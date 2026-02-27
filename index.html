@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>League of Women Voters of Newport County</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="site-header">
@@ -13,6 +13,7 @@
             <a href="index.html" class="logo">
                 <img src="images/logo-newport-county-transparent.png" alt="League of Women Voters of Newport County">
             </a>
+            <a href="get-involved.html#donate" class="header-donate">Donate</a>
         </div>
     </header>
 
@@ -20,140 +21,134 @@
         <div class="container">
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="vote.html">Voter Information</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="vote.html">Voter Resources</a></li>
+                <li><a href="events.html">Events</a></li>
                 <li><a href="issues.html">Issues & Advocacy</a></li>
-                <li><a href="events.html">Calendar & Events</a></li>
                 <li><a href="get-involved.html">Get Involved</a></li>
                 <li><a href="news.html">News</a></li>
-                <li><a href="find-your-rep.html">Find Your Rep</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="hero-image">
-        <img src="images/homepage-hero.jpg" alt="League members at voting rights rally at the Capitol">
-    </div>
-
-    <div class="page-header" style="padding-top: 30px;">
+    <!-- HERO SECTION - CLEAN & FOCUSED -->
+    <section class="hero-section">
         <h1>Empowering Voters. Defending Democracy.</h1>
-        <p class="lead">The League of Women Voters of Newport County works year-round to register voters, host nonpartisan candidate forums, and advocate for good government across Newport, Jamestown, Little Compton, Middletown, Portsmouth, and Tiverton.</p>
-        <div style="margin-top: 35px; display: flex; gap: 15px; flex-wrap: wrap;">
-            <a href="get-involved.html" class="btn">Join Us</a>
-            <a href="events.html" class="btn btn-secondary">Upcoming Events</a>
+        <p class="lead">The League of Women Voters of Newport County is a nonpartisan organization working to register voters, host candidate forums, and advocate for good government across six towns in Rhode Island.</p>
+        <div class="hero-cta">
+            <a href="get-involved.html" class="btn">Join the League</a>
             <a href="vote.html" class="btn-blue btn">Register to Vote</a>
         </div>
-    </div>
+    </section>
 
-    <div class="stats">
+    <!-- IMPACT SECTION - PROFESSIONAL GRID -->
+    <section class="impact-section">
         <div class="container">
-            <div class="stats-grid">
-                <div>
-                    <span class="stat-number">200+</span>
-                    <span class="stat-label">Voters Registered in 2024</span>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <span class="impact-number">200+</span>
+                    <span class="impact-label">Voters Registered</span>
                 </div>
-                <div>
-                    <span class="stat-number">7</span>
-                    <span class="stat-label">Candidate Forums Hosted</span>
+                <div class="impact-card">
+                    <span class="impact-number">7</span>
+                    <span class="impact-label">Candidate Forums</span>
                 </div>
-                <div>
-                    <span class="stat-number">161</span>
-                    <span class="stat-label">Active Members</span>
+                <div class="impact-card">
+                    <span class="impact-number">161</span>
+                    <span class="impact-label">Active Members</span>
                 </div>
-                <div>
-                    <span class="stat-number">6</span>
-                    <span class="stat-label">Towns Served</span>
+                <div class="impact-card">
+                    <span class="impact-number">6</span>
+                    <span class="impact-label">Towns Served</span>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- WHY IT MATTERS -->
+    <div class="container content-section">
+        <h2>Why It Matters</h2>
+        <p>Democracy thrives when every eligible citizen can vote and participate in government. The League of Women Voters has been defending voting rights and promoting civic engagement for over 100 years.</p>
+        <p>In Newport County, we work year-round to ensure that every voice is heard and every vote counts. From registering first-time voters to hosting nonpartisan candidate forums, we empower our community to make informed decisions at the ballot box.</p>
     </div>
 
+    <div class="section-divider"></div>
+
+    <!-- OUR WORK - IMAGE CARDS -->
     <div class="container">
-        <h2 style="text-align: center; margin-bottom: 20px;">Make Your Voice Heard</h2>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; font-size: 19px; color: #666;">Get involved in democracy and civic engagement</p>
-        
-        <!-- DYNAMIC CARD GRID -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 60px;">
-            <!-- Card 1 -->
-            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.1); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.15)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'">
-                <div style="background: linear-gradient(135deg, #8B1A7A 0%, #a8267d 100%); height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
-                    <span style="font-size: 64px;">🗳️</span>
-                </div>
-                <div style="padding: 30px;">
-                    <h3 style="margin: 0 0 15px 0; font-size: 22px; color: #8B1A7A;">Register to Vote</h3>
-                    <p style="margin: 0 0 20px 0; line-height: 1.7;">Make your voice heard! Register online in just 5 minutes.</p>
-                    <a href="vote.html" class="btn" style="width: 100%;">Get Started</a>
+        <h2 style="text-align: center; margin-bottom: 40px;">Our Work in Action</h2>
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="images/go-vote.jpg" alt="Volunteers registering voters">
+                <div class="image-caption">
+                    <h3>Voter Registration</h3>
+                    <p>Registering voters at community events throughout Newport County</p>
                 </div>
             </div>
-
-            <!-- Card 2 -->
-            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.1); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.15)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'">
-                <div style="background: linear-gradient(135deg, #003d7a 0%, #00509e 100%); height: 200px; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 64px;">📅</span>
-                </div>
-                <div style="padding: 30px;">
-                    <h3 style="margin: 0 0 15px 0; font-size: 22px; color: #003d7a;">Upcoming Events</h3>
-                    <p style="margin: 0 0 10px 0;"><strong>Next Meeting:</strong></p>
-                    <p style="margin: 0 0 20px 0;">First Thursday, 7:00 PM<br>Newport Public Library or Zoom</p>
-                    <a href="events.html" class="btn-blue btn" style="width: 100%;">See All Events</a>
+            <div class="image-card">
+                <img src="images/bottom-home-1.jpg" alt="Voting rights are human rights protest">
+                <div class="image-caption">
+                    <h3>Defending Voting Rights</h3>
+                    <p>Advocating for accessible, secure elections for all eligible voters</p>
                 </div>
             </div>
-
-            <!-- Card 3 -->
-            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.1); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.15)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'">
-                <div style="background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%); height: 200px; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 64px;">🤝</span>
+            <div class="image-card">
+                <img src="images/bottom-home-2.jpg" alt="Stop voter suppression">
+                <div class="image-caption">
+                    <h3>Civic Engagement</h3>
+                    <p>Building awareness and fighting for fair, safe, and secure elections</p>
                 </div>
-                <div style="padding: 30px;">
-                    <h3 style="margin: 0 0 15px 0; font-size: 22px; color: #d32f2f;">Get Involved</h3>
-                    <p style="margin: 0 0 20px 0; line-height: 1.7;">Join us! Volunteer, become a member, or observe local government.</p>
-                    <a href="get-involved.html" class="btn" style="background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%); width: 100%;">Join Today</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- DYNAMIC PHOTO SHOWCASE -->
-        <h2 style="text-align: center; margin-top: 80px; margin-bottom: 25px;">Our Work in Action</h2>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; font-size: 19px; color: #666;">League members across Newport County advocate for democracy and engage with our communities</p>
-        
-        <!-- Photo Grid with Captions -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px;">
-            <!-- Photo 1 -->
-            <div class="photo-card">
-                <img src="images/go-vote.jpg" alt="Volunteers with Go Vote signs" style="height: 350px; object-fit: cover;">
-                <div class="photo-card-caption">Volunteers registering voters</div>
-            </div>
-
-            <!-- Photo 2 - NEW -->
-            <div class="photo-card">
-                <img src="images/bottom-home-1.jpg" alt="Voting Rights are Human Rights protest" style="height: 350px; object-fit: cover;">
-                <div class="photo-card-caption">Voting rights are human rights</div>
-            </div>
-
-            <!-- Photo 3 - NEW -->
-            <div class="photo-card">
-                <img src="images/bottom-home-2.jpg" alt="Stop voter suppression protest" style="height: 350px; object-fit: cover;">
-                <div class="photo-card-caption">Stop voter suppression</div>
-            </div>
-        </div>
-
-        <!-- Purple CTA Section -->
-        <div style="background: linear-gradient(135deg, #8B1A7A 0%, #a8267d 100%); padding: 60px 40px; text-align: center; margin: 80px 0; border-radius: 16px; box-shadow: 0 10px 30px rgba(139,26,122,0.3); position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>'); opacity: 0.5;"></div>
-            <div style="position: relative; z-index: 1;">
-                <h2 style="color: white; margin: 0 0 20px 0; font-size: 38px;">Stay Informed</h2>
-                <p style="color: rgba(255,255,255,0.95); font-size: 20px; max-width: 600px; margin: 0 auto 30px; line-height: 1.6;">Subscribe to our monthly NEWS and NOTES newsletter for updates on League activities, voting information, and opportunities to get involved.</p>
-                <a href="get-involved.html" class="btn" style="background: white; color: #8B1A7A; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">Subscribe Now</a>
             </div>
         </div>
     </div>
 
+    <div class="section-divider"></div>
+
+    <!-- HOW TO GET INVOLVED - 3 STEPS -->
+    <div class="container content-section">
+        <h2>How to Get Involved</h2>
+        <p>Making a difference is easier than you think. Here's how to join us:</p>
+        
+        <div style="margin: 40px 0;">
+            <h3>1. Become a Member</h3>
+            <p>Join the League for $75/year (individual) or $100/year (household). Membership includes our newsletter, event invitations, and voting rights in League decisions.</p>
+        </div>
+
+        <div style="margin: 40px 0;">
+            <h3>2. Volunteer Your Time</h3>
+            <p>Help register voters, organize events, or observe local government meetings. We offer flexible opportunities that fit your schedule—from 2-5 hours per month.</p>
+        </div>
+
+        <div style="margin: 40px 0;">
+            <h3>3. Stay Informed</h3>
+            <p>Subscribe to our monthly newsletter, attend our quarterly meetings, and follow us on Facebook to stay connected with League activities and advocacy efforts.</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="get-involved.html" class="btn">Explore Opportunities</a>
+        </div>
+    </div>
+
+    <!-- CTA SECTION -->
+    <div class="container">
+        <div class="cta-section">
+            <h2>Make Your Voice Heard</h2>
+            <p>Join fellow citizens across Newport County working to strengthen democracy and empower voters. Together, we can make a difference.</p>
+            <a href="get-involved.html" class="btn">Join the League Today</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div>
                 <h4>League of Women Voters of Newport County</h4>
                 <p>A nonpartisan political organization encouraging informed and active participation in government.</p>
-                <p style="margin-top: 20px;"><strong>Serving Newport, Jamestown, Little Compton, Middletown, Portsmouth, and Tiverton</strong></p>
+                <p style="margin-top: 20px;"><strong>Serving:</strong> Newport, Jamestown, Little Compton, Middletown, Portsmouth, and Tiverton</p>
+                
+                <h4 style="margin-top: 30px;">Newsletter Signup</h4>
+                <p>Stay informed with our monthly NEWS and NOTES newsletter.</p>
+                <a href="get-involved.html" class="btn" style="margin-top: 10px; display: inline-flex;">Subscribe</a>
             </div>
             
             <div>
@@ -167,5 +162,13 @@
             
             <div>
                 <h4>Contact</h4>
-                <a href="/cdn-cgi/l/email-protection#440813120a2133342b3630072b312a303d042329252d286a272b29"><span class="__cf_email__" data-cfemail="d19d86879fb4a6a1bea3a592bea4bfa5a891b6bcb0b8bdffb2bebc">[email&#160;protected]</span></a>
-                <a href="/cdn-cgi/l/email-protection#bacac8dfc9d3dedfd4ced6cdccd4d9888ffaddd7dbd3d694d9d5d7">President</a>
+                <p><strong>General:</strong><br><a href="mailto:LWVNewportCounty@gmail.com">LWVNewportCounty@gmail.com</a></p>
+                <p style="margin-top: 15px;"><strong>President:</strong><br>Christine Stenning<br><a href="mailto:presidentlwvnc25@gmail.com">presidentlwvnc25@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 League of Women Voters of Newport County. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

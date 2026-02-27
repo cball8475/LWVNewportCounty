@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar & Events - LWV Newport County</title>
+    <title>Events - LWV Newport County</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="site-header">
@@ -13,6 +13,7 @@
             <a href="index.html" class="logo">
                 <img src="images/logo-newport-county-transparent.png" alt="League of Women Voters of Newport County">
             </a>
+            <a href="get-involved.html#donate" class="header-donate">Donate</a>
         </div>
     </header>
 
@@ -20,92 +21,102 @@
         <div class="container">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="vote.html">Voter Information</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="vote.html">Voter Resources</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
                 <li><a href="issues.html">Issues & Advocacy</a></li>
-                <li><a href="events.html" class="active">Calendar & Events</a></li>
                 <li><a href="get-involved.html">Get Involved</a></li>
                 <li><a href="news.html">News</a></li>
-                <li><a href="find-your-rep.html">Find Your Rep</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="page-header">
-        <h1>Calendar & Events</h1>
+    <div class="hero-section">
+        <h1>Events & Programs</h1>
         <p class="lead">Join us for forums, meetings, and community events throughout Newport County.</p>
     </div>
 
-    <div class="hero-image">
-        <img src="images/voting-rights-protest2.jpg" alt="LWV table at community event">
-    </div>
-
-    <div class="container">
+    <div class="container content-section">
         <h2>Upcoming Events</h2>
         
-        <div style="background: #f8f8f8; padding: 40px; margin: 40px 0; border-left: 4px solid #d32f2f;">
-            <h3>Quarterly Member Meeting</h3>
-            <p style="color: #d32f2f; font-weight: 600; margin-bottom: 15px;">April 23, 2026 • 5:30 PM</p>
-            <p style="margin-bottom: 15px;"><strong>Location:</strong> Newport Playhouse or Zoom</p>
-            <p>Join fellow League members for our quarterly gathering. We'll discuss current issues, plan upcoming activities, and hear from a guest speaker on topics important to Newport County voters.</p>
+        <!-- Event Card: March 20 -->
+        <div class="event-card">
+            <div class="event-header">
+                <div class="event-date">Thursday, March 20, 2026</div>
+                <h2 class="event-title">Members Meet and Mingle (INAUGURAL EVENT!)</h2>
+                <div class="event-location">📍 Johnny's at Wyndam, 240 Aquidneck Ave, Middletown<br>🕓 4:30 PM - 6:00 PM</div>
+            </div>
+            <div class="event-body">
+                <p>Join fellow League members as they wrap their week up with time for relaxation, a libation and conversation.</p>
+                <p><strong>What's Included:</strong> Cash bar and complimentary appetizers</p>
+                <p><strong>RSVP Required:</strong> Let us know if you'll be there so we can plan for appetizers.</p>
+                <a href="mailto:lwvnewportcounty@gmail.com?subject=RSVP: March 20 Meet and Mingle" class="btn">RSVP Now</a>
+            </div>
         </div>
 
-        <div style="background: #fff; padding: 40px; margin: 40px 0; border: 2px solid #003d7a;">
-            <h3>Celebrating Our Elected Women Officials in Newport County</h3>
-            <p style="color: #d32f2f; font-weight: 600; margin-bottom: 15px;">May 8, 2026 • 5:00 PM</p>
-            <p style="margin-bottom: 15px;"><strong>Location:</strong> VFW Hall, Portsmouth, RI</p>
-            <p style="margin-bottom: 15px;">Join fellow League members as we celebrate and honor all elected women officials, at both state and local levels, throughout Newport County.</p>
-            <p><strong>Guest Speaker:</strong> Dr. Kelly Armstrong, President of Salve Regina University</p>
+        <!-- Event Card: April 23 -->
+        <div class="event-card">
+            <div class="event-header">
+                <div class="event-date">Wednesday, April 23, 2026</div>
+                <h2 class="event-title">Quarterly Member Meeting</h2>
+                <div class="event-location">📍 Innovate Newport<br>🕔 5:30 PM</div>
+            </div>
+            <div class="event-body">
+                <p>Join fellow League members for our quarterly gathering. We'll discuss current issues, plan upcoming activities, and hear from a guest speaker on topics important to Newport County voters.</p>
+                <p><strong>Open To:</strong> All members and interested community members</p>
+                <a href="mailto:lwvnewportcounty@gmail.com?subject=RSVP: April 23 Quarterly Meeting" class="btn">RSVP Now</a>
+            </div>
         </div>
+
+        <!-- Event Card: May 8 -->
+        <div class="event-card">
+            <div class="event-header">
+                <div class="event-date">Thursday, May 8, 2026</div>
+                <h2 class="event-title">Celebrating Our Elected Women Officials</h2>
+                <div class="event-location">📍 VFW Hall, Portsmouth RI<br>🕔 5:00 PM</div>
+            </div>
+            <div class="event-body">
+                <p>Join fellow League members as we celebrate and honor all elected women officials, at both state and local levels, throughout Newport County.</p>
+                <p><strong>Guest Speaker:</strong> Dr. Kelly Armstrong, President of Salve Regina University</p>
+                <a href="mailto:lwvnewportcounty@gmail.com?subject=RSVP: May 8 Celebration" class="btn">RSVP Now</a>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
 
         <h2>Regular Programs</h2>
-        <p style="font-size: 1.1em; margin-bottom: 40px;">The League hosts regular meetings and events throughout the year. All members and interested community members are welcome.</p>
+        <p>The League hosts regular meetings and events throughout the year. All members and interested community members are welcome.</p>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0;">
-            <div style="background: #f8f8f8; padding: 35px;">
-                <h3>Quarterly Member Meetings</h3>
-                <p style="color: #666; margin: 15px 0;"><strong>Schedule:</strong> Announced in advance</p>
-                <p style="color: #666; margin: 15px 0;"><strong>Time:</strong> 5:30 PM</p>
-                <p>Regular gatherings for members and the public to discuss current issues and plan activities. Locations rotate around the areas in Newport County.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 40px 0;">
+            <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 4px solid #8B1A7A;">
+                <h3 style="margin-top: 0; color: #8B1A7A;">Quarterly Member Meetings</h3>
+                <p><strong>Schedule:</strong> Announced in advance<br><strong>Time:</strong> 5:30 PM</p>
+                <p>Regular gatherings for members and the public to discuss current issues and plan activities. Locations rotate around Newport County.</p>
             </div>
-                    <div style="background: linear-gradient(135deg, #8B1A7A 0%, #a8267d 100%); color: white; padding: 45px; margin: 30px 0; border-radius: 12px; box-shadow: 0 8px 20px rgba(139,26,122,0.25);">
-            <h3 style="color: white; margin-top: 0;">March 20, 2026 - Members Meet and Mingle (INAUGURAL EVENT!)</h3>
-            <p style="margin: 0;"><strong>Time:</strong> 4:30 PM - 6:00 PM</p>
-            <p style="margin: 10px 0 0 0;"><strong>Location:</strong> Johnny's at Wyndam, 240 Aquidneck Ave, Middletown</p>
-            <p style="margin: 20px 0 0 0;">Join fellow League members as they wrap their week up with time for relaxation, a libation and conversation. Cash bar and free appetizers.</p>
-            <p style="margin: 15px 0 0 0; font-size: 14px;"><strong>RSVP:</strong> Let us know if you'll be there so we can plan for appetizers: <a href="mailto:lwvnewportcounty@gmail.com" style="color: white; text-decoration: underline;">lwvnewportcounty@gmail.com</a></p>
-        </div>
 
-        <div style="background: #003d7a; color: white; padding: 35px;">
-                <h3 style="color: white;">Board Meetings</h3>
-                <p style="color: rgba(255,255,255,0.9); margin: 15px 0;"><strong>Schedule:</strong> First Wednesday</p>
-                <p style="color: rgba(255,255,255,0.9); margin: 15px 0;"><strong>Time:</strong> 1:00 PM</p>
-                <p style="color: rgba(255,255,255,0.9);">The Officers and Board of Directors meet to guide League activities. Members are welcome to observe these meetings.</p>
+            <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 4px solid #003d7a;">
+                <h3 style="margin-top: 0; color: #003d7a;">Board Meetings</h3>
+                <p><strong>Schedule:</strong> First Wednesday<br><strong>Time:</strong> 1:00 PM</p>
+                <p>The Officers and Board of Directors meet to guide League activities. Members are welcome to observe these meetings.</p>
             </div>
         </div>
 
-        <h2>Candidate Forums</h2>
-        <p>The League hosts nonpartisan candidate forums before primary and general elections, giving voters the opportunity to hear directly from candidates running for local and state office.</p>
-        <div style="background: #f8f8f8; padding: 35px; margin: 30px 0;">
-            <p style="margin-bottom: 15px;"><strong>2026 Forum Schedule:</strong></p>
-            <p>Forums will be announced as election dates approach. Check back for updates or follow us on Facebook for the latest information.</p>
+        <div class="section-divider"></div>
+
+        <h2>2026 Candidate Forums</h2>
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="images/candidate-forum.jpg" alt="Candidate Forum - Educate the Vote" style="max-width: 450px; width: 100%; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.1);">
         </div>
+        <p>The League hosts nonpartisan candidate forums before every election. These forums give voters the opportunity to hear directly from candidates running for local and state office.</p>
+        <p>Forum dates will be announced as candidates declare their candidacy. All forums are free and open to the public, with questions submitted by community members and moderated by the League.</p>
+    </div>
 
-        <h2>Community Events</h2>
-        <p style="margin-bottom: 30px;">Look for the League at community events throughout Newport County where we register voters, provide election information, and engage with our neighbors about the importance of civic participation.</p>
-
-                <div style="background: linear-gradient(135deg, #8B1A7A 0%, #a8267d 100%); color: white; padding: 45px; margin: 30px 0; border-radius: 12px; box-shadow: 0 8px 20px rgba(139,26,122,0.25);">
-            <h3 style="color: white; margin-top: 0;">March 20, 2026 - Members Meet and Mingle (INAUGURAL EVENT!)</h3>
-            <p style="margin: 0;"><strong>Time:</strong> 4:30 PM - 6:00 PM</p>
-            <p style="margin: 10px 0 0 0;"><strong>Location:</strong> Johnny's at Wyndam, 240 Aquidneck Ave, Middletown</p>
-            <p style="margin: 20px 0 0 0;">Join fellow League members as they wrap their week up with time for relaxation, a libation and conversation. Cash bar and free appetizers.</p>
-            <p style="margin: 15px 0 0 0; font-size: 14px;"><strong>RSVP:</strong> Let us know if you'll be there so we can plan for appetizers: <a href="mailto:lwvnewportcounty@gmail.com" style="color: white; text-decoration: underline;">lwvnewportcounty@gmail.com</a></p>
-        </div>
-
-        <div style="background: #003d7a; color: white; padding: 50px; margin: 60px 0; text-align: center;">
-            <h2 style="color: white; margin-bottom: 20px;">Want to Stay Informed?</h2>
-            <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px; font-size: 1.1em;">Follow us on Facebook for event updates and important election information.</p>
-            <a href="https://www.facebook.com/LWVNewportCounty/" target="_blank" class="btn btn-secondary" style="background: white; color: #003d7a; border: none;">Follow Us</a>
+    <!-- CTA Section -->
+    <div class="container">
+        <div class="cta-section">
+            <h2>Stay Connected</h2>
+            <p>Follow us on Facebook for event updates and important election information.</p>
+            <a href="https://www.facebook.com/LWVNewportCounty/" class="btn" target="_blank">Follow on Facebook</a>
         </div>
     </div>
 
@@ -114,6 +125,11 @@
             <div>
                 <h4>League of Women Voters of Newport County</h4>
                 <p>A nonpartisan political organization encouraging informed and active participation in government.</p>
+                <p style="margin-top: 20px;"><strong>Serving:</strong> Newport, Jamestown, Little Compton, Middletown, Portsmouth, and Tiverton</p>
+                
+                <h4 style="margin-top: 30px;">Newsletter Signup</h4>
+                <p>Stay informed with our monthly NEWS and NOTES newsletter.</p>
+                <a href="get-involved.html" class="btn" style="margin-top: 10px; display: inline-flex;">Subscribe</a>
             </div>
             
             <div>
@@ -127,5 +143,13 @@
             
             <div>
                 <h4>Contact</h4>
-                <a href="/cdn-cgi/l/email-protection#9ed2c9c8d0fbe9eef1eceaddf1ebf0eae7def9f3fff7f2b0fdf1f3"><span class="__cf_email__" data-cfemail="90dcc7c6def5e7e0ffe2e4d3ffe5fee4e9d0f7fdf1f9fcbef3fffd">[email&#160;protected]</span></a>
-                <a href="/cdn-cgi/l/email-protection#ee9e9c8b9d878a8b809a829998808ddcdbae89838f8782c08d8183">President</a>
+                <p><strong>General:</strong><br><a href="mailto:LWVNewportCounty@gmail.com">LWVNewportCounty@gmail.com</a></p>
+                <p style="margin-top: 15px;"><strong>President:</strong><br>Christine Stenning<br><a href="mailto:presidentlwvnc25@gmail.com">presidentlwvnc25@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 League of Women Voters of Newport County. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
