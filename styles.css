@@ -64,7 +64,7 @@ html {
 
 /* HEADER WITH DONATE BUTTON */
 .site-header {
-    background: linear-gradient(135deg, #003d7a 0%, #00509e 100%);
+    background: linear-gradient(135deg, #8B1A7A 0%, #a8267d 100%);
     padding: 20px 0;
     border-bottom: 3px solid var(--accent-purple);
     box-shadow: var(--shadow-md);
@@ -87,8 +87,8 @@ html {
 }
 
 .header-donate {
-    background: var(--accent-purple);
-    color: white;
+    background: white;
+    color: var(--accent-purple);
     padding: 12px 24px;
     border-radius: 6px;
     text-decoration: none;
@@ -99,7 +99,8 @@ html {
 }
 
 .header-donate:hover {
-    background: var(--accent-purple-light);
+    background: var(--bg-light);
+    color: var(--accent-purple);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
