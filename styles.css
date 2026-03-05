@@ -137,10 +137,10 @@ nav li { flex: 0 0 auto; }
 
 nav a {
     display: block;
-    padding: 16px 24px;
+    padding: 16px 14px;
     color: var(--text-medium);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     border-bottom: 3px solid transparent;
     transition: var(--transition);
