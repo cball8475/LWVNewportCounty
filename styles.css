@@ -48,8 +48,7 @@ h4 { font-size: 19px; margin-top: 20px; }
 p {
     color: var(--text-medium);
     line-height: 1.8;
-    margin-bottom: 16px;
-    max-width: 75ch;
+    margin: 0 auto 16px;
 }
 
 html { scroll-behavior: smooth; }
