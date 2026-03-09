@@ -6,6 +6,9 @@
     <title>Get Involved - LWV Newport County</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script
+      src="https://www.paypal.com/sdk/js?client-id=BAAtb1ZKsH3g6ZZbY4D-zF3uWsdJ24WlA6oz6r2yrH9Xjd4VIbSi3vHWpUORZdMRLiI4v-CBOwRlU6tqUY&components=hosted-buttons&enable-funding=venmo&currency=USD">
+    </script>
 </head>
 <body>
         <header class="site-header">
@@ -80,17 +83,13 @@
         <div style="background: white; padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-top: 4px solid #8B1A7A; text-align: center;">
             <h3 style="margin-top: 0;">Make a Donation</h3>
             <p style="margin-bottom: 30px;">Support our voter education and advocacy programs</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; max-width: 600px; margin: 30px auto;">
-                <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; font-weight: 600; color: #003d7a;">$25</div>
-                <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; font-weight: 600; color: #003d7a;">$50</div>
-                <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; font-weight: 600; color: #003d7a;">$100</div>
-                <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; font-weight: 600; color: #003d7a;">$250</div>
-                <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; font-weight: 600; color: #003d7a;">Other</div>
-            </div>
 
-            <p style="margin: 30px 0 20px; font-size: 14px; color: #666;">Donate securely via PayPal</p>
-            <a href="https://www.paypal.com/donate/?hosted_button_id=LWVNEWPORTCOUNTY" target="_blank" class="btn" style="background: #0070ba; color: white; font-size: 18px; padding: 15px 40px;">Donate with PayPal</a>
+            <div id="paypal-container-F7T5QZZ3E526N"></div>
+            <script>
+              paypal.HostedButtons({
+                hostedButtonId: "F7T5QZZ3E526N",
+              }).render("#paypal-container-F7T5QZZ3E526N")
+            </script>
             
             <p style="margin-top: 25px; font-size: 14px; color: #666;">Or mail a check to:<br><strong>LWV Newport County</strong><br>PO Box 4204<br>Middletown, RI 02842</p>
         </div>
