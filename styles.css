@@ -158,16 +158,12 @@ nav a:hover, nav a.active {
 /* HERO IMAGE (full-width banner photo) */
 .hero-image {
     width: 100%;
-    overflow: hidden;
-    max-height: 420px;
     display: block;
 }
 
 .hero-image img {
     width: 100%;
-    height: 420px;
-    object-fit: cover;
-    object-position: center top;
+    height: auto;
     display: block;
 }
 
