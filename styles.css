@@ -148,6 +148,32 @@ nav a:hover, nav a.active {
     background: var(--bg-purple-light);
 }
 
+/* HAMBURGER BUTTON - hidden on desktop */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--accent-purple);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -456,6 +482,59 @@ footer a:hover {
     border-top: 1px solid #d1d5db;
     color: var(--text-light);
     font-size: 13px;
+}
+
+/* ── MOBILE NAV (≤767px) ── */
+@media (max-width: 767px) {
+    nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 20px;
+        position: relative;
+        min-height: 52px;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        width: 240px;
+        box-shadow: var(--shadow-lg);
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        z-index: 200;
+        padding: 8px 0;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    nav ul li {
+        flex: unset;
+        width: 100%;
+    }
+
+    nav ul li a {
+        padding: 13px 20px;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+        font-size: 15px;
+    }
+
+    nav ul li a:hover, nav ul li a.active {
+        border-bottom: none;
+        border-left-color: var(--accent-purple);
+        background: var(--bg-purple-light);
+    }
 }
 
 /* TABLET */
