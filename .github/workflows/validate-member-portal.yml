@@ -1,0 +1,40 @@
+# POKA-YOKE: Verify members.html is StatiCrypt-encrypted on every push
+# Fails the build if someone accidentally pushes unencrypted member content
+name: Validate Member Portal Encryption
+
+on:
+  push:
+    paths:
+      - 'members.html'
+
+jobs:
+  check-encryption:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify members.html is encrypted
+        run: |
+          # Check for StatiCrypt marker class
+          if ! grep -q 'class="staticrypt-html"' members.html; then
+            echo "::error::members.html is NOT encrypted! It must be processed through StatiCrypt before pushing."
+            echo "Run: staticrypt members-source.html --password YOUR_PASSWORD -o members.html"
+            exit 1
+          fi
+
+          # Check that raw member content is NOT present (encrypted content is base64 gibberish)
+          # These are phrases that would only appear in the unencrypted source
+          if grep -qi 'member portal content\|meeting minutes\|board documents' members.html; then
+            echo "::error::members.html appears to contain unencrypted member content!"
+            exit 1
+          fi
+
+          echo "✓ members.html is properly encrypted"
+
+      - name: Verify members-source.html is NOT in repo
+        run: |
+          if [ -f "members-source.html" ]; then
+            echo "::error::members-source.html (UNENCRYPTED) was pushed to the repo! Remove it immediately."
+            exit 1
+          fi
+          echo "✓ No unencrypted source file in repo"
