@@ -10,8 +10,6 @@
  * recreated in Google Sheets, these GIDs will need updating.
  */
 
-const https = require('https');
-
 // ── Published sheet base URL and tab GIDs ──
 const BASE = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vROP_1R5IJfAbTQk8Lm5gHn_cfqF4PLnbZqZ37kLw0sdV1rxHeU9Cx5_98-HM1f3g/pub?output=csv';
 
@@ -28,26 +26,15 @@ const TABS = {
   resources:          '186492680',
 };
 
-// ── CSV fetcher ──
-function fetchCSV(gid) {
+// ── CSV fetcher (uses Node 20 native fetch — auto-follows redirects) ──
+async function fetchCSV(gid) {
   const url = `${BASE}&gid=${gid}`;
-  return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { 'User-Agent': 'LWVNC-Builder/1.0' } }, (res) => {
-      // Follow redirects
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        https.get(res.headers.location, (res2) => {
-          let data = '';
-          res2.on('data', c => data += c);
-          res2.on('end', () => resolve(data));
-        }).on('error', reject);
-        return;
-      }
-      let data = '';
-      res.on('data', c => data += c);
-      res.on('end', () => resolve(data));
-    });
-    req.on('error', reject);
+  const res = await fetch(url, {
+    headers: { 'User-Agent': 'LWVNC-Builder/1.0' },
+    redirect: 'follow',
   });
+  if (!res.ok) throw new Error(`Failed to fetch gid=${gid}: ${res.status}`);
+  return await res.text();
 }
 
 // ── Simple CSV parser (handles quoted fields with commas) ──
