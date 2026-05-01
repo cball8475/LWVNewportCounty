@@ -1,0 +1,11 @@
+# POKA-YOKE: Never push the unencrypted member portal source
+# The source file is edited locally and encrypted via StatiCrypt
+# Only the encrypted members.html gets pushed to the repo
+members-source.html
+
+# StatiCrypt intermediate output folder
+encrypted/
+
+# OS junk
+.DS_Store
+Thumbs.db
