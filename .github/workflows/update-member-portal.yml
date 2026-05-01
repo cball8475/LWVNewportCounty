@@ -9,6 +9,9 @@ on:
     - cron: '0 22 * * *'   # 6 PM ET
   workflow_dispatch: {}     # Manual trigger for testing
 
+permissions:
+  contents: write
+
 jobs:
   update-portal:
     runs-on: ubuntu-latest
