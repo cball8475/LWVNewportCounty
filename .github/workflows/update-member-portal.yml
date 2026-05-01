@@ -1,0 +1,66 @@
+# Fetches member portal content from Google Sheets twice daily,
+# builds HTML, encrypts with StatiCrypt, and commits if changed.
+name: Update Member Portal from Google Sheet
+
+on:
+  schedule:
+    # 8 AM and 6 PM Eastern (UTC-4 during EDT)
+    - cron: '0 12 * * *'   # 8 AM ET
+    - cron: '0 22 * * *'   # 6 PM ET
+  workflow_dispatch: {}     # Manual trigger for testing
+
+jobs:
+  update-portal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install StatiCrypt
+        run: npm install -g staticrypt
+
+      - name: Build member portal HTML from Google Sheet
+        run: node scripts/build-member-portal.js members-source.html
+
+      - name: Encrypt with StatiCrypt
+        run: |
+          staticrypt members-source.html \
+            --password "${{ secrets.MEMBER_PASSWORD }}" \
+            --short
+          # StatiCrypt writes to encrypted/ folder with --short
+          cp encrypted/members-source.html members-new.html
+
+          # Customize the login page
+          sed -i 's|<title>Protected Page</title>|<title>Member Portal - LWV Newport County</title>|' members-new.html
+          sed -i 's|<p class="staticrypt-title">Protected Page</p>|<p class="staticrypt-title">LWVNC Member Portal</p>|' members-new.html
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if diff -q members.html members-new.html > /dev/null 2>&1; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected — will commit"
+          fi
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          mv members-new.html members.html
+          # Clean up build artifacts — never commit the source
+          rm -rf members-source.html encrypted/
+
+          git config user.name "LWVNC Bot"
+          git config user.email "noreply@lwvnewportcounty.org"
+          git add members.html
+          git commit -m "Auto-update member portal from Google Sheet"
+          git push
+
+      - name: Clean up (no changes)
+        if: steps.diff.outputs.changed != 'true'
+        run: rm -rf members-source.html members-new.html encrypted/
