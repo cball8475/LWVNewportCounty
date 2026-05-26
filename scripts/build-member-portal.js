@@ -150,11 +150,19 @@ function buildMemberEvents(rows) {
 }
 
 function buildLinkedList(rows, placeholder) {
-  const real = rows.filter(r => r[0] && !r[0].startsWith('Example') && !r[0].includes('April 2026') && !r[0].includes('2025-2026') && !r[0].includes('News &'));
+  // Filter out example/placeholder rows by checking the link column for "example"
+  // or the title starting with "Example". Real entries with real URLs pass through.
+  const real = rows.filter(r => r[0] && !r[0].startsWith('Example') && !(r[r.length - 1] || '').includes('example'));
   if (!real.length) {
     return `<p style="color: #666; font-style: italic; margin-bottom: 0;">${placeholder}</p>`;
   }
-  return real.map(r => {
+  // Sort by date column (r[1]) newest first when parseable dates exist
+  const sorted = [...real].sort((a, b) => {
+    const da = Date.parse(a[1]), db = Date.parse(b[1]);
+    if (!isNaN(da) && !isNaN(db)) return db - da; // newest first
+    return 0; // keep original order if dates aren't parseable
+  });
+  return sorted.map(r => {
     const title = esc(r[0] || '');
     const dateOrCat = esc(r[1] || '');
     const link = r[r.length - 1] || '';
