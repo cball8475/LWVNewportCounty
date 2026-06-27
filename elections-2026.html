@@ -184,6 +184,18 @@
       .el-soon .el-btn{ background:#ffd84d; border-color:#ffd84d; color:#3a2a00; }
       .el-soon .el-btn:hover{ background:#fff; border-color:#fff; color:var(--el-blue); }
 
+      /* ===== WHO'S RUNNING — candidate links ===== */
+      .el-candidates{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:0 0 26px; }
+      .el-cand{ display:flex; align-items:center; justify-content:space-between; gap:14px; background:#fff; border:1px solid var(--el-line); border-radius:14px; padding:20px 22px; text-decoration:none; box-shadow:var(--el-shadow-sm); transition:all .2s ease; }
+      .el-cand:hover{ box-shadow:var(--el-shadow-md); transform:translateY(-3px); border-color:#e7d3e3; }
+      .el-cand-town{ font-size:1.12rem; font-weight:800; color:var(--el-purple); display:flex; align-items:center; gap:9px; }
+      .el-cand-town svg{ flex:0 0 auto; }
+      .el-cand-go{ font-size:.86rem; font-weight:700; color:var(--el-blue); white-space:nowrap; }
+      .el-cand-foot{ background:var(--el-purple-bg); border-radius:14px; padding:22px 26px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+      .el-cand-foot p{ margin:0; color:var(--el-ink); font-weight:700; font-size:1.02rem; }
+      @media(max-width:880px){ .el-candidates{ grid-template-columns:1fr 1fr; } }
+      @media(max-width:560px){ .el-candidates{ grid-template-columns:1fr; } }
+
       .el-updated{ text-align:center; color:#9aa3b2; font-size:.85rem; padding:6px 20px 54px; }
 
       /* ===== RESPONSIVE ===== */
@@ -576,14 +588,39 @@
       </section>
 
       <!-- ===== WHO'S RUNNING ===== -->
-      <section class="el-section el-reveal" id="running" style="padding-top:0;">
-        <div class="el-soon">
-          <div class="el-soon-inner">
-            <span class="el-badge">Coming Soon</span>
-            <h2>Who's Running in Newport County?</h2>
-            <p>We're building a full guide to the 2026 candidates for every race on your ballot. In the meantime, see your personalized ballot and compare candidates side-by-side at <strong>Vote411</strong> — the League of Women Voters' nonpartisan election resource.</p>
-            <a class="el-btn" href="https://www.vote411.org" target="_blank" rel="noopener">See My Ballot at Vote411 →</a>
-          </div>
+      <section class="el-section el-reveal" id="running">
+        <p class="el-kicker">On your 2026 ballot</p>
+        <h2>Who's Running in Newport County?</h2>
+        <p class="el-intro">See who has filed to run for office in your town. These nonpartisan candidate lists are maintained by the League of Women Voters of Newport County and open in a new tab. For a personalized ballot and a side-by-side comparison of every candidate, also visit Vote411.</p>
+        <div class="el-candidates">
+          <a class="el-cand" href="https://bit.ly/4w3RLFE" target="_blank" rel="noopener">
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Newport</span>
+            <span class="el-cand-go">View candidates →</span>
+          </a>
+          <a class="el-cand" href="https://bit.ly/4eIWBkp" target="_blank" rel="noopener">
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Middletown</span>
+            <span class="el-cand-go">View candidates →</span>
+          </a>
+          <a class="el-cand" href="https://bit.ly/3QDnEG4" target="_blank" rel="noopener">
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Portsmouth</span>
+            <span class="el-cand-go">View candidates →</span>
+          </a>
+          <a class="el-cand" href="https://bit.ly/4akI5hz" target="_blank" rel="noopener">
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Tiverton</span>
+            <span class="el-cand-go">View candidates →</span>
+          </a>
+          <a class="el-cand" href="https://bit.ly/3SvxxpR" target="_blank" rel="noopener">
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</span>
+            <span class="el-cand-go">View candidates →</span>
+          </a>
+          <a class="el-cand" href="https://bit.ly/4eAQYEQ" target="_blank" rel="noopener">
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</span>
+            <span class="el-cand-go">View candidates →</span>
+          </a>
+        </div>
+        <div class="el-cand-foot">
+          <p>Want a personalized ballot and full candidate comparison?</p>
+          <a class="el-btn blue" href="https://www.vote411.org" target="_blank" rel="noopener">See My Ballot at Vote411 →</a>
         </div>
       </section>
 
