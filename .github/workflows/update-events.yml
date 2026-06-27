@@ -1,0 +1,47 @@
+# Pulls public events from the "LWVNC Public Events" Google Sheet (published CSV)
+# twice daily, rebuilds the AUTO-EVENTS block in events.html, and commits if changed.
+name: Update Events from Google Sheet
+
+on:
+  schedule:
+    # 8 AM and 6 PM Eastern (UTC-4 during EDT)
+    - cron: '0 12 * * *'   # 8 AM ET
+    - cron: '0 22 * * *'   # 6 PM ET
+  workflow_dispatch: {}     # Manual trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  update-events:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build events.html from Google Sheet
+        run: node scripts/build-events.js events.html
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet -- events.html; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected — will commit"
+          fi
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "LWVNC Bot"
+          git config user.email "noreply@lwvnewportcounty.org"
+          git add events.html
+          git commit -m "Auto-update events from Google Sheet"
+          git push
