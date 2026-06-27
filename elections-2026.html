@@ -4,117 +4,213 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elections 2026 | League of Women Voters of Newport County</title>
-    <meta name="description" content="Your 2026 Rhode Island elections hub for Newport County: registration deadlines, early voting and mail ballot dates, candidate forums in all six towns, how to check your registration, and how to become a poll worker. Primary: Sept 9. Election Day: Nov 3.">
+    <meta name="description" content="Your 2026 Rhode Island elections hub for Newport County: registration deadlines, early voting and mail ballot dates, candidate forums in all six towns, how to vote, how to check your registration, and how to become a poll worker. Primary: Sept 9. Election Day: Nov 3.">
     <meta property="og:title" content="Elections 2026 — League of Women Voters of Newport County">
-    <meta property="og:description" content="Key dates, candidate forums, registration check, and poll worker info for the 2026 Rhode Island elections in Newport County.">
+    <meta property="og:description" content="Key dates, candidate forums, how to vote, registration check, and poll worker info for the 2026 Rhode Island elections in Newport County.">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>document.documentElement.className += ' js';</script>
     <style>
-      /* ===== Elections 2026 page — scoped styles (el- prefix) ===== */
-      :root{ --el-navy:#1B3A6B; --el-navy-deep:#142c52; --el-gold:#C5A028; --el-gold-soft:#f4ecd6; --el-ink:#243042; --el-line:#e3ddcf; }
+      /* ===== Elections 2026 — scoped styles (el- prefix), aligned to site purple/blue ===== */
+      :root{
+        --el-purple:#8B1A7A; --el-purple-light:#a8267d; --el-purple-deep:#6d1460;
+        --el-blue:#003d7a; --el-blue-light:#00509e;
+        --el-ink:#1a1a1a; --el-muted:#4a4a4a; --el-soft:#6b7280;
+        --el-line:#e5e7eb; --el-bg:#f9fafb; --el-purple-bg:#f5e6f1;
+        --el-shadow-sm:0 1px 3px rgba(0,0,0,.08); --el-shadow-md:0 6px 18px rgba(109,20,96,.12);
+        --el-shadow-lg:0 14px 38px rgba(109,20,96,.16);
+      }
       .el-wrap{ font-family:'Inter',-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--el-ink); }
+      .el-wrap a{ color:var(--el-purple); }
 
-      /* HERO */
-      .el-hero{ background:linear-gradient(135deg,var(--el-navy) 0%, var(--el-navy-deep) 100%); color:#fff; padding:64px 20px 56px; text-align:center; position:relative; overflow:hidden; }
-      .el-hero::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:6px; background:repeating-linear-gradient(90deg,var(--el-gold) 0 40px,#d9b94a 40px 80px); }
-      .el-hero-eyebrow{ text-transform:uppercase; letter-spacing:.2em; font-size:.8rem; font-weight:700; color:var(--el-gold); margin:0 0 14px; }
-      .el-hero h1{ color:#fff; font-size:3rem; line-height:1.05; margin:0 0 16px; font-weight:800; letter-spacing:-.01em; }
-      .el-hero h1 span{ color:var(--el-gold); }
-      .el-hero-sub{ max-width:640px; margin:0 auto 14px; font-size:1.12rem; line-height:1.6; color:rgba(255,255,255,.92); }
-      .el-hero-towns{ font-size:.9rem; color:rgba(255,255,255,.7); margin:0 0 28px; letter-spacing:.02em; }
+      /* reveal-on-scroll (safe: only hides when JS present, with load failsafe) */
+      .js .el-reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+      .js .el-reveal.in{ opacity:1; transform:none; }
+      @media (prefers-reduced-motion:reduce){ .js .el-reveal{ opacity:1 !important; transform:none !important; transition:none; } }
+
+      /* ===== HERO ===== */
+      .el-hero{ background:linear-gradient(135deg,var(--el-purple) 0%, var(--el-purple-deep) 100%); color:#fff; padding:66px 20px 58px; text-align:center; position:relative; overflow:hidden; }
+      .el-hero::before{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 18% 22%, rgba(255,255,255,.10) 0 2px, transparent 3px) 0 0/34px 34px; opacity:.6; pointer-events:none; }
+      .el-hero::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:6px; background:linear-gradient(90deg,var(--el-blue) 0%, var(--el-blue-light) 50%, var(--el-blue) 100%); }
+      .el-hero-inner{ position:relative; z-index:1; }
+      .el-hero-eyebrow{ text-transform:uppercase; letter-spacing:.2em; font-size:.82rem; font-weight:700; color:#f3d6ec; margin:0 0 14px; }
+      .el-hero h1{ color:#fff; font-size:3.2rem; line-height:1.04; margin:0 0 16px; font-weight:800; letter-spacing:-.02em; }
+      .el-hero h1 span{ color:#ffd84d; }
+      .el-hero-sub{ max-width:660px; margin:0 auto 16px; font-size:1.16rem; line-height:1.6; color:rgba(255,255,255,.94); }
+      .el-hero-towns{ font-size:.92rem; color:rgba(255,255,255,.72); margin:0 0 30px; letter-spacing:.02em; }
       .el-jump{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-      .el-jump a{ display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:999px; background:rgba(255,255,255,.1); color:#fff; text-decoration:none; font-weight:600; font-size:.95rem; border:1px solid rgba(255,255,255,.28); transition:all .2s ease; }
-      .el-jump a:hover{ background:var(--el-gold); color:var(--el-navy-deep); border-color:var(--el-gold); transform:translateY(-2px); }
+      .el-jump a{ display:inline-flex; align-items:center; gap:7px; padding:11px 20px; border-radius:999px; background:rgba(255,255,255,.12); color:#fff; text-decoration:none; font-weight:600; font-size:.95rem; border:1px solid rgba(255,255,255,.32); transition:all .2s ease; }
+      .el-jump a:hover{ background:#fff; color:var(--el-purple-deep); border-color:#fff; transform:translateY(-2px); }
 
-      /* COUNTDOWN STRIP */
-      .el-count{ background:var(--el-gold-soft); border-bottom:1px solid var(--el-line); }
-      .el-count-inner{ max-width:1100px; margin:0 auto; padding:26px 20px; display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
-      .el-count-card{ background:#fff; border-radius:10px; padding:20px 16px; text-align:center; box-shadow:0 2px 8px rgba(27,58,107,.08); border-top:4px solid var(--el-gold); }
-      .el-count-card.is-primary{ border-top-color:var(--el-navy); }
-      .el-count-num{ font-size:2.1rem; font-weight:800; color:var(--el-navy); line-height:1; }
-      .el-count-num small{ font-size:.8rem; font-weight:600; color:#7a8595; display:block; margin-top:4px; letter-spacing:.04em; text-transform:uppercase; }
-      .el-count-label{ font-size:.92rem; font-weight:700; color:var(--el-ink); margin-top:10px; }
-      .el-count-date{ font-size:.84rem; color:#6b7689; margin-top:3px; }
+      /* ===== SMART DEADLINE BANNER ===== */
+      .el-banner{ background:var(--el-blue); color:#fff; }
+      .el-banner-inner{ max-width:1100px; margin:0 auto; padding:16px 20px; display:flex; align-items:center; gap:16px 22px; flex-wrap:wrap; justify-content:center; text-align:center; }
+      .el-banner .el-b-flag{ font-weight:800; text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; background:#ffd84d; color:#3a2a00; padding:5px 12px; border-radius:999px; white-space:nowrap; }
+      .el-banner .el-b-text{ font-size:1.05rem; font-weight:600; }
+      .el-banner .el-b-text b{ color:#ffd84d; }
+      .el-banner .el-b-days{ font-weight:800; }
+      .el-banner .el-cal{ background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.45); color:#fff; }
+      .el-banner .el-cal:hover{ background:#fff; color:var(--el-blue); }
 
-      /* SECTION SHELL */
-      .el-section{ max-width:1100px; margin:0 auto; padding:58px 20px; }
-      .el-section h2{ font-size:1.9rem; color:var(--el-navy); margin:0 0 6px; font-weight:800; }
-      .el-section .el-kicker{ text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; color:var(--el-gold); margin:0 0 6px; }
-      .el-section .el-intro{ color:#56627a; font-size:1.04rem; max-width:680px; margin:0 0 32px; line-height:1.6; }
-      .el-alt{ background:#f7f9fc; border-top:1px solid #eef1f6; border-bottom:1px solid #eef1f6; }
+      /* ===== STICKY SECTION NAV ===== */
+      .el-subnav{ position:sticky; top:0; z-index:90; background:rgba(255,255,255,.97); backdrop-filter:saturate(1.1) blur(6px); border-bottom:1px solid var(--el-line); box-shadow:var(--el-shadow-sm); }
+      .el-subnav-inner{ max-width:1100px; margin:0 auto; display:flex; gap:4px; overflow-x:auto; padding:0 12px; scrollbar-width:thin; }
+      .el-subnav a{ flex:0 0 auto; padding:14px 16px; font-size:.92rem; font-weight:700; color:var(--el-muted); text-decoration:none; border-bottom:3px solid transparent; white-space:nowrap; transition:color .15s ease, border-color .15s ease; }
+      .el-subnav a:hover{ color:var(--el-purple); }
+      .el-subnav a.active{ color:var(--el-purple); border-bottom-color:var(--el-purple); }
 
-      /* TIMELINE */
-      .el-cycle-head{ display:flex; align-items:center; gap:12px; margin:34px 0 18px; }
-      .el-chip{ display:inline-block; padding:5px 14px; border-radius:999px; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; }
-      .el-chip.primary{ background:var(--el-navy); color:#fff; }
-      .el-chip.general{ background:var(--el-gold); color:var(--el-navy-deep); }
-      .el-cycle-head .el-when{ color:#6b7689; font-size:.95rem; font-weight:600; }
+      /* ===== AT-A-GLANCE / COUNTDOWN ===== */
+      .el-count{ background:var(--el-purple-bg); border-bottom:1px solid var(--el-line); }
+      .el-count-inner{ max-width:1100px; margin:0 auto; padding:30px 20px; display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+      .el-count-card{ background:#fff; border-radius:12px; padding:22px 16px; text-align:center; box-shadow:var(--el-shadow-sm); border-top:4px solid var(--el-blue); }
+      .el-count-card.is-primary{ border-top-color:var(--el-purple); }
+      .el-count-num{ font-size:2.2rem; font-weight:800; color:var(--el-blue); line-height:1; }
+      .el-count-card.is-primary .el-count-num{ color:var(--el-purple); }
+      .el-count-num small{ font-size:.78rem; font-weight:600; color:#7a8595; display:block; margin-top:5px; letter-spacing:.04em; text-transform:uppercase; }
+      .el-count-label{ font-size:.95rem; font-weight:700; color:var(--el-ink); margin-top:11px; }
+      .el-count-date{ font-size:.85rem; color:#6b7689; margin-top:3px; }
+
+      /* ===== SECTION SHELL ===== */
+      .el-section{ max-width:1100px; margin:0 auto; padding:64px 20px; }
+      .el-section h2{ font-size:2rem; color:var(--el-purple); margin:0 0 6px; font-weight:800; line-height:1.15; }
+      .el-kicker{ text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; color:var(--el-blue); margin:0 0 8px; }
+      .el-intro{ color:#56627a; font-size:1.06rem; max-width:700px; margin:0 0 30px; line-height:1.65; }
+      .el-alt{ background:var(--el-bg); border-top:1px solid #eef1f6; border-bottom:1px solid #eef1f6; }
+
+      /* tools row (print / share) */
+      .el-tools{ display:flex; gap:10px; flex-wrap:wrap; margin:-12px 0 26px; }
+      .el-tool{ display:inline-flex; align-items:center; gap:7px; font-size:.86rem; font-weight:700; color:var(--el-muted); background:#fff; border:1px solid var(--el-line); border-radius:999px; padding:8px 15px; cursor:pointer; text-decoration:none; transition:all .15s ease; }
+      .el-tool:hover{ color:var(--el-purple); border-color:var(--el-purple); }
+
+      /* ===== TIMELINE ===== */
+      .el-cycle-head{ display:flex; align-items:center; gap:12px; margin:36px 0 18px; flex-wrap:wrap; }
+      .el-chip{ display:inline-block; padding:6px 15px; border-radius:999px; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; }
+      .el-chip.primary{ background:var(--el-purple); color:#fff; }
+      .el-chip.general{ background:var(--el-blue); color:#fff; }
+      .el-cycle-head .el-when{ color:#6b7689; font-size:.96rem; font-weight:600; }
       .el-timeline{ position:relative; margin:0 0 6px; padding:0; list-style:none; }
-      .el-timeline::before{ content:""; position:absolute; left:13px; top:6px; bottom:6px; width:2px; background:var(--el-line); }
-      .el-tl-item{ position:relative; padding:0 0 22px 44px; }
-      .el-tl-item::before{ content:""; position:absolute; left:6px; top:3px; width:16px; height:16px; border-radius:50%; background:#fff; border:3px solid var(--el-gold); }
-      .el-tl-item.is-eday::before{ background:var(--el-navy); border-color:var(--el-navy); box-shadow:0 0 0 4px rgba(27,58,107,.15); }
-      .el-tl-date{ font-weight:800; color:var(--el-navy); font-size:1.02rem; }
-      .el-tl-title{ font-weight:700; color:var(--el-ink); margin:1px 0 2px; }
-      .el-tl-note{ color:#6b7689; font-size:.92rem; }
+      .el-timeline::before{ content:""; position:absolute; left:13px; top:6px; bottom:26px; width:2px; background:var(--el-line); }
+      .el-tl-item{ position:relative; padding:0 0 24px 46px; }
+      .el-tl-item::before{ content:""; position:absolute; left:6px; top:3px; width:16px; height:16px; border-radius:50%; background:#fff; border:3px solid var(--el-blue); }
+      .el-cycle-primary .el-tl-item::before{ border-color:var(--el-purple); }
+      .el-tl-item.is-eday::before{ background:var(--el-blue); box-shadow:0 0 0 4px rgba(0,61,122,.16); }
+      .el-cycle-primary .el-tl-item.is-eday::before{ background:var(--el-purple); box-shadow:0 0 0 4px rgba(139,26,122,.16); }
+      .el-tl-date{ font-weight:800; color:var(--el-ink); font-size:1.04rem; }
+      .el-tl-title{ font-weight:700; color:var(--el-blue); margin:1px 0 2px; }
+      .el-cycle-primary .el-tl-title{ color:var(--el-purple); }
+      .el-tl-note{ color:#6b7689; font-size:.94rem; }
 
-      /* FORUMS */
-      .el-state-forum{ background:var(--el-navy); color:#fff; border-radius:12px; padding:24px 26px; display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-bottom:28px; }
-      .el-state-forum .el-sf-date{ background:var(--el-gold); color:var(--el-navy-deep); border-radius:10px; padding:12px 18px; text-align:center; font-weight:800; line-height:1.1; min-width:84px; }
+      /* Add-to-calendar buttons */
+      .el-cal{ display:inline-flex; align-items:center; gap:6px; margin-top:9px; font-size:.82rem; font-weight:700; color:var(--el-purple); background:#fff; border:1px solid var(--el-line); border-radius:999px; padding:6px 13px; cursor:pointer; transition:all .15s ease; line-height:1; }
+      .el-cal:hover{ background:var(--el-purple); color:#fff; border-color:var(--el-purple); }
+      .el-cal svg{ flex:0 0 auto; }
+
+      /* ===== WAYS TO VOTE ===== */
+      .el-ways{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+      .el-way{ background:#fff; border:1px solid var(--el-line); border-radius:14px; padding:26px 24px; box-shadow:var(--el-shadow-sm); transition:all .2s ease; display:flex; flex-direction:column; }
+      .el-way:hover{ box-shadow:var(--el-shadow-md); transform:translateY(-3px); }
+      .el-way-ic{ width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:var(--el-purple-bg); margin-bottom:16px; }
+      .el-way h3{ margin:0 0 8px; color:var(--el-purple); font-size:1.2rem; }
+      .el-way p{ color:#56627a; font-size:.97rem; line-height:1.6; margin:0 0 16px; flex:1; }
+      .el-way .el-way-link{ font-weight:700; text-decoration:none; color:var(--el-blue); }
+      .el-way .el-way-link:hover{ text-decoration:underline; }
+
+      /* ===== FORUMS ===== */
+      .el-state-forum{ background:linear-gradient(135deg,var(--el-purple) 0%, var(--el-purple-deep) 100%); color:#fff; border-radius:14px; padding:24px 26px; display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-bottom:26px; box-shadow:var(--el-shadow-md); }
+      .el-state-forum .el-sf-date{ background:#ffd84d; color:#3a2a00; border-radius:12px; padding:12px 18px; text-align:center; font-weight:800; line-height:1.1; min-width:84px; }
       .el-state-forum .el-sf-date span{ display:block; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; font-weight:700; }
-      .el-state-forum .el-sf-date b{ font-size:1.5rem; }
-      .el-state-forum .el-sf-body h3{ margin:0 0 3px; color:#fff; font-size:1.15rem; }
-      .el-state-forum .el-sf-body p{ margin:0; color:rgba(255,255,255,.8); font-size:.95rem; }
+      .el-state-forum .el-sf-date b{ font-size:1.6rem; }
+      .el-state-forum .el-sf-body{ flex:1; min-width:200px; }
+      .el-state-forum .el-sf-body h3{ margin:0 0 3px; color:#fff; font-size:1.18rem; }
+      .el-state-forum .el-sf-body p{ margin:0; color:rgba(255,255,255,.82); font-size:.95rem; }
+      .el-state-forum .el-cal{ background:rgba(255,255,255,.14); color:#fff; border-color:rgba(255,255,255,.4); margin-top:0; }
+      .el-state-forum .el-cal:hover{ background:#fff; color:var(--el-purple); }
+
+      .el-filter{ display:flex; flex-wrap:wrap; gap:9px; margin:0 0 24px; }
+      .el-filter-label{ width:100%; font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--el-soft); margin-bottom:2px; }
+      .el-fbtn{ font:inherit; font-size:.9rem; font-weight:700; color:var(--el-muted); background:#fff; border:1.5px solid var(--el-line); border-radius:999px; padding:8px 16px; cursor:pointer; transition:all .15s ease; }
+      .el-fbtn:hover{ border-color:var(--el-purple); color:var(--el-purple); }
+      .el-fbtn[aria-pressed="true"]{ background:var(--el-purple); border-color:var(--el-purple); color:#fff; }
+
       .el-forum-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-      .el-town{ background:#fff; border:1px solid var(--el-line); border-radius:12px; padding:22px; transition:all .2s ease; }
-      .el-town:hover{ box-shadow:0 8px 22px rgba(27,58,107,.12); transform:translateY(-3px); border-color:#d4cbb4; }
-      .el-town h3{ margin:0 0 14px; color:var(--el-navy); font-size:1.18rem; display:flex; align-items:center; gap:8px; }
+      .el-town{ background:#fff; border:1px solid var(--el-line); border-radius:14px; padding:22px; transition:all .2s ease; }
+      .el-town:hover{ box-shadow:var(--el-shadow-md); transform:translateY(-3px); border-color:#e7d3e3; }
+      .el-town.is-hidden{ display:none; }
+      .el-town h3{ margin:0 0 14px; color:var(--el-purple); font-size:1.18rem; display:flex; align-items:center; gap:8px; }
       .el-town h3 svg{ flex:0 0 auto; }
-      .el-forum-row{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; padding:9px 0; border-bottom:1px dashed var(--el-line); }
+      .el-forum-row{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 0; border-bottom:1px dashed var(--el-line); }
       .el-forum-row:last-child{ border-bottom:0; }
-      .el-forum-row .el-fr-name{ font-weight:600; color:var(--el-ink); font-size:.96rem; }
-      .el-forum-row .el-fr-date{ font-weight:800; color:var(--el-gold); white-space:nowrap; font-size:.96rem; }
-      .el-forum-foot{ margin-top:18px; font-size:.9rem; color:#6b7689; }
+      .el-fr-main{ min-width:0; }
+      .el-forum-row .el-fr-name{ font-weight:600; color:var(--el-ink); font-size:.97rem; display:block; }
+      .el-forum-row .el-fr-date{ font-weight:800; color:var(--el-blue); white-space:nowrap; font-size:.9rem; }
+      .el-fr-cal{ flex:0 0 auto; width:34px; height:34px; padding:0; margin:0; border-radius:9px; justify-content:center; }
+      .el-fr-cal span{ display:none; }
+      .el-forum-foot{ margin-top:20px; font-size:.9rem; color:#6b7689; }
 
-      /* ACTION CARDS (register check / poll worker) */
+      /* ===== ACTION CARDS ===== */
       .el-actions{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-      .el-act{ background:#fff; border:1px solid var(--el-line); border-radius:14px; padding:28px; display:flex; gap:22px; align-items:flex-start; }
+      .el-act{ background:#fff; border:1px solid var(--el-line); border-radius:16px; padding:30px; display:flex; gap:24px; align-items:flex-start; box-shadow:var(--el-shadow-sm); transition:all .2s ease; }
+      .el-act:hover{ box-shadow:var(--el-shadow-md); }
       .el-act .el-act-body{ flex:1; min-width:0; }
-      .el-act h3{ margin:0 0 8px; color:var(--el-navy); font-size:1.3rem; }
-      .el-act p{ color:#56627a; line-height:1.6; margin:0 0 18px; font-size:.98rem; }
-      .el-btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--el-navy); color:#fff; text-decoration:none; font-weight:700; padding:13px 22px; border-radius:8px; font-size:1rem; transition:all .2s ease; border:2px solid var(--el-navy); }
-      .el-btn:hover{ background:var(--el-gold); border-color:var(--el-gold); color:var(--el-navy-deep); transform:translateY(-2px); }
-      .el-btn.gold{ background:var(--el-gold); border-color:var(--el-gold); color:var(--el-navy-deep); }
-      .el-btn.gold:hover{ background:var(--el-navy); border-color:var(--el-navy); color:#fff; }
+      .el-act h3{ margin:0 0 8px; color:var(--el-purple); font-size:1.34rem; }
+      .el-act p{ color:#56627a; line-height:1.6; margin:0 0 18px; font-size:.99rem; }
+      .el-btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--el-purple); color:#fff; text-decoration:none; font-weight:700; padding:13px 22px; border-radius:8px; font-size:1rem; transition:all .2s ease; border:2px solid var(--el-purple); min-height:48px; }
+      .el-btn:hover{ background:var(--el-purple-light); border-color:var(--el-purple-light); color:#fff; transform:translateY(-2px); box-shadow:var(--el-shadow-md); }
+      .el-btn.blue{ background:var(--el-blue); border-color:var(--el-blue); }
+      .el-btn.blue:hover{ background:var(--el-blue-light); border-color:var(--el-blue-light); }
       .el-qr{ flex:0 0 auto; text-align:center; }
-      .el-qr img{ width:118px; height:118px; display:block; border:1px solid var(--el-line); border-radius:10px; padding:6px; background:#fff; }
-      .el-qr span{ display:block; font-size:.74rem; color:#7a8595; margin-top:7px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+      .el-qr img{ width:120px; height:120px; display:block; border:1px solid var(--el-line); border-radius:12px; padding:7px; background:#fff; }
+      .el-qr span{ display:block; font-size:.74rem; color:#7a8595; margin-top:8px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
 
-      /* WHO'S RUNNING */
-      .el-soon{ background:var(--el-navy); color:#fff; border-radius:14px; padding:38px 32px; text-align:center; position:relative; overflow:hidden; }
-      .el-soon::before{ content:""; position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(197,160,40,.06) 0 14px,transparent 14px 28px); }
-      .el-soon-inner{ position:relative; max-width:620px; margin:0 auto; }
-      .el-soon .el-badge{ display:inline-block; background:var(--el-gold); color:var(--el-navy-deep); font-weight:800; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; padding:6px 16px; border-radius:999px; margin-bottom:16px; }
-      .el-soon h2{ color:#fff; margin:0 0 12px; font-size:1.7rem; }
-      .el-soon p{ color:rgba(255,255,255,.88); line-height:1.65; margin:0 0 22px; }
-      .el-soon .el-btn{ background:var(--el-gold); border-color:var(--el-gold); color:var(--el-navy-deep); }
-      .el-soon .el-btn:hover{ background:#fff; border-color:#fff; color:var(--el-navy); }
+      /* ===== FAQ ===== */
+      .el-faq{ max-width:840px; }
+      .el-faq details{ background:#fff; border:1px solid var(--el-line); border-radius:12px; margin-bottom:12px; overflow:hidden; transition:box-shadow .2s ease; }
+      .el-faq details[open]{ box-shadow:var(--el-shadow-sm); border-color:#e7d3e3; }
+      .el-faq summary{ cursor:pointer; list-style:none; padding:18px 22px; font-weight:700; color:var(--el-ink); font-size:1.05rem; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+      .el-faq summary::-webkit-details-marker{ display:none; }
+      .el-faq summary::after{ content:"+"; font-size:1.5rem; font-weight:700; color:var(--el-purple); line-height:1; transition:transform .2s ease; }
+      .el-faq details[open] summary::after{ transform:rotate(45deg); }
+      .el-faq .el-faq-body{ padding:0 22px 20px; color:#56627a; line-height:1.7; font-size:1rem; }
+      .el-faq .el-faq-body a{ color:var(--el-blue); font-weight:700; }
 
-      .el-updated{ text-align:center; color:#9aa3b2; font-size:.85rem; padding:0 20px 50px; }
+      /* ===== WHO'S RUNNING ===== */
+      .el-soon{ background:linear-gradient(135deg,var(--el-blue) 0%, #002a55 100%); color:#fff; border-radius:16px; padding:42px 32px; text-align:center; position:relative; overflow:hidden; box-shadow:var(--el-shadow-md); }
+      .el-soon::before{ content:""; position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 14px,transparent 14px 28px); }
+      .el-soon-inner{ position:relative; max-width:640px; margin:0 auto; }
+      .el-soon .el-badge{ display:inline-block; background:#ffd84d; color:#3a2a00; font-weight:800; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; padding:6px 16px; border-radius:999px; margin-bottom:16px; }
+      .el-soon h2{ color:#fff; margin:0 0 12px; font-size:1.8rem; }
+      .el-soon p{ color:rgba(255,255,255,.9); line-height:1.65; margin:0 0 24px; }
+      .el-soon .el-btn{ background:#ffd84d; border-color:#ffd84d; color:#3a2a00; }
+      .el-soon .el-btn:hover{ background:#fff; border-color:#fff; color:var(--el-blue); }
 
-      /* RESPONSIVE */
+      .el-updated{ text-align:center; color:#9aa3b2; font-size:.85rem; padding:6px 20px 54px; }
+
+      /* ===== RESPONSIVE ===== */
       @media (max-width:880px){
-        .el-hero h1{ font-size:2.3rem; }
+        .el-hero h1{ font-size:2.4rem; }
         .el-count-inner{ grid-template-columns:repeat(2,1fr); }
+        .el-ways{ grid-template-columns:1fr; }
         .el-forum-grid{ grid-template-columns:1fr 1fr; }
         .el-actions{ grid-template-columns:1fr; }
       }
       @media (max-width:560px){
+        .el-hero{ padding:52px 18px 46px; }
+        .el-hero h1{ font-size:2.05rem; }
         .el-forum-grid{ grid-template-columns:1fr; }
         .el-act{ flex-direction:column; align-items:center; text-align:center; }
         .el-act p{ text-align:left; }
         .el-state-forum{ flex-direction:column; text-align:center; }
+        .el-banner-inner{ gap:10px; }
+      }
+
+      /* ===== PRINT ===== */
+      @media print{
+        .site-header, nav, .el-subnav, .el-hero .el-jump, .el-banner, footer, .el-cal, .el-tools, .el-filter, .el-qr, .el-soon .el-btn{ display:none !important; }
+        .el-hero, .el-state-forum, .el-soon{ background:#fff !important; color:#000 !important; box-shadow:none; }
+        .el-hero h1, .el-hero h1 span, .el-section h2, .el-soon h2{ color:#000 !important; }
+        .el-town, .el-act, .el-way{ break-inside:avoid; box-shadow:none; }
+        .el-section{ padding:18px 0; }
       }
     </style>
 </head>
@@ -152,20 +248,49 @@
     <main class="el-wrap">
       <!-- ===== HERO ===== -->
       <section class="el-hero">
-        <p class="el-hero-eyebrow">Newport County · Rhode Island</p>
-        <h1>Elections <span>2026</span></h1>
-        <p class="el-hero-sub">Everything you need to vote with confidence this year — key dates, candidate forums, and how to make sure you're ready when the polls open.</p>
-        <p class="el-hero-towns">Serving Newport · Middletown · Portsmouth · Tiverton · Jamestown · Little Compton</p>
-        <div class="el-jump">
-          <a href="#dates">🗓 Key Dates</a>
-          <a href="#forums">🎤 Candidate Forums</a>
-          <a href="#check">✓ Check Registration</a>
-          <a href="#pollworker">🗳 Be a Poll Worker</a>
-          <a href="#running">👤 Who's Running</a>
+        <div class="el-hero-inner">
+          <p class="el-hero-eyebrow">Newport County · Rhode Island</p>
+          <h1>Elections <span>2026</span></h1>
+          <p class="el-hero-sub">Everything you need to vote with confidence this year — key dates, how to vote, candidate forums, and how to make sure you're ready when the polls open.</p>
+          <p class="el-hero-towns">Serving Newport · Middletown · Portsmouth · Tiverton · Jamestown · Little Compton</p>
+          <div class="el-jump">
+            <a href="#dates">🗓 Key Dates</a>
+            <a href="#vote">🗳 How to Vote</a>
+            <a href="#forums">🎤 Forums</a>
+            <a href="#check">✓ Check Registration</a>
+            <a href="#pollworker">🤝 Poll Workers</a>
+            <a href="#faq">❓ FAQ</a>
+            <a href="#running">👤 Candidates</a>
+          </div>
         </div>
       </section>
 
-      <!-- ===== COUNTDOWN / AT-A-GLANCE ===== -->
+      <!-- ===== SMART DEADLINE BANNER (live) ===== -->
+      <div class="el-banner" id="el-banner" hidden>
+        <div class="el-banner-inner">
+          <span class="el-b-flag">⏰ Next Deadline</span>
+          <span class="el-b-text" id="el-banner-text">Loading…</span>
+          <button class="el-cal" id="el-banner-cal" type="button" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add to calendar
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== STICKY SECTION NAV ===== -->
+      <nav class="el-subnav" id="el-subnav" aria-label="Elections 2026 sections">
+        <div class="el-subnav-inner">
+          <a href="#dates">Key Dates</a>
+          <a href="#vote">How to Vote</a>
+          <a href="#forums">Forums</a>
+          <a href="#check">Check Registration</a>
+          <a href="#pollworker">Poll Workers</a>
+          <a href="#faq">FAQ</a>
+          <a href="#running">Candidates</a>
+        </div>
+      </nav>
+
+      <!-- ===== AT-A-GLANCE ===== -->
       <section class="el-count" aria-label="Election countdown">
         <div class="el-count-inner">
           <div class="el-count-card is-primary">
@@ -179,12 +304,12 @@
             <div class="el-count-date">Tue · Nov 3, 2026</div>
           </div>
           <div class="el-count-card is-primary">
-            <div class="el-count-num" style="font-size:1.5rem; padding-top:6px;">Aug 10</div>
+            <div class="el-count-num" style="font-size:1.6rem; padding-top:6px;">Aug 10</div>
             <div class="el-count-label">Register for the Primary</div>
             <div class="el-count-date">Deadline</div>
           </div>
           <div class="el-count-card">
-            <div class="el-count-num" style="font-size:1.5rem; padding-top:6px;">Oct 4</div>
+            <div class="el-count-num" style="font-size:1.6rem; padding-top:6px;">Oct 4</div>
             <div class="el-count-label">Register for the General</div>
             <div class="el-count-date">Deadline</div>
           </div>
@@ -192,35 +317,52 @@
       </section>
 
       <!-- ===== KEY DATES ===== -->
-      <section class="el-section" id="dates">
+      <section class="el-section el-reveal" id="dates">
         <p class="el-kicker">Mark your calendar</p>
         <h2>2026 Election Calendar</h2>
-        <p class="el-intro">Rhode Island runs two elections in 2026 — a statewide Primary in September and the General Election in November. Each has its own registration deadline, mail ballot deadline, and early voting window. Polls are open <strong>7:00&nbsp;a.m.&nbsp;to&nbsp;8:00&nbsp;p.m.</strong> on both Election Days.</p>
+        <p class="el-intro">Rhode Island runs two elections in 2026 — a statewide Primary in September and the General Election in November. Each has its own registration deadline, mail ballot deadline, and early voting window. Polls are open <strong>7:00&nbsp;a.m.&nbsp;to&nbsp;8:00&nbsp;p.m.</strong> on both Election Days. Tap <strong>Add to calendar</strong> on any date to save it to your phone.</p>
+
+        <div class="el-tools">
+          <button class="el-tool" type="button" onclick="window.print()">🖨 Print these dates</button>
+          <button class="el-tool" type="button" id="el-share">🔗 Share this page</button>
+        </div>
 
         <div class="el-cycle-head">
           <span class="el-chip primary">Primary</span>
           <span class="el-when">Election Day — Wednesday, September 9, 2026</span>
         </div>
-        <ul class="el-timeline">
+        <ul class="el-timeline el-cycle-primary">
           <li class="el-tl-item">
             <div class="el-tl-date">Monday, August 10</div>
             <div class="el-tl-title">Voter registration deadline</div>
             <div class="el-tl-note">Last day to register to vote in the Primary.</div>
+            <button class="el-cal" type="button" data-cal data-title="Register to vote — RI Primary" data-date="2026-08-10" data-note="Last day to register to vote in the Rhode Island Primary. Register or check your status at vote.sos.ri.gov." data-file="register-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
           <li class="el-tl-item">
             <div class="el-tl-date">Wednesday, August 19</div>
             <div class="el-tl-title">Mail ballot application deadline</div>
             <div class="el-tl-note">Applications must be received by 4:00 p.m.</div>
+            <button class="el-cal" type="button" data-cal data-title="Mail ballot application deadline — RI Primary" data-date="2026-08-19" data-note="Mail ballot applications for the RI Primary must be received by 4:00 p.m. Details at vote.sos.ri.gov." data-file="mail-ballot-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
           <li class="el-tl-item">
             <div class="el-tl-date">August 20 – September 8</div>
             <div class="el-tl-title">Early in-person voting</div>
             <div class="el-tl-note">At your local board of canvassers. Final day ends at 4:00 p.m.</div>
+            <button class="el-cal" type="button" data-cal data-title="Early in-person voting — RI Primary" data-date="2026-08-20" data-end="2026-09-09" data-note="Early in-person voting for the RI Primary at your local board of canvassers. Final day ends at 4:00 p.m." data-file="early-voting-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
           <li class="el-tl-item is-eday">
             <div class="el-tl-date">Wednesday, September 9</div>
             <div class="el-tl-title">Primary Election Day</div>
             <div class="el-tl-note">Polls open 7:00 a.m. – 8:00 p.m.</div>
+            <button class="el-cal" type="button" data-cal data-title="RI Primary Election Day" data-date="2026-09-09" data-note="Rhode Island Primary Election Day. Polls open 7:00 a.m. to 8:00 p.m. Find your polling place at vote.sos.ri.gov." data-file="primary-election-day">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
         </ul>
 
@@ -233,109 +375,208 @@
             <div class="el-tl-date">Sunday, October 4</div>
             <div class="el-tl-title">Voter registration deadline</div>
             <div class="el-tl-note">Last day to register to vote in the General Election.</div>
+            <button class="el-cal" type="button" data-cal data-title="Register to vote — RI General Election" data-date="2026-10-04" data-note="Last day to register to vote in the Rhode Island General Election. Register or check your status at vote.sos.ri.gov." data-file="register-general">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
           <li class="el-tl-item">
             <div class="el-tl-date">Tuesday, October 13</div>
             <div class="el-tl-title">Mail ballot application deadline</div>
             <div class="el-tl-note">Applications must be received by 4:00 p.m.</div>
+            <button class="el-cal" type="button" data-cal data-title="Mail ballot application deadline — RI General Election" data-date="2026-10-13" data-note="Mail ballot applications for the RI General Election must be received by 4:00 p.m. Details at vote.sos.ri.gov." data-file="mail-ballot-general">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
           <li class="el-tl-item">
             <div class="el-tl-date">October 14 – November 2</div>
             <div class="el-tl-title">Early in-person voting</div>
             <div class="el-tl-note">At your local board of canvassers. Final day ends at 4:00 p.m.</div>
+            <button class="el-cal" type="button" data-cal data-title="Early in-person voting — RI General Election" data-date="2026-10-14" data-end="2026-11-03" data-note="Early in-person voting for the RI General Election at your local board of canvassers. Final day ends at 4:00 p.m." data-file="early-voting-general">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
           <li class="el-tl-item is-eday">
             <div class="el-tl-date">Tuesday, November 3</div>
             <div class="el-tl-title">General Election Day</div>
             <div class="el-tl-note">Polls open 7:00 a.m. – 8:00 p.m.</div>
+            <button class="el-cal" type="button" data-cal data-title="RI General Election Day" data-date="2026-11-03" data-note="Rhode Island General Election Day. Polls open 7:00 a.m. to 8:00 p.m. Find your polling place at vote.sos.ri.gov." data-file="general-election-day">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+            </button>
           </li>
         </ul>
       </section>
 
-      <!-- ===== CANDIDATE FORUMS ===== -->
+      <!-- ===== HOW TO VOTE ===== -->
       <section class="el-alt">
-        <div class="el-section" id="forums">
-          <p class="el-kicker">Nonpartisan &amp; free to attend</p>
-          <h2>Candidate Forums</h2>
-          <p class="el-intro">The League hosts nonpartisan forums so you can hear directly from the candidates before you vote. Below are the 2026 forum dates across Newport County. <strong>Times and locations will be announced</strong> as each forum is confirmed — check the <a href="events.html" style="color:var(--el-navy); font-weight:700;">Events page</a> for the latest details.</p>
-
-          <div class="el-state-forum">
-            <div class="el-sf-date"><span>Aug</span><b>4</b></div>
-            <div class="el-sf-body">
-              <h3>State Senate Primary Forum — District 13</h3>
-              <p>Our first forum of the season covers the District 13 State Senate primary race.</p>
+        <div class="el-section el-reveal" id="vote">
+          <p class="el-kicker">Three ways to cast your ballot</p>
+          <h2>How to Vote in Rhode Island</h2>
+          <p class="el-intro">Every registered Rhode Island voter has three ways to vote. Pick whatever fits your schedule — all three are official and secure.</p>
+          <div class="el-ways">
+            <div class="el-way">
+              <div class="el-way-ic">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 21V10l8-6 8 6v11" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>
+              </div>
+              <h3>In person on Election Day</h3>
+              <p>Vote at your assigned polling place on Election Day — Primary on Sept 9, General on Nov 3. Polls are open 7:00 a.m. to 8:00 p.m. Not sure where you go? Look up your polling place first.</p>
+              <a class="el-way-link" href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Find my polling place →</a>
+            </div>
+            <div class="el-way">
+              <div class="el-way-ic">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3h11l3 3v15H5z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#8B1A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h3>Early in-person voting</h3>
+              <p>Can't make Election Day? Vote early at your local board of canvassers — Aug 20–Sept 8 for the Primary, Oct 14–Nov 2 for the General. The final day ends at 4:00 p.m.</p>
+              <a class="el-way-link" href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Early voting details →</a>
+            </div>
+            <div class="el-way">
+              <div class="el-way-ic">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 6l9 6 9-6" stroke="#8B1A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="#8B1A7A" stroke-width="2"/></svg>
+              </div>
+              <h3>By mail ballot</h3>
+              <p>Vote from home with a mail ballot. Apply by the deadline — Aug 19 for the Primary, Oct 13 for the General (applications due by 4:00 p.m.). Then return your ballot by Election Day.</p>
+              <a class="el-way-link" href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Request a mail ballot →</a>
             </div>
           </div>
-
-          <div class="el-forum-grid">
-            <div class="el-town">
-              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#C5A028" stroke-width="2" stroke-linejoin="round"/></svg>Newport</h3>
-              <div class="el-forum-row"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Sept 17</span></div>
-              <div class="el-forum-row"><span class="el-fr-name">City Council</span><span class="el-fr-date">Sept 24</span></div>
-            </div>
-            <div class="el-town">
-              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#C5A028" stroke-width="2" stroke-linejoin="round"/></svg>Portsmouth</h3>
-              <div class="el-forum-row"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 15</span></div>
-              <div class="el-forum-row"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 22</span></div>
-            </div>
-            <div class="el-town">
-              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#C5A028" stroke-width="2" stroke-linejoin="round"/></svg>Middletown</h3>
-              <div class="el-forum-row"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 29</span></div>
-              <div class="el-forum-row"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 21</span></div>
-            </div>
-            <div class="el-town">
-              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#C5A028" stroke-width="2" stroke-linejoin="round"/></svg>Tiverton</h3>
-              <div class="el-forum-row"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 7</span></div>
-              <div class="el-forum-row"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 8</span></div>
-            </div>
-            <div class="el-town">
-              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#C5A028" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</h3>
-              <div class="el-forum-row"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 13</span></div>
-              <div class="el-forum-row"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 15</span></div>
-            </div>
-            <div class="el-town">
-              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#C5A028" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</h3>
-              <div class="el-forum-row"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 22</span></div>
-              <div class="el-forum-row"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 19</span></div>
-            </div>
-          </div>
-          <p class="el-forum-foot">All forums are nonpartisan and open to the public. Dates are subject to change as candidate fields are finalized.</p>
         </div>
       </section>
 
-      <!-- ===== ACTION: CHECK REGISTRATION + POLL WORKER ===== -->
-      <section class="el-section">
-        <div class="el-actions">
-          <!-- Check registration -->
-          <div class="el-act" id="check">
-            <div class="el-act-body">
-              <h3>Check Your Registration</h3>
-              <p><strong>Are you a registered voter? Is your registration accurate?</strong> Confirm your status, polling place, and mailing address through Rhode Island's official voter portal — it takes about a minute.</p>
-              <a class="el-btn" href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Check My Registration →</a>
-            </div>
-            <div class="el-qr">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAAEiCAIAAADS3EjhAAAERklEQVR42u3d4Y0TMRCGYYK2DDqhJcqhJTqhj6UBtArMjb+x73n+X5Ld5JVXupH9uu/7C9Dpq1sAMgOZATIDmYHMAJmBzACZgcxAZoDMQGYgM0BmIDNAZiAzkBnwjqvyx9++/zjsdvz+9TNyvc/vW/kW+q4oda9m/jasZuChEWQGyAxkBjJzC0BmIDNAZhB39b105b/mfWbOPaQ+Veo7Ou+3YTUDD40gM0BmIDOQmVsAMgOZATKDuCv1xjP31ZipckU73o3zfhtWM5AZyAyQGcgMZAbIDGQGyAwWuNyC96XOXklNRczcR8RqBsgMZAYyA2QGMgOZATIDmQF/ZQpke5VJDnMeVjOQGSAzkBnIDJAZyAyQGcgMjhGbAjlvwmDmjh19r9z3DZ7327CagcxAZoDMQGYgM0BmIDNAZrBA4xRI31TETH0TFamTaPw2rGYgM0BmIDOQGSAzkBnIDJAZbKQ0BeLEkI9y3lSE34bVDGQGMgNkBjIDmQEyA5kBMoPFSlMgqRNDZu6NkToRJmXm5ErlXvX9nq1m4KERZAbIDGQGMgNkBjIDZAYLNO4FkpoR6fvMO77vs8r7pqZ8+l6574qsZuChEWQGyAxkBjIDZAYyA2QGC7zu+/7vP565J0dK3y4U513RzFkcqxl4aARkBjIDmQEyA5mBzACZwdZKUyDP+vZd6NvB4rxpjJTULiMzdzexmoGHRpAZIDOQGcgMkBnIDJAZLNA4BfJs5iTHzP08UmevfLb73PeZrWbgoRFkBsgMZAYyA2QGMgNkBgsMPRGm72/7rqjPjqfnzPwWUt+v1Qw8NILMAJmBzEBmgMxAZoDMYAF7gfzDK1euyEk0E643NcdjNQOZgcwAmYHMQGaAzEBmgMxggdgUyLPUJMd5VzTzzJfzZoCsZuChEWQGyAxkBjJzC0BmIDNAZhB3Vf54x1mN1GkjlbtR+cznnWKz46/OagYyA5kBMgOZgcwAmYHMAJnBAkP3Apmpb1+NHc9eSX3mmXu9WM1AZiAzQGYgM5CZWwAyA5kBMoO42F4gM6XOXkl9C32nq5w3yWE1A5mBzACZgcwAmYHMQGaAzGC4q++lZ/6nPzUzkdpHJDWpY3cTqxl4aASZATIDmYHMAJmBzACZwWJX6o2dVHL23ZgpNZlkNQOZgcwAmYHMQGaAzEBmgMxggcsteF/qvJi+XUY+233u2wnGagYeGkFmgMxAZiAztwBkBjIDZAZxpkA+TGXCoG9fjcqMSN9ZMzPnaZwIAx4aAZmBzEBmgMxAZiAzQGawtdgUyI57VKTuRuokmsqMSOV9K2aeU2M1A5mBzACZgcxAZoDMQGaAzGCBximQmf+PT11R374alc+cmuTomwHq25HFiTDgoRFkBsgMZAbIDGQGMgNkBsO97vt2F8BqBjIDZAYyA5kBMgOZgcwAmYHMAJmBzEBmgMxAZoDMQGYgM0BmkPcHeU5+ne6fsoAAAAAASUVORK5CYII=" alt="QR code linking to the Rhode Island voter information portal">
-              <span>Scan to check</span>
-            </div>
-          </div>
+      <!-- ===== CANDIDATE FORUMS ===== -->
+      <section class="el-section el-reveal" id="forums">
+        <p class="el-kicker">Nonpartisan &amp; free to attend</p>
+        <h2>Candidate Forums</h2>
+        <p class="el-intro">The League hosts nonpartisan forums so you can hear directly from the candidates before you vote. Below are the 2026 forum dates across Newport County. <strong>Times and locations will be announced</strong> as each forum is confirmed — check the <a href="events.html">Events page</a> for the latest, and add any forum to your calendar.</p>
 
-          <!-- Poll worker -->
-          <div class="el-act" id="pollworker">
-            <div class="el-act-body">
-              <h3>Be a Poll Worker</h3>
-              <p>Poll workers keep our elections running — checking in voters, guiding people through the process, and making democracy work in your own community. Training is provided, and many positions are paid. The Rhode Island Department of State has the requirements and the application.</p>
-              <a class="el-btn gold" href="https://vote.sos.ri.gov/Elections/PollWorkerInfo" target="_blank" rel="noopener">Sign Up to Serve →</a>
+        <div class="el-state-forum">
+          <div class="el-sf-date"><span>Aug</span><b>4</b></div>
+          <div class="el-sf-body">
+            <h3>State Senate Primary Forum — District 13</h3>
+            <p>Our first forum of the season covers the District 13 State Senate primary race.</p>
+          </div>
+          <button class="el-cal" type="button" data-cal data-title="LWV Forum — State Senate Primary, District 13" data-date="2026-08-04" data-note="League of Women Voters of Newport County candidate forum: State Senate Primary, District 13. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-senate-d13">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add to calendar
+          </button>
+        </div>
+
+        <div class="el-filter" role="group" aria-label="Filter forums by town">
+          <span class="el-filter-label">Show forums for:</span>
+          <button class="el-fbtn" type="button" data-filter="all" aria-pressed="true">All towns</button>
+          <button class="el-fbtn" type="button" data-filter="newport" aria-pressed="false">Newport</button>
+          <button class="el-fbtn" type="button" data-filter="portsmouth" aria-pressed="false">Portsmouth</button>
+          <button class="el-fbtn" type="button" data-filter="middletown" aria-pressed="false">Middletown</button>
+          <button class="el-fbtn" type="button" data-filter="tiverton" aria-pressed="false">Tiverton</button>
+          <button class="el-fbtn" type="button" data-filter="jamestown" aria-pressed="false">Jamestown</button>
+          <button class="el-fbtn" type="button" data-filter="little-compton" aria-pressed="false">Little Compton</button>
+        </div>
+
+        <div class="el-forum-grid" id="el-forum-grid">
+          <div class="el-town" data-town="newport">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Newport</h3>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Sept 17</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Newport School Committee" data-date="2026-09-17" data-note="LWV Newport County candidate forum: Newport School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-newport-school" aria-label="Add Newport School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">City Council</span><span class="el-fr-date">Sept 24</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Newport City Council" data-date="2026-09-24" data-note="LWV Newport County candidate forum: Newport City Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-newport-council" aria-label="Add Newport City Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+          </div>
+          <div class="el-town" data-town="portsmouth">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Portsmouth</h3>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 15</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Portsmouth Town Council" data-date="2026-09-15" data-note="LWV Newport County candidate forum: Portsmouth Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-portsmouth-council" aria-label="Add Portsmouth Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 22</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Portsmouth School Committee" data-date="2026-10-22" data-note="LWV Newport County candidate forum: Portsmouth School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-portsmouth-school" aria-label="Add Portsmouth School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+          </div>
+          <div class="el-town" data-town="middletown">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Middletown</h3>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 29</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Middletown Town Council" data-date="2026-09-29" data-note="LWV Newport County candidate forum: Middletown Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-middletown-council" aria-label="Add Middletown Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 21</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Middletown School Committee" data-date="2026-10-21" data-note="LWV Newport County candidate forum: Middletown School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-middletown-school" aria-label="Add Middletown School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+          </div>
+          <div class="el-town" data-town="tiverton">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Tiverton</h3>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 7</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Tiverton Town Council" data-date="2026-10-07" data-note="LWV Newport County candidate forum: Tiverton Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-tiverton-council" aria-label="Add Tiverton Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 8</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Tiverton School Committee" data-date="2026-10-08" data-note="LWV Newport County candidate forum: Tiverton School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-tiverton-school" aria-label="Add Tiverton School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+          </div>
+          <div class="el-town" data-town="jamestown">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</h3>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 13</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Jamestown Town Council" data-date="2026-10-13" data-note="LWV Newport County candidate forum: Jamestown Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-jamestown-council" aria-label="Add Jamestown Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 15</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Jamestown School Committee" data-date="2026-10-15" data-note="LWV Newport County candidate forum: Jamestown School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-jamestown-school" aria-label="Add Jamestown School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+          </div>
+          <div class="el-town" data-town="little-compton">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</h3>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 22</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Little Compton Town Council" data-date="2026-09-22" data-note="LWV Newport County candidate forum: Little Compton Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-littlecompton-council" aria-label="Add Little Compton Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 19</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Little Compton School Committee" data-date="2026-10-19" data-note="LWV Newport County candidate forum: Little Compton School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-littlecompton-school" aria-label="Add Little Compton School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+          </div>
+        </div>
+        <p class="el-forum-foot" id="el-forum-empty" hidden>No forums listed for that town yet. Check the <a href="events.html">Events page</a> for updates.</p>
+        <p class="el-forum-foot">All forums are nonpartisan and open to the public. Dates are subject to change as candidate fields are finalized.</p>
+      </section>
+
+      <!-- ===== ACTION: CHECK REGISTRATION + POLL WORKER ===== -->
+      <section class="el-alt">
+        <div class="el-section el-reveal">
+          <div class="el-actions">
+            <!-- Check registration -->
+            <div class="el-act" id="check">
+              <div class="el-act-body">
+                <h3>Check Your Registration</h3>
+                <p><strong>Are you a registered voter? Is your registration accurate?</strong> Confirm your status, polling place, and mailing address through Rhode Island's official voter portal — it takes about a minute.</p>
+                <a class="el-btn" href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Check My Registration →</a>
+              </div>
+              <div class="el-qr">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAAEiCAIAAADS3EjhAAAERklEQVR42u3d4Y0TMRCGYYK2DDqhJcqhJTqhj6UBtArMjb+x73n+X5Ld5JVXupH9uu/7C9Dpq1sAMgOZATIDmYHMAJmBzACZgcxAZoDMQGYgM0BmIDNAZiAzkBnwjqvyx9++/zjsdvz+9TNyvc/vW/kW+q4oda9m/jasZuChEWQGyAxkBjJzC0BmIDNAZhB39b105b/mfWbOPaQ+Veo7Ou+3YTUDD40gM0BmIDOQmVsAMgOZATKDuCv1xjP31ZipckU73o3zfhtWM5AZyAyQGcgMZAbIDGQGyAwWuNyC96XOXklNRczcR8RqBsgMZAYyA2QGMgOZATIDmQF/ZQpke5VJDnMeVjOQGSAzkBnIDJAZyAyQGcgMjhGbAjlvwmDmjh19r9z3DZ7327CagcxAZoDMQGYgM0BmIDNAZrBA4xRI31TETH0TFamTaPw2rGYgM0BmIDOQGSAzkBnIDJAZbKQ0BeLEkI9y3lSE34bVDGQGMgNkBjIDmQEyA5kBMoPFSlMgqRNDZu6NkToRJmXm5ErlXvX9nq1m4KERZAbIDGQGMgNkBjIDZAYLNO4FkpoR6fvMO77vs8r7pqZ8+l6574qsZuChEWQGyAxkBjIDZAYyA2QGC7zu+/7vP565J0dK3y4U513RzFkcqxl4aARkBjIDmQEyA5mBzACZwdZKUyDP+vZd6NvB4rxpjJTULiMzdzexmoGHRpAZIDOQGcgMkBnIDJAZLNA4BfJs5iTHzP08UmevfLb73PeZrWbgoRFkBsgMZAYyA2QGMgNkBgsMPRGm72/7rqjPjqfnzPwWUt+v1Qw8NILMAJmBzEBmgMxAZoDMYAF7gfzDK1euyEk0E643NcdjNQOZgcwAmYHMQGaAzEBmgMxggdgUyLPUJMd5VzTzzJfzZoCsZuChEWQGyAxkBjJzC0BmIDNAZhB3Vf54x1mN1GkjlbtR+cznnWKz46/OagYyA5kBMgOZgcwAmYHMAJnBAkP3Apmpb1+NHc9eSX3mmXu9WM1AZiAzQGYgM5CZWwAyA5kBMoO42F4gM6XOXkl9C32nq5w3yWE1A5mBzACZgcwAmYHMQGaAzGC4q++lZ/6nPzUzkdpHJDWpY3cTqxl4aASZATIDmYHMAJmBzACZwWJX6o2dVHL23ZgpNZlkNQOZgcwAmYHMQGaAzEBmgMxggcsteF/qvJi+XUY+233u2wnGagYeGkFmgMxAZiAztwBkBjIDZAZxpkA+TGXCoG9fjcqMSN9ZMzPnaZwIAx4aAZmBzEBmgMxAZiAzQGawtdgUyI57VKTuRuokmsqMSOV9K2aeU2M1A5mBzACZgcxAZoDMQGaAzGCBximQmf+PT11R374alc+cmuTomwHq25HFiTDgoRFkBsgMZAbIDGQGMgNkBsO97vt2F8BqBjIDZAYyA5kBMgOZgcwAmYHMAJmBzEBmgMxAZoDMQGYgM0BmkPcHeU5+ne6fsoAAAAAASUVORK5CYII=" alt="QR code linking to the Rhode Island voter information portal">
+                <span>Scan to check</span>
+              </div>
             </div>
-            <div class="el-qr">
-              <img src="data:image/png;base64,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" alt="QR code linking to Rhode Island poll worker information">
-              <span>Scan to apply</span>
+
+            <!-- Poll worker -->
+            <div class="el-act" id="pollworker">
+              <div class="el-act-body">
+                <h3>Be a Poll Worker</h3>
+                <p>Poll workers keep our elections running — checking in voters, guiding people through the process, and making democracy work in your own community. Training is provided, and many positions are paid. The Rhode Island Department of State has the requirements and the application.</p>
+                <a class="el-btn blue" href="https://vote.sos.ri.gov/Elections/PollWorkerInfo" target="_blank" rel="noopener">Sign Up to Serve →</a>
+              </div>
+              <div class="el-qr">
+                <img src="data:image/png;base64,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" alt="QR code linking to Rhode Island poll worker information">
+                <span>Scan to apply</span>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- ===== FAQ ===== -->
+      <section class="el-section el-reveal" id="faq">
+        <p class="el-kicker">Quick answers</p>
+        <h2>Voter FAQ</h2>
+        <p class="el-intro">Common questions about voting in Rhode Island. Every answer links to an official source so you can confirm the details yourself.</p>
+        <div class="el-faq">
+          <details>
+            <summary>Am I registered to vote?</summary>
+            <div class="el-faq-body">You can confirm your registration, polling place, and mailing address in about a minute through Rhode Island's official voter portal. <a href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Check your registration →</a></div>
+          </details>
+          <details>
+            <summary>How do I register, and what's the deadline?</summary>
+            <div class="el-faq-body">You can register online, by mail, or in person. To vote in the <strong>Primary</strong>, register by <strong>Monday, August 10, 2026</strong>. To vote in the <strong>General Election</strong>, register by <strong>Sunday, October 4, 2026</strong>. <a href="https://vote.sos.ri.gov/Voter/RegisterToVote" target="_blank" rel="noopener">Register to vote →</a></div>
+          </details>
+          <details>
+            <summary>What are my ways to vote?</summary>
+            <div class="el-faq-body">Three ways: in person on Election Day (polls open 7 a.m.–8 p.m.), early in-person voting at your local board of canvassers, or by mail ballot. See the <a href="#vote">How to Vote</a> section above for dates and details.</div>
+          </details>
+          <details>
+            <summary>Where is my polling place?</summary>
+            <div class="el-faq-body">Your polling place depends on your address, and it can change between elections — always confirm before Election Day. <a href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Find my polling place →</a></div>
+          </details>
+          <details>
+            <summary>How do I vote by mail?</summary>
+            <div class="el-faq-body">Apply for a mail ballot by the deadline — <strong>August 19</strong> for the Primary or <strong>October 13</strong> for the General (applications must be received by 4:00 p.m.). Then return your completed ballot by Election Day. <a href="https://vote.sos.ri.gov/" target="_blank" rel="noopener">Mail ballot information →</a></div>
+          </details>
+          <details>
+            <summary>What will be on my ballot?</summary>
+            <div class="el-faq-body">See your personalized ballot and compare candidates side-by-side at Vote411, the League of Women Voters' nonpartisan election resource. <a href="https://www.vote411.org" target="_blank" rel="noopener">See my ballot at Vote411 →</a></div>
+          </details>
+          <details>
+            <summary>How can I become a poll worker?</summary>
+            <div class="el-faq-body">Poll workers are paid and trained, and they're essential to running elections in your community. The Rhode Island Department of State has the requirements and application. <a href="https://vote.sos.ri.gov/Elections/PollWorkerInfo" target="_blank" rel="noopener">Poll worker information →</a></div>
+          </details>
         </div>
       </section>
 
       <!-- ===== WHO'S RUNNING ===== -->
-      <section class="el-section" id="running" style="padding-top:0;">
+      <section class="el-section el-reveal" id="running" style="padding-top:0;">
         <div class="el-soon">
           <div class="el-soon-inner">
             <span class="el-badge">Coming Soon</span>
@@ -382,14 +623,22 @@
     </footer>
 
     <script>
-      // Live countdown to the two 2026 election days (local time, robust if a date has passed)
       (function(){
+        "use strict";
+
+        /* ---------- helpers ---------- */
+        var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var WDAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        function pad(n){ return (n<10?'0':'')+n; }
+        function ymdToLocal(s){ var p=s.split('-'); return new Date(+p[0],+p[1]-1,+p[2]); }
+        function startOfToday(){ var t=new Date(); t.setHours(0,0,0,0); return t; }
+
+        /* ---------- live countdown (at-a-glance) ---------- */
         function daysUntil(y,m,d){
-          var today=new Date(); today.setHours(0,0,0,0);
           var target=new Date(y,m-1,d); target.setHours(0,0,0,0);
-          return Math.round((target-today)/86400000);
+          return Math.round((target-startOfToday())/86400000);
         }
-        function render(id,y,m,d){
+        function renderCount(id,y,m,d){
           var el=document.getElementById(id); if(!el) return;
           var n=daysUntil(y,m,d);
           if(n>1){ el.innerHTML=n+'<small>days away</small>'; }
@@ -397,8 +646,168 @@
           else if(n===0){ el.innerHTML='Today<small>polls 7a–8p</small>'; }
           else { el.innerHTML='Done<small>election held</small>'; }
         }
-        render('cd-primary',2026,9,9);
-        render('cd-general',2026,11,3);
+        renderCount('cd-primary',2026,9,9);
+        renderCount('cd-general',2026,11,3);
+
+        /* ---------- smart "next deadline" banner ---------- */
+        var KEY=[
+          {label:'Register to vote for the Primary', date:'2026-08-10', cal:{title:'Register to vote — RI Primary', note:'Last day to register to vote in the RI Primary. vote.sos.ri.gov', file:'register-primary'}},
+          {label:'Mail-ballot application deadline for the Primary', date:'2026-08-19', cal:{title:'Mail ballot application deadline — RI Primary', note:'Mail ballot applications due by 4:00 p.m. vote.sos.ri.gov', file:'mail-ballot-primary'}},
+          {label:'Early in-person voting begins for the Primary', date:'2026-08-20', cal:{title:'Early voting begins — RI Primary', note:'Early in-person voting at your local board of canvassers.', file:'early-voting-primary'}},
+          {label:'Primary Election Day', date:'2026-09-09', cal:{title:'RI Primary Election Day', note:'Polls open 7:00 a.m.–8:00 p.m. vote.sos.ri.gov', file:'primary-election-day'}},
+          {label:'Register to vote for the General Election', date:'2026-10-04', cal:{title:'Register to vote — RI General Election', note:'Last day to register to vote in the RI General Election. vote.sos.ri.gov', file:'register-general'}},
+          {label:'Mail-ballot application deadline for the General Election', date:'2026-10-13', cal:{title:'Mail ballot application deadline — RI General Election', note:'Mail ballot applications due by 4:00 p.m. vote.sos.ri.gov', file:'mail-ballot-general'}},
+          {label:'Early in-person voting begins for the General Election', date:'2026-10-14', cal:{title:'Early voting begins — RI General Election', note:'Early in-person voting at your local board of canvassers.', file:'early-voting-general'}},
+          {label:'General Election Day', date:'2026-11-03', cal:{title:'RI General Election Day', note:'Polls open 7:00 a.m.–8:00 p.m. vote.sos.ri.gov', file:'general-election-day'}}
+        ];
+        function nextKey(){
+          var today=startOfToday();
+          for(var i=0;i<KEY.length;i++){
+            var d=ymdToLocal(KEY[i].date); d.setHours(0,0,0,0);
+            var days=Math.round((d-today)/86400000);
+            if(days>=0) return {item:KEY[i], days:days, d:d};
+          }
+          return null;
+        }
+        (function renderBanner(){
+          var nk=nextKey(); var box=document.getElementById('el-banner');
+          if(!nk||!box) return;
+          var d=nk.d, item=nk.item;
+          var when=WDAYS[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+          var left = nk.days===0 ? 'today' : (nk.days===1 ? 'tomorrow' : nk.days+' days left');
+          document.getElementById('el-banner-text').innerHTML='<b>'+item.label+'</b> — '+when+' · <span class="el-b-days">'+left+'</span>';
+          var calBtn=document.getElementById('el-banner-cal');
+          if(calBtn){
+            calBtn.setAttribute('data-cal','');
+            calBtn.setAttribute('data-title',item.cal.title);
+            calBtn.setAttribute('data-date',item.date);
+            calBtn.setAttribute('data-note',item.cal.note);
+            calBtn.setAttribute('data-file',item.cal.file);
+            calBtn.hidden=false;
+          }
+          box.hidden=false;
+        })();
+
+        /* ---------- add-to-calendar (.ics) ---------- */
+        function icsStamp(){
+          var d=new Date();
+          return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';
+        }
+        function icsEsc(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n'); }
+        function nextDayStr(ymd){
+          var d=ymdToLocal(ymd); d.setDate(d.getDate()+1);
+          return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
+        }
+        function buildICS(o){
+          var start=o.date.replace(/-/g,'');
+          var end=o.end?o.end.replace(/-/g,''):nextDayStr(o.date);
+          var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//LWV Newport County//Elections 2026//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT','UID:'+o.date.replace(/-/g,'')+'-'+(o.file||'event')+'@lwvnewportcounty.org','DTSTAMP:'+icsStamp(),'DTSTART;VALUE=DATE:'+start,'DTEND;VALUE=DATE:'+end,'SUMMARY:'+icsEsc(o.title),'TRANSP:TRANSPARENT'];
+          if(o.note) L.push('DESCRIPTION:'+icsEsc(o.note));
+          L.push('BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(o.title),'TRIGGER:-P2D','END:VALARM','END:VEVENT','END:VCALENDAR');
+          return L.join('\r\n');
+        }
+        function downloadICS(o){
+          var blob=new Blob([buildICS(o)],{type:'text/calendar;charset=utf-8'});
+          var url=URL.createObjectURL(blob);
+          var a=document.createElement('a'); a.href=url; a.download=(o.file||'event')+'.ics';
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          setTimeout(function(){ URL.revokeObjectURL(url); },1500);
+        }
+        document.addEventListener('click',function(e){
+          var b=e.target.closest && e.target.closest('[data-cal]'); if(!b) return;
+          e.preventDefault();
+          downloadICS({
+            title:b.getAttribute('data-title'), date:b.getAttribute('data-date'),
+            end:b.getAttribute('data-end'), note:b.getAttribute('data-note'), file:b.getAttribute('data-file')
+          });
+        });
+
+        /* ---------- town filter ---------- */
+        var fbtns=document.querySelectorAll('.el-fbtn');
+        var towns=document.querySelectorAll('#el-forum-grid .el-town');
+        var emptyMsg=document.getElementById('el-forum-empty');
+        Array.prototype.forEach.call(fbtns,function(btn){
+          btn.addEventListener('click',function(){
+            var f=btn.getAttribute('data-filter');
+            Array.prototype.forEach.call(fbtns,function(o){ o.setAttribute('aria-pressed', o===btn ? 'true':'false'); });
+            var shown=0;
+            Array.prototype.forEach.call(towns,function(t){
+              var match = (f==='all') || (t.getAttribute('data-town')===f);
+              t.classList.toggle('is-hidden', !match);
+              if(match) shown++;
+            });
+            if(emptyMsg) emptyMsg.hidden = shown!==0;
+          });
+        });
+
+        /* ---------- sticky subnav: offset + scrollspy ---------- */
+        var subnav=document.getElementById('el-subnav');
+        function placeSubnav(){
+          var mainNav=document.querySelector('body > nav');
+          var h=mainNav?Math.round(mainNav.getBoundingClientRect().height):0;
+          if(subnav) subnav.style.top=h+'px';
+          return h;
+        }
+        placeSubnav();
+        window.addEventListener('resize',placeSubnav);
+        var subLinks=subnav?subnav.querySelectorAll('a'):[];
+        // smooth-scroll with offset for sub-nav + main nav
+        function scrollWithOffset(hash){
+          var target=document.querySelector(hash); if(!target) return;
+          var offset=placeSubnav()+(subnav?subnav.getBoundingClientRect().height:0)+8;
+          var y=target.getBoundingClientRect().top+window.pageYOffset-offset;
+          window.scrollTo({top:y,behavior:'smooth'});
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('.el-jump a, .el-subnav a, .el-faq-body a[href^="#"]'),function(a){
+          a.addEventListener('click',function(e){
+            var href=a.getAttribute('href');
+            if(href&&href.charAt(0)==='#'&&document.querySelector(href)){
+              e.preventDefault(); scrollWithOffset(href);
+              if(history.replaceState) history.replaceState(null,'',href);
+            }
+          });
+        });
+        if('IntersectionObserver' in window && subLinks.length){
+          var map={};
+          Array.prototype.forEach.call(subLinks,function(a){ map[a.getAttribute('href').slice(1)]=a; });
+          var spy=new IntersectionObserver(function(entries){
+            entries.forEach(function(en){
+              if(en.isIntersecting){
+                Array.prototype.forEach.call(subLinks,function(a){ a.classList.remove('active'); });
+                var a=map[en.target.id]; if(a) a.classList.add('active');
+              }
+            });
+          },{rootMargin:'-45% 0px -50% 0px',threshold:0});
+          ['dates','vote','forums','check','pollworker','faq','running'].forEach(function(id){
+            var s=document.getElementById(id); if(s) spy.observe(s);
+          });
+        }
+
+        /* ---------- reveal on scroll ---------- */
+        var reveals=document.querySelectorAll('.el-reveal');
+        function revealAll(){ Array.prototype.forEach.call(reveals,function(el){ el.classList.add('in'); }); }
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(reduce || !('IntersectionObserver' in window)){
+          revealAll();
+        } else {
+          var ro=new IntersectionObserver(function(entries,obs){
+            entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); obs.unobserve(en.target); } });
+          },{rootMargin:'0px 0px -8% 0px',threshold:0.05});
+          Array.prototype.forEach.call(reveals,function(el){ ro.observe(el); });
+          window.addEventListener('load',function(){ setTimeout(revealAll,1200); }); // failsafe
+        }
+
+        /* ---------- share ---------- */
+        var shareBtn=document.getElementById('el-share');
+        if(shareBtn){
+          shareBtn.addEventListener('click',function(){
+            var url='https://lwvnewportcounty.org/elections-2026.html';
+            var data={title:'Elections 2026 — LWV Newport County', text:'Your 2026 Rhode Island elections hub for Newport County.', url:url};
+            if(navigator.share){ navigator.share(data).catch(function(){}); }
+            else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ var t=shareBtn.textContent; shareBtn.textContent='✓ Link copied'; setTimeout(function(){ shareBtn.textContent=t; },1800); }); }
+            else { window.prompt('Copy this link:',url); }
+          });
+        }
       })();
     </script>
 </body>
