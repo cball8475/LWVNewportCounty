@@ -1,0 +1,97 @@
+# Publishes "📰 Post News to the Website" issue-form submissions to news.html.
+# Fill the form → this renders the card, commits, GitHub Pages redeploys, and
+# the issue gets a confirmation comment and is closed. Editing the issue later
+# updates the published card in place.
+#
+# Safety: posts from repo owners/members/collaborators publish automatically.
+# A submission from anyone else waits until a maintainer adds the "approved"
+# label to the issue.
+name: Post News from Issue Form
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: post-news
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      contains(github.event.issue.labels.*.name, 'news-post') &&
+      (contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.issue.author_association) ||
+       contains(github.event.issue.labels.*.name, 'approved'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Render news card into news.html
+        run: node scripts/post-news.js news.html
+
+      - name: Commit and push
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "LWVNC Bot"
+          git config user.email "noreply@lwvnewportcounty.org"
+          git add news.html
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+            exit 0
+          fi
+          git commit -m "Post news from issue #${ISSUE_NUMBER}"
+          # another bot (events/member-portal/LWVUS feed) may push between our
+          # checkout and push — rebase and retry a few times
+          for attempt in 1 2 3 4; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push failed (attempt ${attempt}), rebasing and retrying..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            sleep $((2 ** attempt))
+          done
+          git push
+
+      - name: Confirm on the issue and close it
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "${ISSUE_NUMBER}" --repo "${GITHUB_REPOSITORY}" --body \
+            "✅ Published! Your post is live at https://lwvnewportcounty.org/news.html (give GitHub Pages a minute or two to redeploy). To fix a typo, just edit this issue — the website updates automatically."
+          gh issue close "${ISSUE_NUMBER}" --repo "${GITHUB_REPOSITORY}" --reason completed || true
+
+      - name: Report a failure on the issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "${ISSUE_NUMBER}" --repo "${GITHUB_REPOSITORY}" --body \
+            "⚠️ Something went wrong publishing this post — most often a missing Headline or Story field. Please edit the issue to fill in both required fields; the publish will retry automatically. (Details: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})"
+
+  needs-approval:
+    if: >-
+      github.event.action == 'opened' &&
+      contains(github.event.issue.labels.*.name, 'news-post') &&
+      !contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.issue.author_association)
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ask a maintainer to approve
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "${ISSUE_NUMBER}" --repo "${GITHUB_REPOSITORY}" --body \
+            "Thanks for the submission! Because it didn't come from a site maintainer, it needs a quick review before it goes live. A maintainer can publish it by adding the **approved** label to this issue."

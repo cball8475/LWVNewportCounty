@@ -1,0 +1,67 @@
+name: "📰 Post News to the Website"
+description: Publish a news item to the News & Updates page. Fill this out, press Submit, and the site updates itself — nothing else to do.
+title: "[News] "
+labels: ["news-post"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in the fields below and press **Submit new issue**. The website
+        rebuilds itself automatically and your post appears on the
+        [News & Updates page](https://lwvnewportcounty.org/news.html) within a
+        couple of minutes. You'll get a confirmation comment with a link when
+        it's live.
+
+        To fix a typo later, just edit this issue — the post on the website
+        updates automatically to match.
+  - type: input
+    id: headline
+    attributes:
+      label: Headline
+      placeholder: "WIN! Supreme Court Protects Mail Voting and Preserves States' Authority Over Ballot Receipt Rules"
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section
+      description: Which part of the News page should this appear under?
+      options:
+        - News from LWV Newport County
+        - News from LWV Rhode Island
+        - News from LWV United States
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: Story
+      description: One or more paragraphs. Leave a blank line between paragraphs.
+      placeholder: |
+        Today, the Supreme Court issued a decision upholding voters' rights and permitting ballots that are cast on time to be counted after Election Day according to state law.
+
+        The decision reverses the Fifth Circuit's incorrect interpretation of federal Election Day statutes.
+    validations:
+      required: true
+  - type: input
+    id: category
+    attributes:
+      label: Category label (optional)
+      description: The small red label shown above the headline. Leave blank for "News".
+      placeholder: "Press Release, Breaking Victory, Announcement…"
+  - type: input
+    id: date
+    attributes:
+      label: Date (optional)
+      description: "Leave blank to use today's date. Formats: 6/29/2026 or 2026-06-29."
+  - type: input
+    id: link
+    attributes:
+      label: Link (optional)
+      description: Web address of the full statement or article. Shown as a "Read More →" button.
+      placeholder: "https://www.lwv.org/newsroom/press-releases/..."
+  - type: input
+    id: image
+    attributes:
+      label: Image (optional)
+      description: "A web image address (https://…) or a file already in the site's images folder (images/photo.jpg)."
