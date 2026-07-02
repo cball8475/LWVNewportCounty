@@ -67,6 +67,26 @@ UA = (
 MARKER_START = "<!-- LWVUS_NEWS_START -->"
 MARKER_END = "<!-- LWVUS_NEWS_END -->"
 
+# Don't rewrite the HTML block unless the fetch produced at least this many
+# valid items — a thin result usually means the scrape half-failed, and we'd
+# rather keep yesterday's good content than replace it with less.
+MIN_ITEMS_FOR_HTML = 2
+
+# Titles that mean the scraper grabbed site chrome, not a press release.
+JUNK_TITLES = {
+    "pagination", "next", "previous", "next page", "previous page",
+    "read more", "learn more", "press releases", "newsroom",
+}
+
+
+def looks_valid(item):
+    """Filter out nav/pager artifacts regardless of which fetcher produced them."""
+    title = (item.get("title") or "").strip()
+    link = item.get("link") or ""
+    if len(title) < 15 or title.lower() in JUNK_TITLES:
+        return False
+    return "/newsroom/press-releases/" in link
+
 
 # -----------------------------------------------------------------------------
 # Fetchers
@@ -106,39 +126,39 @@ def try_rss():
 
 def scrape_press_releases():
     """
-    Fallback: parse the HTML press releases page. Selectors are best-effort
-    and may need tuning if LWV changes their Drupal template.
+    Fallback: parse the HTML press releases page. Walks every link that points
+    at a press-release detail page and takes the link's own text as the title —
+    container-based selectors proved fragile against the Drupal template (they
+    once matched a nav block and produced an item titled "Pagination").
     """
     r = requests.get(PRESS_URL, headers={"User-Agent": UA}, timeout=REQUEST_TIMEOUT)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
 
     items = []
-    # Drupal listing pages typically wrap each entry in <article> or
-    # <div class="views-row">. Try both; whichever hits first wins.
-    candidates = soup.select("article, .views-row, .node--type-press-release")
-    for el in candidates:
-        link_el = el.find("a", href=True)
-        title_el = el.find(["h2", "h3", "h4"])
-        if not link_el or not title_el:
+    seen = set()
+    for a in soup.find_all("a", href=True):
+        href = urljoin(LWV_BASE, a["href"]).split("#")[0].split("?")[0]
+        if "/newsroom/press-releases/" not in href or href.rstrip("/") == PRESS_URL:
+            continue
+        if href in seen:
             continue
 
-        href = urljoin(LWV_BASE, link_el["href"])
-        # Skip non-press-release links (nav, social, etc.)
-        if "/newsroom/" not in href and "/press-releases" not in href:
-            # Still might be a valid item link; keep it if the title looks real.
-            if len(title_el.get_text(strip=True)) < 10:
-                continue
+        title = a.get_text(strip=True)
+        if len(title) < 15 or title.lower() in JUNK_TITLES:
+            continue  # "Read more"-style links; the headline link will come by
+        seen.add(href)
 
-        title = title_el.get_text(strip=True)
-
-        date_el = el.find("time")
         date = ""
-        if date_el:
-            date = date_el.get("datetime") or date_el.get_text(strip=True)
-
-        summary_el = el.find("p")
-        summary = summary_el.get_text(strip=True)[:300] if summary_el else ""
+        summary = ""
+        container = a.find_parent(["article", "li", "div"])
+        if container:
+            date_el = container.find("time")
+            if date_el:
+                date = date_el.get("datetime") or date_el.get_text(strip=True)
+            summary_el = container.find("p")
+            if summary_el:
+                summary = summary_el.get_text(strip=True)[:300]
 
         items.append({
             "title": title,
@@ -156,36 +176,62 @@ def scrape_press_releases():
 # Rendering
 # -----------------------------------------------------------------------------
 
+def _fmt_date(raw):
+    """Best-effort: turn ISO / RSS date strings into 'June 29, 2026'."""
+    raw = (raw or "").strip()
+    if not raw:
+        return ""
+    dt = None
+    try:
+        dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S %Z",
+                    "%m/%d/%Y", "%B %d, %Y"):
+            try:
+                dt = datetime.strptime(raw, fmt)
+                break
+            except ValueError:
+                continue
+    if dt is None:
+        return raw  # show whatever the source gave us rather than nothing
+    return f"{dt.strftime('%B')} {dt.day}, {dt.year}"
+
+
 def render_html_block(items):
     """
-    Render items as an HTML fragment. Classes are prefixed `lwvus-` so
-    they don't collide with the rest of the site's CSS.
+    Render items as article cards matching the hand-written press-release
+    cards on news.html (inline styles, site palette).
     """
-    html_lines = ['<div class="lwvus-news-list">']
+    html_lines = []
     for it in items:
         title = _escape(it.get("title", ""))
         link = _escape(it.get("link", "#"))
-        date = _escape(it.get("date", ""))
+        date = _escape(_fmt_date(it.get("date", "")))
         summary = _escape(it.get("summary", ""))
 
-        html_lines.append('  <article class="lwvus-news-item">')
+        label = "Press Release &bull; LWVUS" + (f" &bull; {date}" if date else "")
+        html_lines.append('        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">')
         html_lines.append(
-            f'    <h3 class="lwvus-news-title">'
-            f'<a href="{link}" target="_blank" rel="noopener">{title}</a>'
-            f'</h3>'
+            f'            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; '
+            f'text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">{label}</p>'
         )
-        if date:
-            html_lines.append(f'    <p class="lwvus-news-date">{date}</p>')
+        html_lines.append(f'            <h3 style="margin: 0 0 12px 0; color: #003d7a;">{title}</h3>')
         if summary:
-            html_lines.append(f'    <p class="lwvus-news-summary">{summary}</p>')
-        html_lines.append('  </article>')
-    html_lines.append('</div>')
+            html_lines.append(f'            <p>{summary}</p>')
+        html_lines.append('            <p style="margin-top: 15px;">')
+        html_lines.append(
+            f'                <a href="{link}" target="_blank" rel="noopener" '
+            f'style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; '
+            f'font-weight: 600; display: inline-block; font-size: 14px;">Read Full Statement &rarr;</a>'
+        )
+        html_lines.append('            </p>')
+        html_lines.append('        </article>')
 
-    updated = datetime.now(timezone.utc).strftime("%B %d, %Y at %H:%M UTC")
+    updated = datetime.now(timezone.utc).strftime("%B %d, %Y")
     html_lines.append(
-        f'<p class="lwvus-news-updated"><em>Source: '
-        f'<a href="{PRESS_URL}" target="_blank" rel="noopener">LWVUS Press Releases</a>. '
-        f'Last updated {updated}.</em></p>'
+        f'        <p style="color: #888; font-size: 13px; font-style: italic; margin-top: 20px;">'
+        f'Updated automatically from the '
+        f'<a href="{PRESS_URL}" target="_blank" rel="noopener">LWVUS newsroom</a> on {updated}.</p>'
     )
     return "\n".join(html_lines)
 
@@ -258,13 +304,20 @@ def main():
             print(f"[main] scrape failed: {e}", file=sys.stderr)
             sys.exit(1)
 
+    items = [it for it in (items or []) if looks_valid(it)][:MAX_ITEMS]
     if not items:
-        print("[main] no items found; exiting without changes", file=sys.stderr)
+        print("[main] no valid items found; exiting without changes", file=sys.stderr)
         sys.exit(0)  # exit clean; commit step will be a no-op
 
     write_json(items)
-    block = render_html_block(items)
-    update_html_files(block)
+    if len(items) >= MIN_ITEMS_FOR_HTML:
+        block = render_html_block(items)
+        update_html_files(block)
+    else:
+        print(
+            f"[main] only {len(items)} valid item(s) — keeping the existing HTML block",
+            file=sys.stderr,
+        )
 
     print(f"[done] {len(items)} items processed")
 
