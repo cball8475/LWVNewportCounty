@@ -19,6 +19,7 @@
 
     <nav>
         <div class="container">
+            <a href="index.html" class="nav-brand" aria-label="LWV Newport County home"><img src="images/logo-nc-small.png" alt="LWV Newport County"></a>
             <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.classList.toggle('open'); document.querySelector('nav ul').classList.toggle('open')">
                 <span></span>
                 <span></span>
@@ -38,6 +39,39 @@
             </ul>
         </div>
     </nav>
+
+    <!-- ============================================================
+         VOTING RIGHTS UPDATE BANNER  →  news.html / action-alerts.html
+         Added July 2026: RIVRA held in committee + SOS Amore's response
+         to the DOJ letter. Self-contained styles. Remove or update this
+         block when the news cycle moves on.
+         ============================================================ -->
+    <div class="vr-alert-band" role="region" aria-label="Voting rights update">
+      <style>
+        .vr-alert-band{ background:linear-gradient(135deg,#d32f2f 0%,#a31515 100%); border-bottom:4px solid #C5A028; padding:18px 20px; font-family:Arial,Helvetica,sans-serif; }
+        .vr-alert-inner{ max-width:1000px; margin:0 auto; display:flex; align-items:center; gap:16px 24px; flex-wrap:wrap; justify-content:space-between; }
+        .vr-alert-text{ flex:1; min-width:260px; color:#fff; }
+        .vr-alert-eyebrow{ text-transform:uppercase; letter-spacing:.16em; font-size:.72rem; font-weight:800; color:#ffd9d9; margin:0 0 4px; }
+        .vr-alert-msg{ color:#fff; margin:0; font-size:.98rem; line-height:1.45; }
+        .vr-alert-msg b{ color:#ffe9a8; }
+        .vr-alert-ctas{ display:flex; gap:10px; flex-wrap:wrap; }
+        .vr-alert-btn{ display:inline-block; text-decoration:none; font-weight:800; font-size:.9rem; padding:10px 18px; border-radius:6px; white-space:nowrap; transition:transform .15s ease; }
+        .vr-alert-btn:hover{ transform:translateY(-2px); }
+        .vr-alert-btn-primary{ background:#fff; color:#a31515; }
+        .vr-alert-btn-secondary{ background:transparent; color:#fff; border:2px solid rgba(255,255,255,.75); }
+        @media(max-width:640px){ .vr-alert-inner{ flex-direction:column; align-items:flex-start; } }
+      </style>
+      <div class="vr-alert-inner">
+        <div class="vr-alert-text">
+          <p class="vr-alert-eyebrow">🗳 Voting Rights Update</p>
+          <p class="vr-alert-msg">The <b>RI Voting Rights Act did not pass</b> this session &mdash; and the Secretary of State is pushing back on a DOJ <b>&ldquo;intimidation letter&rdquo;</b> over our voter rolls. Get the story and make your voice heard.</p>
+        </div>
+        <div class="vr-alert-ctas">
+          <a href="news.html" class="vr-alert-btn vr-alert-btn-primary">Read the News &rarr;</a>
+          <a href="action-alerts.html" class="vr-alert-btn vr-alert-btn-secondary">Take Action &rarr;</a>
+        </div>
+      </div>
+    </div>
 
     <!-- HERO SECTION -->
     <section class="hero-section">
