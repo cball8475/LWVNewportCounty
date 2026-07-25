@@ -66,6 +66,13 @@ function parseCSV(text) {
 // ── adaptive column mapping from the actual header row ──
 function mapColumns(header) {
   const find = (...keys) => {
+    // Exact header match wins before any substring guess — with substring-only
+    // matching, a "Contact Name" column left of "Event Title" silently claimed
+    // the name slot and rendered contact names as event titles.
+    for (let i = 0; i < header.length; i++) {
+      const h = header[i].toLowerCase();
+      if (keys.some(k => h === k)) return i;
+    }
     for (let i = 0; i < header.length; i++) {
       const h = header[i].toLowerCase();
       if (keys.some(k => h.includes(k))) return i;
@@ -162,12 +169,25 @@ async function main() {
       description: get(col.description),
       link: get(col.link),
     };
-  }).filter(ev => {
-    if (!ev.name || /^example[:\s]/i.test(ev.name)) return false; // skip blank + example rows
-    if (!ev.dateObj || isNaN(ev.dateObj)) return false;           // skip unparseable dates
-    if (ev.dateObj < today) return false;                         // drop past events
+  });
+
+  // Filter with a paper trail. A volunteer who types "TBD" or "Nov 3rd" in the
+  // date column gets no feedback anywhere — the event just never appears — so
+  // every skipped row is named, and unparseable dates are called out as the
+  // thing to fix in the sheet.
+  const badDates = [];
+  events = events.filter(ev => {
+    if (!ev.name || /^example[:\s]/i.test(ev.name)) return false; // blank + example rows, by design
+    if (!ev.dateObj || isNaN(ev.dateObj)) {
+      badDates.push(ev);
+      return false;
+    }
+    if (ev.dateObj < today) return false;                         // past events, by design
     return true;
   });
+  for (const ev of badDates) {
+    console.error(`SKIPPED (unparseable date): "${ev.name}" — fix the Date cell in the Google Sheet for this row`);
+  }
 
   events.sort((a, b) => a.dateObj - b.dateObj);                   // soonest first
 

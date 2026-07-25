@@ -12,6 +12,13 @@ on:
 permissions:
   contents: write
 
+# Shares the push queue with the other bot workflows — this and
+# update-member-portal fire at the SAME cron times and both push to main;
+# without serialization the loser's push silently failed twice a day.
+concurrency:
+  group: site-content-push
+  cancel-in-progress: false
+
 jobs:
   update-events:
     runs-on: ubuntu-latest
@@ -44,4 +51,12 @@ jobs:
           git config user.email "noreply@lwvnewportcounty.org"
           git add events.html
           git commit -m "Auto-update events from Google Sheet"
+          for attempt in 1 2 3 4; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push failed (attempt ${attempt}), rebasing and retrying..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            sleep $((2 ** attempt))
+          done
           git push

@@ -12,6 +12,13 @@ on:
 permissions:
   contents: write
 
+# Shares the push queue with the other bot workflows — this and update-events
+# fire at the SAME cron times and both push to main; without serialization the
+# loser's push silently failed twice a day.
+concurrency:
+  group: site-content-push
+  cancel-in-progress: false
+
 jobs:
   update-portal:
     runs-on: ubuntu-latest
@@ -25,6 +32,18 @@ jobs:
 
       - name: Install StatiCrypt
         run: npm install -g staticrypt
+
+      - name: Assert MEMBER_PASSWORD is set
+        env:
+          MEMBER_PASSWORD: ${{ secrets.MEMBER_PASSWORD }}
+        run: |
+          # An unset secret expands to "" — staticrypt could happily "encrypt"
+          # the roster with a blank password and every downstream check would
+          # still pass. Refuse to build at all without a real password.
+          if [ -z "$MEMBER_PASSWORD" ]; then
+            echo "::error::MEMBER_PASSWORD repo secret is not set — refusing to build the member portal without a real password."
+            exit 1
+          fi
 
       - name: Build member portal HTML from Google Sheet
         run: node scripts/build-member-portal.js members-source.html
@@ -52,6 +71,30 @@ jobs:
             echo "Changes detected — will commit"
           fi
 
+      # POKA-YOKE, inline. The standalone validate-member-portal workflow can
+      # NEVER catch this path: GitHub does not trigger workflows from pushes
+      # made with GITHUB_TOKEN, so it only ever ran on manual human pushes.
+      # The check must live here, before the commit, or it guards nothing.
+      - name: Verify encryption before committing
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          if ! grep -q 'class="staticrypt-html"' members-new.html; then
+            echo "::error::Built members-new.html is NOT StatiCrypt-encrypted — refusing to commit member content."
+            exit 1
+          fi
+          # Phrases below only exist in the UNENCRYPTED source; the sentinel
+          # 'lwvnc-portal-plaintext-sentinel' is emitted by the builder for
+          # exactly this purpose, so the check can't rot if headings get reworded.
+          if grep -qi 'member portal content\|meeting minutes\|board documents\|lwvnc-portal-plaintext-sentinel' members-new.html; then
+            echo "::error::Built members-new.html appears to contain unencrypted member content — refusing to commit."
+            exit 1
+          fi
+          # And the sentinel must exist in the source, proving the builder still emits it.
+          if ! grep -q 'lwvnc-portal-plaintext-sentinel' members-source.html; then
+            echo "::error::Plaintext sentinel missing from members-source.html — the encryption check can no longer prove anything. Update builder + check together."
+            exit 1
+          fi
+
       - name: Commit and push
         if: steps.diff.outputs.changed == 'true'
         run: |
@@ -63,6 +106,14 @@ jobs:
           git config user.email "noreply@lwvnewportcounty.org"
           git add members.html
           git commit -m "Auto-update member portal from Google Sheet"
+          for attempt in 1 2 3 4; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push failed (attempt ${attempt}), rebasing and retrying..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            sleep $((2 ** attempt))
+          done
           git push
 
       - name: Clean up (no changes)

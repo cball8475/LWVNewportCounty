@@ -11,6 +11,12 @@ on:
     - cron: '0 */6 * * *'  # every 6 hours, on the hour (UTC)
   workflow_dispatch:        # lets you run it manually from the Actions tab
 
+# All bot workflows that push to main share this group so they queue instead
+# of racing — a lost race here silently dropped the loser's update.
+concurrency:
+  group: site-content-push
+  cancel-in-progress: false
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -36,14 +42,27 @@ jobs:
         run: |
           git config user.name "lwvnc-feed-bot"
           git config user.email "lwvnc-feed-bot@users.noreply.github.com"
-          # Stage only the files this workflow is allowed to touch.
-          git add data/lwvus-news.json 2>/dev/null || true
-          # The page file name is configurable; stage any HTML change
-          # the script might have made to pages with the news markers.
-          git add '*.html' 2>/dev/null || true
+          # Stage exactly the files this workflow owns. No "2>/dev/null || true":
+          # that masked a missing output file, and the '*.html' glob could sweep
+          # unrelated in-flight edits into a feed commit. Only pages containing
+          # the news markers are staged, and only if they exist.
+          git add data/lwvus-news.json
+          for page in $(grep -l 'LWVUS_NEWS_START' *.html); do
+            git add "$page"
+          done
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
             git commit -m "chore: update LWVUS news feed [skip ci]"
+            # Another bot (events/member-portal/post-news) may push between our
+            # checkout and push — rebase and retry instead of silently losing.
+            for attempt in 1 2 3 4; do
+              if git push; then
+                exit 0
+              fi
+              echo "Push failed (attempt ${attempt}), rebasing and retrying..."
+              git pull --rebase origin "${GITHUB_REF_NAME}"
+              sleep $((2 ** attempt))
+            done
             git push
           fi

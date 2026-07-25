@@ -37,45 +37,61 @@ async function fetchCSV(gid) {
   return await res.text();
 }
 
-// ── Simple CSV parser (handles quoted fields with commas) ──
+// ── CSV parser: full state machine, same as scripts/build-events.js ──
+// The old line-splitting parser broke on quoted fields containing NEWLINES:
+// any multi-paragraph announcement or multi-line address silently corrupted
+// that row and every field after it. Multi-line cells are exactly what this
+// sheet holds, so parse character-by-character.
 function parseCSV(text) {
-  const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
-  if (lines.length < 2) return []; // header only or empty
-
-  const rows = [];
-  for (let i = 1; i < lines.length; i++) { // skip header row
-    const line = lines[i].trim();
-    if (!line) continue;
-
-    const fields = [];
-    let field = '';
-    let inQuotes = false;
-    for (let j = 0; j < line.length; j++) {
-      const ch = line[j];
-      if (inQuotes) {
-        if (ch === '"' && line[j + 1] === '"') {
-          field += '"';
-          j++;
-        } else if (ch === '"') {
-          inQuotes = false;
-        } else {
-          field += ch;
-        }
-      } else {
-        if (ch === '"') {
-          inQuotes = true;
-        } else if (ch === ',') {
-          fields.push(field.trim());
-          field = '';
-        } else {
-          field += ch;
-        }
-      }
-    }
-    fields.push(field.trim());
-    rows.push(fields);
+  const s = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  const out = [];
+  let row = [], field = '', inQ = false;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (inQ) {
+      if (c === '"' && s[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') inQ = false;
+      else field += c;
+    } else if (c === '"') inQ = true;
+    else if (c === ',') { row.push(field.trim()); field = ''; }
+    else if (c === '\n') { row.push(field.trim()); out.push(row); row = []; field = ''; }
+    else field += c;
   }
-  return rows;
+  if (field.length || row.length) { row.push(field.trim()); out.push(row); }
+  const rows = out.filter(r => r.some(x => x !== ''));
+  return rows.slice(1); // drop header row (callers index by position)
+}
+
+// ── Sample-row detection ──
+// The sheet's seeded template rows must not publish, but the old approach —
+// hardcoded filters on real-looking values ('May Board Meeting', 'Jane Smith',
+// 'Voting Rights') — silently deleted any REAL row that matched forever.
+// Instead: a row is a sample iff it carries an explicit marker ('Example' /
+// example.com / example URLs) or exactly matches a known seeded row. Every
+// drop is logged so nothing disappears without a trace.
+const KNOWN_SEED_ROWS = [
+  // positions tab seed (no 'example' marker anywhere in it)
+  ['Voting Rights', 'LWVNC supports universal voter registration, expanded early voting, and opposition to voter ID requirements that disenfranchise eligible voters.'],
+];
+
+function isSampleRow(r) {
+  if (!r[0]) return true; // blank leading cell — nothing to render
+  if (/^example[:\s]?/i.test(r[0])) return true;
+  if (r.some(c => /example\.com|\/example\b|\bexample\)/i.test(c || ''))) return true;
+  return KNOWN_SEED_ROWS.some(seed =>
+    seed.length <= r.length && seed.every((cell, i) => (r[i] || '').trim() === cell)
+  );
+}
+
+// Shared filter: keeps real rows, logs every dropped one.
+function realRows(rows, tabName) {
+  return rows.filter(r => {
+    if (isSampleRow(r)) {
+      console.error(`  [${tabName}] dropped sample/blank row: ${JSON.stringify(r.slice(0, 3))}`);
+      return false;
+    }
+    return true;
+  });
 }
 
 // ── HTML escaping ──
@@ -87,18 +103,16 @@ function esc(str) {
 // ── HTML builders for each section ──
 
 function buildAnnouncements(rows) {
-  if (!rows.length || (rows.length === 1 && rows[0][0].startsWith('Example:'))) {
+  if (!rows.length) {
     return '<p style="margin-bottom: 0; color: #333;">No current announcements. Check back for updates on upcoming member events, volunteer opportunities, and League business.</p>';
   }
   return rows
-    .filter(r => r[0] && !r[0].startsWith('Example:'))
     .map(r => `<p style="margin-bottom: 10px; color: #333;">${esc(r[0])}</p>`)
     .join('\n            ');
 }
 
 function buildOfficers(rows) {
   return rows
-    .filter(r => r[0] && r[0] !== 'Example:' && !r[1]?.startsWith('Example'))
     .map(r => {
       const role = esc(r[0] || '');
       const name = esc(r[1] || '');
@@ -115,7 +129,6 @@ function buildOfficers(rows) {
 
 function buildCommittees(rows) {
   return rows
-    .filter(r => r[0] && !r[0].startsWith('Example'))
     .map(r => {
       const comm = esc(r[0] || '');
       const chair = esc(r[1] || '');
@@ -130,7 +143,7 @@ function buildCommittees(rows) {
 }
 
 function buildMemberEvents(rows) {
-  const real = rows.filter(r => r[0] && !r[0].startsWith('Example') && r[0] !== 'May Board Meeting');
+  const real = rows;
   if (!real.length) {
     return '<p style="color: #666; font-style: italic; margin-bottom: 0;">No upcoming member events. Board meetings, committee meetings, and planning sessions will be posted here.</p>';
   }
@@ -150,9 +163,7 @@ function buildMemberEvents(rows) {
 }
 
 function buildLinkedList(rows, placeholder) {
-  // Filter out example/placeholder rows by checking the link column for "example"
-  // or the title starting with "Example". Real entries with real URLs pass through.
-  const real = rows.filter(r => r[0] && !r[0].startsWith('Example') && !(r[r.length - 1] || '').includes('example'));
+  const real = rows; // sample rows already dropped (and logged) by realRows()
   if (!real.length) {
     return `<p style="color: #666; font-style: italic; margin-bottom: 0;">${placeholder}</p>`;
   }
@@ -176,7 +187,7 @@ function buildLinkedList(rows, placeholder) {
 }
 
 function buildRoster(rows) {
-  const real = rows.filter(r => r[0] && !r[0].startsWith('Jane Smith') && !r[0].startsWith('Example'));
+  const real = rows; // seed row is caught by its @example.com address, and logged
   if (!real.length) {
     return `<tr>
                         <td style="padding: 10px 12px; border-bottom: 1px solid #eee;" colspan="3">
@@ -194,7 +205,10 @@ function buildRoster(rows) {
 }
 
 function buildPositions(rows) {
-  const real = rows.filter(r => r[0] && !r[0].startsWith('Voting Rights'));
+  // The seeded 'Voting Rights' sample is dropped by exact match in
+  // KNOWN_SEED_ROWS — a real voting-rights position with its own wording
+  // (core League territory) now publishes instead of vanishing silently.
+  const real = rows;
   if (!real.length) {
     return '<p style="color: #666; font-style: italic; margin-bottom: 0;">Current positions and priorities will be posted here.</p>';
   }
@@ -208,7 +222,6 @@ function buildPositions(rows) {
 
 function buildResources(rows) {
   return rows
-    .filter(r => r[0] && !r[0].startsWith('Example'))
     .map(r => {
       const title = esc(r[0] || '');
       const desc = esc(r[1] || '');
@@ -231,12 +244,16 @@ async function main() {
   const entries = Object.entries(TABS);
   const results = await Promise.all(entries.map(([, gid]) => fetchCSV(gid)));
   entries.forEach(([key], i) => {
-    data[key] = parseCSV(results[i]);
-    console.error(`  ${key}: ${data[key].length} rows`);
+    data[key] = realRows(parseCSV(results[i]), key);
+    console.error(`  ${key}: ${data[key].length} real rows`);
   });
 
   // Build HTML
+  // The sentinel comment below is load-bearing: the update-member-portal
+  // workflow refuses to commit any members.html that still contains it,
+  // proving the page really went through StatiCrypt. Do not remove.
   const html = `<!DOCTYPE html>
+<!-- lwvnc-portal-plaintext-sentinel -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">

@@ -306,14 +306,30 @@ def main():
 
     items = [it for it in (items or []) if looks_valid(it)][:MAX_ITEMS]
     if not items:
-        print("[main] no valid items found; exiting without changes", file=sys.stderr)
-        sys.exit(0)  # exit clean; commit step will be a no-op
+        # RSS unavailable AND the scrape producing zero valid items is not a
+        # slow news week — LWVUS always has press releases. Exiting 0 here made
+        # a site redesign look like success every 6 hours indefinitely while
+        # the news block silently froze. Fail the workflow so it shows red.
+        print(
+            "[main] FATAL: zero valid items from both RSS and scrape — the "
+            "LWVUS site layout has probably changed and the fetchers need "
+            "updating. Failing loudly instead of freezing the feed silently.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     write_json(items)
     if len(items) >= MIN_ITEMS_FOR_HTML:
         block = render_html_block(items)
         update_html_files(block)
     else:
+        # Thin result: JSON updated, HTML deliberately kept. Surface it as a
+        # visible annotation on the workflow run, not just a stderr line.
+        print(
+            f"::warning::fetch_lwvus got only {len(items)} valid item(s) "
+            f"(need {MIN_ITEMS_FOR_HTML} to rewrite HTML) — the scrape may be "
+            "half-broken; site HTML block left unchanged.",
+        )
         print(
             f"[main] only {len(items)} valid item(s) — keeping the existing HTML block",
             file=sys.stderr,

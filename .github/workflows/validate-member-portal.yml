@@ -1,5 +1,10 @@
 # POKA-YOKE: Verify members.html is StatiCrypt-encrypted on every push
 # Fails the build if someone accidentally pushes unencrypted member content
+#
+# LIMITATION (known, by design): GitHub does not trigger workflows from pushes
+# made with GITHUB_TOKEN, so this NEVER fires on the update-member-portal bot's
+# commits. The same check runs inline in update-member-portal.yml before its
+# commit — this workflow only guards manual human pushes. Keep both.
 name: Validate Member Portal Encryption
 
 on:
@@ -22,9 +27,10 @@ jobs:
             exit 1
           fi
 
-          # Check that raw member content is NOT present (encrypted content is base64 gibberish)
-          # These are phrases that would only appear in the unencrypted source
-          if grep -qi 'member portal content\|meeting minutes\|board documents' members.html; then
+          # Check that raw member content is NOT present (encrypted content is base64 gibberish).
+          # The lwvnc-portal-plaintext-sentinel comment is emitted by the builder into the
+          # plaintext source specifically so this check can't rot if headings are reworded.
+          if grep -qi 'member portal content\|meeting minutes\|board documents\|lwvnc-portal-plaintext-sentinel' members.html; then
             echo "::error::members.html appears to contain unencrypted member content!"
             exit 1
           fi
