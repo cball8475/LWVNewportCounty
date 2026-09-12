@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "forum-portsmouth-town-council-2026-09-15",
+    "tab": "Portsmouth Town Council Candidates Forum",
+    "kicker": "Candidates Forum",
+    "title": ["Town Council", "Candidates Forum"],
+    "subtitle": "Portsmouth, Rhode Island",
+    "lede": "Hear directly from the candidates before you vote in the November 3 election.",
+    "rows": [
+      { "icon": "calendar", "label": "Date & Time",
+        "value": "Tuesday, September 15, 2026 • 6:30 – 8:00 PM" },
+      { "icon": "pin", "label": "Location",
+        "value": "Portsmouth Middle School", "detail": "Little Theatre" },
+      { "icon": "user", "label": "Moderator",
+        "value": "Scott Pickering", "detail": "Publisher, East Bay Media Group" },
+      { "icon": "question", "label": "Questions for the candidates?",
+        "value": "forms.gle/ne5UdKAQb3fJbr8t7",
+        "href": "https://forms.gle/ne5UdKAQb3fJbr8t7",
+        "detail": "Submit your questions in advance" }
+    ]
+  },
+  {
+    "slug": "forum-newport-school-committee-and-city-council-2026",
+    "tab": "Newport School Committee & City Council Candidates Forums",
+    "kicker": "Candidates Forums",
+    "title": ["Newport", "Candidates Forums"],
+    "subtitle": "School Committee • City Council",
+    "lede": "Hear directly from the candidates before you vote in the November 3 election.",
+    "cards": [
+      {
+        "head": "School Committee",
+        "rows": [
+          { "icon": "calendar", "label": "Date & Time",
+            "value": "Thursday, September 17, 2026", "detail": "6:30 – 8:00 PM" },
+          { "icon": "pin", "label": "Location",
+            "value": "Rogers High School", "detail": "Auditorium" },
+          { "icon": "user", "label": "Moderator",
+            "value": "Jim Roehm", "detail": "Past President, Newport Kiwanis Club" },
+          { "icon": "question", "label": "Questions?",
+            "value": "forms.gle/DZSyKAvEM5iuQRedA",
+            "href": "https://forms.gle/DZSyKAvEM5iuQRedA",
+            "detail": "Submit your questions in advance" }
+        ]
+      },
+      {
+        "head": "City Council",
+        "rows": [
+          { "icon": "calendar", "label": "Date & Time",
+            "value": "Thursday, September 24, 2026", "detail": "6:30 – 8:00 PM" },
+          { "icon": "pin", "label": "Location",
+            "value": "Rogers High School", "detail": "Auditorium" },
+          { "icon": "user", "label": "Moderator",
+            "value": "John Marion", "detail": "Executive Director, Common Cause RI" },
+          { "icon": "question", "label": "Questions?",
+            "value": "forms.gle/RD9Sko1Z6sNevSEw9",
+            "href": "https://forms.gle/RD9Sko1Z6sNevSEw9",
+            "detail": "Submit your questions in advance" }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "forum-little-compton-town-council-2026-09-22",
+    "tab": "Little Compton Town Council Candidates Forum",
+    "kicker": "Candidates Forum",
+    "title": ["Town Council", "Candidates Forum"],
+    "subtitle": "Little Compton, Rhode Island",
+    "lede": "Hear directly from the candidates before you vote in the November 3 election.",
+    "rows": [
+      { "icon": "calendar", "label": "Date & Time",
+        "value": "Tuesday, September 22, 2026 • 6:30 – 8:00 PM" },
+      { "icon": "pin", "label": "Location",
+        "value": "Little Compton Community Center" },
+      { "icon": "user", "label": "Moderator",
+        "value": "Scott Pickering", "detail": "Publisher, East Bay Media Group" },
+      { "icon": "question", "label": "Questions for the candidates?",
+        "value": "forms.gle/8eyry8vHeYubhKCu5",
+        "href": "https://forms.gle/8eyry8vHeYubhKCu5",
+        "detail": "Submit your questions in advance" }
+    ]
+  }
+]
