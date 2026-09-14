@@ -10,3 +10,6 @@ encrypted/
 .DS_Store
 Thumbs.db
 __pycache__/
+
+# Generated palm card render output (deliverables are committed at the folder root)
+print/palm-card-2026/source/build/
