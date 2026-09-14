@@ -66,18 +66,39 @@ being a rescaled screenshot.
 
 ## Spanish translation notes
 
-The translation uses formal *usted* throughout, which is the register US election
-offices use for voter materials. Three word choices are judgment calls worth a
-native-speaker review before a large run:
+Formal *usted* throughout, which is the register US election offices use for voter
+materials. The copy was reviewed line by line; these are the calls behind the
+wording that differs from a literal translation.
 
-| Term | Used | Alternative |
+**Corrected from the first draft:**
+
+| Was | Now | Why |
 | --- | --- | --- |
-| Town Halls | *ayuntamientos* | *municipios*, *alcaldías* |
-| RI Secretary of State | *Secretario de Estado de RI* | *Secretaría de Estado de RI* (the office rather than the officeholder) |
-| League of Women Voters RI Education Fund | *Fondo Educativo de la Liga de Mujeres Votantes de RI* | keep the legal entity name in English if the League's compliance guidance requires it |
+| Verifique su *registro electoral* | Verifique su *registro de votante* | *registro electoral* is the roll itself; the voter checks their own registration |
+| *Localice* su lugar de votación | *Encuentre* su lugar de votación | *localice* is bureaucratic for a call to action |
+| *Cumpla* su plan | *Cumpla con* su plan | "follow through" is *cumplir con algo* |
+| Fecha límite para registrarse *para votar* | Fecha límite para registrarse | stacked two *para*; the second is redundant |
+| identificación *con foto válida* | identificación *válida con foto* | the first parses as a *valid photo*; the ID is what must be valid |
+| ...vencido hace más de seis (6) meses *antes de votar, pero* no necesita... | ...vencido hace más de seis (6) meses. *No* necesita... | mixed a now-relative frame (*hace*) with an election-relative one (*antes de votar*) |
+| *Licencia de conducir o permiso de RI* | *Licencia o permiso de conducir de RI* | groups the noun once instead of two loose *o* |
+| de *Estados Unidos* | de *los Estados Unidos* | formal register takes the article |
 
-The LWV logo lockup stays in English on both cards — it is the registered
-trademark artwork.
+**Deliberate choices, not oversights:**
+
+- ***ayuntamientos*** for Town Halls. Rhode Island's largest Hispanic community is
+  Dominican, and Dominican Spanish uses *ayuntamiento* for exactly this — the
+  municipal government and its building. It is also the standard dictionary
+  translation. *Municipios* and *alcaldías* are the Central and South American
+  alternatives if the League would rather aim wider.
+- ***Secretario de Estado de RI*** matches the form US states use on their own
+  Spanish pages and the current officeholder. It would need *Secretaria* if a woman
+  takes the office; *Secretaría de Estado de RI* names the department instead and
+  sidesteps that permanently.
+- **The Education Fund's name is translated** (*Fondo Educativo de la Liga de
+  Mujeres Votantes de RI*). Keep the legal entity name in English instead if the
+  League's compliance guidance requires it on funding disclosures.
+- **The LWV logo lockup stays in English** on both cards — it is the registered
+  trademark artwork.
 
 ## Rebuilding
 

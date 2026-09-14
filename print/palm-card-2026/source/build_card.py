@@ -109,12 +109,12 @@ STRINGS = {
         "html_lang": "es",
         "s1_title": "Haga su plan para votar",
         "plan": [
-            "Verifique su registro electoral.",
+            "Verifique su registro de votante.",
             "Decida c&oacute;mo va a votar.",
-            "Localice su lugar de votaci&oacute;n.",
+            "Encuentre su lugar de votaci&oacute;n.",
             "Revise su boleta electoral.",
             "Inf&oacute;rmese sobre los candidatos y los temas.",
-            "Cumpla su plan. &nbsp;&iexcl;Emita su voto!",
+            "Cumpla con su plan. &nbsp;&iexcl;Emita su voto!",
         ],
         "vic": "Su Centro de Informaci&oacute;n para Votantes",
         "sos": "Secretario de Estado de RI",
@@ -126,20 +126,20 @@ STRINGS = {
         "icon_early": ["Votaci&#243;n", "Anticipada"],
         "election": "Elecci&oacute;n General &ndash; 3 de noviembre de 2026",
         "dates": [
-            ("4&nbsp;de&nbsp;octubre", "Fecha l&iacute;mite para registrarse para votar"),
+            ("4&nbsp;de&nbsp;octubre", "Fecha l&iacute;mite para registrarse"),
             ("13&nbsp;de&nbsp;octubre", "Fecha l&iacute;mite para solicitar boleta por correo"),
             ("14&nbsp;de&nbsp;oct.&nbsp;&ndash;&nbsp;2&nbsp;de&nbsp;nov.",
              "Votaci&oacute;n anticipada en los ayuntamientos"),
         ],
-        "id_title": "Traiga una identificaci&oacute;n con foto v&aacute;lida",
+        "id_title": "Traiga una identificaci&oacute;n v&aacute;lida con foto",
         "id_note": ("La identificaci&oacute;n debe ser v&aacute;lida y no haber vencido hace "
-                    "m&aacute;s de seis&nbsp;(6)&nbsp;meses antes de votar, pero no necesita "
-                    "mostrar su direcci&oacute;n actual."),
+                    "m&aacute;s de seis&nbsp;(6)&nbsp;meses. No necesita mostrar su "
+                    "direcci&oacute;n&nbsp;actual."),
         "ids": [
-            "Licencia de conducir o permiso de RI, o pasaporte de EE.&nbsp;UU.",
+            "Licencia o permiso de conducir de RI, o pasaporte de EE.&nbsp;UU.",
             "Identificaci&oacute;n militar de EE.&nbsp;UU. o tarjeta m&eacute;dica del gobierno",
             "Identificaci&oacute;n de una instituci&oacute;n educativa de EE.&nbsp;UU.",
-            "Tarjeta de identificaci&oacute;n de Estados Unidos o de Rhode Island",
+            "Tarjeta de identificaci&oacute;n de los Estados Unidos o de Rhode Island",
         ],
         # Only the strings that outgrow their box get pulled down.
         "tune": {
