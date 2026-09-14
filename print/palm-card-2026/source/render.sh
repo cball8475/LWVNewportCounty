@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-CHROME=/opt/pw-browsers/chromium-1194/chrome-linux/chrome
+CHROME=${CHROME:-/opt/pw-browsers/chromium-1194/chrome-linux/chrome}
 cd "$(dirname "$0")/build"
 for f in card-*.html; do
   base="${f%.html}"
