@@ -13,3 +13,6 @@ __pycache__/
 
 # Generated palm card render output (deliverables are committed at the folder root)
 print/palm-card-2026/source/build/
+
+# Generated forum flyer HTML (deliverable PDFs/PNGs are committed at the folder root)
+print/forum-flyers-2026/source/build/
