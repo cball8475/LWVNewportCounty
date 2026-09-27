@@ -37,7 +37,7 @@ async function fetchCSV(gid) {
   return await res.text();
 }
 
-// ── CSV parser: full state machine, same as scripts/build-events.js ──
+// ── CSV parser: full state machine ──
 // The old line-splitting parser broke on quoted fields containing NEWLINES:
 // any multi-paragraph announcement or multi-line address silently corrupted
 // that row and every field after it. Multi-line cells are exactly what this
