@@ -1,6 +1,6 @@
 # Posting News to the Website
 
-News now works like events — nobody edits HTML. There are **two automated paths** onto the [News & Updates page](https://lwvnewportcounty.org/news.html):
+Nobody edits HTML to post news. There are **two automated paths** onto the [News & Updates page](https://lwvnewportcounty.org/news.html):
 
 ## 1. Post your own news (the form)
 
@@ -25,9 +25,9 @@ Within a couple of minutes a GitHub Action renders your post into the right sect
 
 ## 2. National news posts itself (no one does anything)
 
-`scripts/fetch_lwvus.py` runs daily (`.github/workflows/lwvus-news.yml`) and pulls the latest LWVUS press releases from lwv.org into the "News from LWV United States" section, between the `LWVUS_NEWS_START/END` markers in `news.html`. Statements like *"Supreme Court Protects Mail Voting"* appear on the site without anyone posting them.
+`scripts/fetch_lwvus.py` runs every 6 hours (`.github/workflows/lwvus-news.yml`) and pulls the latest LWVUS press releases from lwv.org into the "News from LWV United States" section, between the `LWVUS_NEWS_START/END` markers in `news.html`. Statements like *"Supreme Court Protects Mail Voting"* appear on the site without anyone posting them.
 
-Don't hand-edit between those two markers — the daily run replaces that block. Anything you want to say in your own words belongs in the form (path 1), which posts *above* the automatic feed.
+Don't hand-edit between those two markers — each run replaces that block. Anything you want to say in your own words belongs in the form (path 1), which posts *above* the automatic feed.
 
 ## How it fits together on news.html
 
@@ -42,7 +42,7 @@ News from LWV Rhode Island
 
 News from LWV United States
   ├─ AUTO-NEWS-LWVUS block   ← form posts
-  └─ LWVUS_NEWS block        ← daily automatic feed from lwv.org
+  └─ LWVUS_NEWS block        ← automatic feed from lwv.org (every 6 hours)
 ```
 
 ## Pieces
