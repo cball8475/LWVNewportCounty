@@ -12,9 +12,9 @@ on:
 permissions:
   contents: write
 
-# Shares the push queue with the other bot workflows — this and update-events
-# fire at the SAME cron times and both push to main; without serialization the
-# loser's push silently failed twice a day.
+# Shares the push queue with the other bot workflows — this and lwvus-news
+# both fire at 12:00 UTC and both push to main; without serialization the
+# loser's push silently failed.
 concurrency:
   group: site-content-push
   cancel-in-progress: false
