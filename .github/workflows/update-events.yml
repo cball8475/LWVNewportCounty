@@ -3,10 +3,14 @@
 name: Update Events from Google Sheet
 
 on:
-  schedule:
-    # 8 AM and 6 PM Eastern (UTC-4 during EDT)
-    - cron: '0 12 * * *'   # 8 AM ET
-    - cron: '0 22 * * *'   # 6 PM ET
+  # PAUSED 2026-09-27: the "LWVNC Public Events" sheet was deleted (its published
+  # link has returned 410 Gone since Sep 25) and it isn't in Trash, so every run
+  # failed. Uncomment the schedule once a replacement sheet is published and
+  # CSV_URL in scripts/build-events.js points at it.
+  # schedule:
+  #   # 8 AM and 6 PM Eastern (UTC-4 during EDT)
+  #   - cron: '0 12 * * *'   # 8 AM ET
+  #   - cron: '0 22 * * *'   # 6 PM ET
   workflow_dispatch: {}     # Manual trigger for testing
 
 permissions:
