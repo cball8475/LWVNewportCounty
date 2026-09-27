@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar &amp; Events - LWV Newport County</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 2026 Candidate Forums list: the script at the bottom of the page tags each
+           date whose data-date has passed, matching the "Past" tag on the Elections hub. */
+        .forum-date.is-past { color: #7a8595; }
+        .forum-date.is-past::after { content: " \00B7  Past"; font-weight: 600; font-size: .85em; }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -99,13 +105,13 @@
             <p style="font-size: 1.05em; margin-bottom: 14px;">The League is hosting nonpartisan candidate forums across Newport County so voters can hear directly from candidates before the 2026 primary and general elections.</p>
             <p style="margin-bottom: 8px;"><strong>2026 forum schedule</strong> — times and locations announced as each forum is confirmed:</p>
             <ul style="margin: 0 0 16px 24px; line-height: 1.9;">
-                <li><strong>State Senate Primary, District 13</strong> &mdash; Aug 4</li>
-                <li><strong>Portsmouth</strong> &mdash; Town Council Sept 15, School Committee Oct 22</li>
-                <li><strong>Newport</strong> &mdash; School Committee Sept 17, City Council Sept 24</li>
-                <li><strong>Little Compton</strong> &mdash; Town Council Sept 22, School Committee Oct 19</li>
-                <li><strong>Middletown</strong> &mdash; Town Council Sept 29, School Committee Oct 21</li>
-                <li><strong>Tiverton</strong> &mdash; Town Council Oct 7, School Committee Oct 8</li>
-                <li><strong>Jamestown</strong> &mdash; Town Council Oct 13, School Committee Oct 15</li>
+                <li><strong>State Senate Primary, District 13</strong> &mdash; <span class="forum-date" data-date="2026-08-04">Aug 4</span></li>
+                <li><strong>Portsmouth</strong> &mdash; <span class="forum-date" data-date="2026-09-15">Town Council Sept 15</span>, <span class="forum-date" data-date="2026-10-22">School Committee Oct 22</span></li>
+                <li><strong>Newport</strong> &mdash; <span class="forum-date" data-date="2026-09-17">School Committee Sept 17</span>, <span class="forum-date" data-date="2026-09-24">City Council Sept 24</span></li>
+                <li><strong>Little Compton</strong> &mdash; <span class="forum-date" data-date="2026-09-22">Town Council Sept 22</span>, <span class="forum-date" data-date="2026-10-19">School Committee Oct 19</span></li>
+                <li><strong>Middletown</strong> &mdash; <span class="forum-date" data-date="2026-09-29">Town Council Sept 29</span>, <span class="forum-date" data-date="2026-10-21">School Committee Oct 21</span></li>
+                <li><strong>Tiverton</strong> &mdash; <span class="forum-date" data-date="2026-10-07">Town Council Oct 7</span>, <span class="forum-date" data-date="2026-10-08">School Committee Oct 8</span></li>
+                <li><strong>Jamestown</strong> &mdash; <span class="forum-date" data-date="2026-10-13">Town Council Oct 13</span>, <span class="forum-date" data-date="2026-10-15">School Committee Oct 15</span></li>
             </ul>
             <p style="margin-bottom: 12px;"><a href="elections-2026.html#forums" style="font-weight: 700; color: #003d7a;">See full details and add any forum to your calendar on the Elections 2026 hub &rarr;</a></p>
             <p style="margin-bottom: 0;">Interested in helping? Forum teams handle candidate invitations, question development, timekeeping, and venue coordination. <a href="mailto:presidentlwvnc25@gmail.com">Contact us to volunteer &rarr;</a></p>
@@ -138,5 +144,17 @@
             <p>A nonpartisan, nonprofit organization. | <a href="about.html">About Us</a> | <a href="get-involved.html">Get Involved</a></p>
         </div>
     </footer>
+<script>
+    // Tag forum dates that have passed. Each date is a .forum-date span with
+    // data-date="YYYY-MM-DD"; it counts as past from the day after the forum.
+    (function () {
+        var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        var spans = document.querySelectorAll('.forum-date[data-date]');
+        for (var i = 0; i < spans.length; i++) {
+            var p = spans[i].getAttribute('data-date').split('-');
+            if (new Date(+p[0], p[1] - 1, +p[2]) < today) spans[i].classList.add('is-past');
+        }
+    })();
+</script>
 </body>
 </html>

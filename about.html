@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - LWV Newport County</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Phones: stack the officers table (name, position, email on separate lines) and
+           show the towns in two columns, so nothing on the page is wider than the screen. */
+        .contact-grid a { overflow-wrap: anywhere; }  /* long URLs/emails wrap in narrow cards */
+        @media (max-width: 600px) {
+            .officers-table thead { display: none; }
+            .officers-table, .officers-table tbody, .officers-table tr, .officers-table td { display: block; }
+            .officers-table tr { padding: 10px 0; }
+            .officers-table td { padding: 2px 16px !important; }
+            .town-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -88,7 +100,7 @@
         <h2 style="margin-top: 50px;">LWVNC Officers</h2>
         <p style="margin-bottom: 30px;">Our officers are elected by the membership and guide the League's direction and priorities.</p>
 
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px;">
+        <table class="officers-table" style="width: 100%; border-collapse: collapse; margin-bottom: 40px;">
             <thead>
                 <tr style="background: #003d7a; color: white;">
                     <th style="padding: 14px 20px; text-align: left; font-weight: 600;">Name</th>
@@ -178,7 +190,7 @@
         <!-- COMMUNITIES -->
         <h2>Our Communities</h2>
         <p>The League of Women Voters of Newport County serves six towns in Rhode Island:</p>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 25px 0 50px;">
+        <div class="town-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 25px 0 50px;">
             <div style="background: #003d7a; color: white; padding: 18px; text-align: center; font-weight: 600;">Newport</div>
             <div style="background: #003d7a; color: white; padding: 18px; text-align: center; font-weight: 600;">Jamestown</div>
             <div style="background: #003d7a; color: white; padding: 18px; text-align: center; font-weight: 600;">Little Compton</div>
@@ -189,7 +201,7 @@
 
         <!-- CONTACT -->
         <h2>Contact Us</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 25px;">
+        <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 25px;">
             <div style="border: 1px solid #e0e0e0; padding: 25px;">
                 <div style="font-size: 28px; margin-bottom: 10px;">📧</div>
                 <h3 style="margin-top: 0; color: #003d7a;">General Inquiries</h3>
