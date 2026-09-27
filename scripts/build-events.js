@@ -33,6 +33,13 @@ async function fetchCSV(url) {
     headers: { 'User-Agent': 'LWVNC-Builder/1.0' },
     redirect: 'follow',
   });
+  // 410 is what Google serves once the sheet is deleted or in the owner's Trash
+  // ("Sorry, the file you have requested has been deleted"). No retry or code
+  // change brings it back, so name the human fix instead of a bare status code.
+  if (res.status === 404 || res.status === 410) {
+    throw new Error(`The "LWVNC Public Events" sheet is gone (HTTP ${res.status}): Google no longer serves its published link, so the sheet was deleted, moved to Trash, or unpublished. ` +
+      "Restore it from the owner's Google Drive Trash (kept 30 days), or publish a replacement (File → Share → Publish to web → CSV) and put the new link in CSV_URL in scripts/build-events.js.");
+  }
   if (!res.ok) throw new Error(`Failed to fetch CSV: ${res.status} ${res.statusText}`);
   const text = await res.text();
   if (/^\s*<(?:!doctype|html)/i.test(text)) {
@@ -217,4 +224,11 @@ async function main() {
   console.error(`Wrote ${EVENTS_FILE} with ${events.length} auto event card(s).`);
 }
 
-main().catch(err => { console.error('BUILD FAILED:', err.message || err); process.exit(1); });
+main().catch(err => {
+  const msg = String(err.message || err);
+  console.error('BUILD FAILED:', msg);
+  // Also emit the reason as a run annotation (stdout, same as fetch_lwvus.py) —
+  // otherwise the run summary only says "Process completed with exit code 1."
+  console.log(`::error::${msg.replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A')}`);
+  process.exit(1);
+});
