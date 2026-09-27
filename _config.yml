@@ -1,0 +1,10 @@
+# GitHub Pages builds this site with Jekyll. The pages are plain HTML and
+# don't use Jekyll; this file only keeps repo-internal files off the public
+# site. Without it, Jekyll publishes every Markdown file as a web page (e.g.
+# lwvnewportcounty.org/DEPLOYMENT-GUIDE.html) and copies scripts/ verbatim.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - NEWS-POSTING-GUIDE.md
+  - docs
+  - scripts

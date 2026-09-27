@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-The public website of the League of Women Voters of Newport County, Rhode Island. It's hand-written static HTML with one shared `styles.css`. There is no build step and no templating. GitHub Pages serves the root of `main` at **lwvnewportcounty.org** (see `CNAME`), so **merging to `main` publishes**. Pages redeploys in about a minute. The repo is public, and the root `*.md` files are published as pages too.
+The public website of the League of Women Voters of Newport County, Rhode Island. It's hand-written static HTML with one shared `styles.css`. There is no build step and no templating. GitHub Pages serves the root of `main` at **lwvnewportcounty.org** (see `CNAME`), so **merging to `main` publishes**. Pages redeploys in about a minute. The repo is public. `_config.yml` keeps repo docs (`CLAUDE.md`, `README.md`, `NEWS-POSTING-GUIDE.md`, `docs/`) and `scripts/` off the published site. Any other Markdown file you add is published as a web page.
 
 The site owner usually reviews from a phone, which shapes the workflow:
 
@@ -113,5 +113,5 @@ Generators write self-contained HTML (fonts, logos and QR codes inlined) and pri
 
 - Files uploaded through the GitHub web UI have arrived **cut off mid-tag**. `site_health.py` flags any page that doesn't end with `</html>`. Browsers auto-close the missing tags, so a cut-off page can look fine at a glance.
 - Pages copied from a live site can carry Cloudflare `/cdn-cgi/l/email-protection` links, which are dead on GitHub Pages. Use plain `mailto:` links instead.
-- The root `*.md` files (`*-SUMMARY.md`, `*-GUIDE.md`, `*-REDESIGN.md`, etc.) are historical notes from earlier builds. Many are out of date. The current workflow docs are `NEWS-POSTING-GUIDE.md` and `print/*/README.md`.
-- `event-section.html` and `"about (1).html"` are unlinked leftovers. They're not part of the site navigation.
+- `docs/history/` holds change notes from earlier builds. They aren't published, and many describe things that no longer exist. The current workflow docs are `NEWS-POSTING-GUIDE.md` and `print/*/README.md`.
+- `event-section.html` is an unlinked leftover, a copy of an old homepage promo. It isn't part of the site navigation.
