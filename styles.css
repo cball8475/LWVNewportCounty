@@ -556,12 +556,25 @@ footer a:hover {
     }
 }
 
+/* SMALL PHONES: long one-word titles ("Representatives") would run off a 320-359px screen */
+@media (max-width: 359px) {
+    h1 { font-size: 36px; }
+}
+
+/* PHONES: compact impact cards so two fit side by side down to a 320px screen */
+@media (max-width: 599px) {
+    .impact-section { padding-left: 0; padding-right: 0; }
+    .impact-grid { gap: 12px; }
+    .impact-card { padding: 28px 8px; }
+    .impact-number { font-size: 40px; }
+    .impact-label { font-size: 12px; letter-spacing: 0.3px; }
+}
+
 /* TABLET */
 @media (min-width: 600px) {
     h1 { font-size: 52px; }
     h2 { font-size: 38px; }
     .hero-section .lead { font-size: 22px; }
-    .impact-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .image-grid { grid-template-columns: repeat(2, 1fr); }
     .image-card img { height: 280px; }
 }
@@ -578,6 +591,11 @@ footer a:hover {
     .image-grid { grid-template-columns: repeat(3, 1fr); gap: 35px; }
     .image-card img { height: 300px; }
     footer .container { grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
+}
+
+/* Four impact cards in one row only from 900px; narrower screens keep two rows of two */
+@media (min-width: 900px) {
+    .impact-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
 }
 
 /* LARGE DESKTOP */

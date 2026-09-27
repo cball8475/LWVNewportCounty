@@ -59,6 +59,8 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 - Set `executablePath` to `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
 - Load pages as `file://` and route-abort `http(s)` requests, because the sandbox has no general web access.
 - Capture at 390px and 1280px.
+- The pages use the Inter web font, which the sandbox can't load, so text widths come out wrong. For layout checks, fetch it with `npm pack @fontsource/inter` and answer the `fonts.googleapis.com` request with `@font-face` rules pointing at its `.woff2` files.
+- To catch sideways scrolling, compare `document.documentElement.scrollWidth` with the viewport width at every width from 320 to 1280px. Content inside an `overflow-x:auto` box (the Elections sub-menu, wide tables) scrolls on its own and doesn't count.
 
 **Live site.** The sandbox proxy blocks `lwvnewportcounty.org` and `docs.google.com`. Check live pages with a web-scraping tool, or ask the owner.
 
