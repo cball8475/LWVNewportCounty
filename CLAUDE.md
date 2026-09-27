@@ -87,6 +87,7 @@ Events are hand-written HTML. The Google Sheet events feed (`update-events.yml`)
 
 - **Where an event appears.** Cards go under "Upcoming Events" in `events.html`, soonest first. To add one, copy an existing card: a month label with a 48px day number, an `<h3>` title, a meta line ("Weekday, Month D • time • location"), a description and a link. The same event may also be promoted on `index.html` (a section after the Elections band), on `issues.html` ("News from LWVRI"), and on `elections-2026.html`. When it changes, change every copy.
 - **Candidate forums.** The schedule is the "2026 Candidate Forums" list in `events.html`. Full details and **Add to calendar** buttons are in `elections-2026.html#forums`; each button carries `data-cal data-title data-date="YYYY-MM-DD" [data-end]`.
+- **Past items on the Elections hub.** The page's `hidePastItems()` script handles them from their dates. Countdown cards (`.el-count-card[data-date]`) hide and the row re-flows. Timeline entries and forums whose calendar button's `data-end`/`data-date` has passed are dimmed, tagged "Past" and lose the button. Give every new card or entry a `data-date`, or it never ages out.
 - **After an event:**
   1. Remove its card and every promo of it.
   2. Add the card to the top of `events-archive.html`, newest first. That file is an unlinked record, not a page. Use its header box: `ARCHIVED: <date> — <title>` / `Removed from events.html: <YYYY-MM-DD>`.

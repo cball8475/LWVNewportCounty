@@ -172,10 +172,14 @@ def check_elections_hub():
     name = "elections-2026.html"
     if not os.path.exists(os.path.join(ROOT, name)):
         return
-    src = strip_noise(read(name))
+    raw = read(name)
+    src = strip_noise(raw)
+    # Since Sept 2026 the page's hidePastItems() script hides past countdown cards and
+    # dims past timeline/forum entries from their data-date, so past items are expected.
+    handled = "hidePastItems" in raw
     # Countdown cards at the top of the hub: static "Aug 10" + a label.
-    for mon, day, label in re.findall(r'class="el-count-num"[^>]*>\s*' + MONTH_RE + r"\.?\s+(\d{1,2})\s*</div>\s*"
-                                      r'<div class="el-count-label">(.*?)</div>', src, re.S):
+    for mon, day, label in ([] if handled else re.findall(r'class="el-count-num"[^>]*>\s*' + MONTH_RE + r"\.?\s+(\d{1,2})\s*</div>\s*"
+                                      r'<div class="el-count-label">(.*?)</div>', src, re.S)):
         d = to_date(mon, day)
         if d and d < TODAY:
             findings.append(("info", f'{name}: countdown card "{text_of(label)}" ({short(d)}) has passed'))
@@ -190,11 +194,16 @@ def check_elections_hub():
         items.append((end, html.unescape(attrs.get("data-title", "?"))))
     if items:
         past = sorted((e, t) for e, t in items if e < TODAY)
-        msg = f'{name}: {len(past)} of {len(items)} "Add to calendar" items have passed'
         upcoming = sorted((e, t) for e, t in items if e >= TODAY)
+        if handled:
+            msg = f'{name}: {len(past)} of {len(items)} dated items are past (the page hides/dims them itself)'
+        else:
+            msg = f'{name}: {len(past)} of {len(items)} "Add to calendar" items have passed'
         if upcoming:
             msg += f'; next is "{upcoming[0][1]}" ({short(upcoming[0][0])})'
-        findings.append(("info", msg))
+        else:
+            msg += '; nothing upcoming - time to refresh the hub for the next election'
+        findings.append(("ok" if handled and upcoming else "info", msg))
 
 
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param",

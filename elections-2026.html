@@ -70,6 +70,14 @@
       .el-count-num small{ font-size:.78rem; font-weight:600; color:#7a8595; display:block; margin-top:5px; letter-spacing:.04em; text-transform:uppercase; }
       .el-count-label{ font-size:.95rem; font-weight:700; color:var(--el-ink); margin-top:11px; }
       .el-count-date{ font-size:.85rem; color:#6b7689; margin-top:3px; }
+      /* Past items: the script at the bottom adds .is-past from each item's data-date. */
+      .el-count-card.is-past{ display:none; }
+      .el-count-inner[data-n="3"]{ grid-template-columns:repeat(3,1fr); }
+      .el-count-inner[data-n="2"]{ grid-template-columns:repeat(2,1fr); max-width:760px; }
+      .el-count-inner[data-n="1"]{ grid-template-columns:minmax(0,360px); justify-content:center; }
+      .el-tl-item.is-past, .el-forum-row.is-past, .el-state-forum.is-past{ opacity:.55; }
+      .is-past [data-cal]{ display:none; }
+      .is-past .el-tl-date::after, .is-past .el-fr-date::after, .el-state-forum.is-past h3::after{ content:" · Past"; font-weight:600; color:#7a8595; font-size:.85em; }
 
       /* ===== SECTION SHELL ===== */
       .el-section{ max-width:1100px; margin:0 auto; padding:64px 20px; }
@@ -202,7 +210,8 @@
       /* ===== RESPONSIVE ===== */
       @media (max-width:880px){
         .el-hero h1{ font-size:2.4rem; }
-        .el-count-inner{ grid-template-columns:repeat(2,1fr); }
+        .el-count-inner, .el-count-inner[data-n]{ grid-template-columns:repeat(2,1fr); }
+        .el-count-inner[data-n="1"]{ grid-template-columns:minmax(0,360px); }
         .el-ways{ grid-template-columns:1fr; }
         .el-forum-grid{ grid-template-columns:1fr 1fr; }
         .el-actions{ grid-template-columns:1fr; }
@@ -307,22 +316,22 @@
       <!-- ===== AT-A-GLANCE ===== -->
       <section class="el-count" aria-label="Election countdown">
         <div class="el-count-inner">
-          <div class="el-count-card is-primary">
+          <div class="el-count-card is-primary" data-date="2026-09-09">
             <div class="el-count-num" id="cd-primary">—<small>days away</small></div>
             <div class="el-count-label">Primary Election</div>
             <div class="el-count-date">Wed · Sept 9, 2026</div>
           </div>
-          <div class="el-count-card">
+          <div class="el-count-card" data-date="2026-11-03">
             <div class="el-count-num" id="cd-general">—<small>days away</small></div>
             <div class="el-count-label">General Election</div>
             <div class="el-count-date">Tue · Nov 3, 2026</div>
           </div>
-          <div class="el-count-card is-primary">
+          <div class="el-count-card is-primary" data-date="2026-08-10">
             <div class="el-count-num" style="font-size:1.6rem; padding-top:6px;">Aug 10</div>
             <div class="el-count-label">Register for the Primary</div>
             <div class="el-count-date">Deadline</div>
           </div>
-          <div class="el-count-card">
+          <div class="el-count-card" data-date="2026-10-04">
             <div class="el-count-num" style="font-size:1.6rem; padding-top:6px;">Oct 4</div>
             <div class="el-count-label">Register for the General</div>
             <div class="el-count-date">Deadline</div>
@@ -688,6 +697,29 @@
         renderCount('cd-primary',2026,9,9);
         renderCount('cd-general',2026,11,3);
 
+        /* ---------- past items ----------
+           Countdown cards carry data-date; timeline entries and forums carry it on their
+           "Add to calendar" button (data-end for multi-day windows). Past countdown cards
+           are hidden and the row re-flows; past entries are dimmed, tagged "Past" and lose
+           their calendar button. Nothing is removed from the HTML. */
+        (function hidePastItems(){
+          var today=startOfToday();
+          function isPast(el){ var s=el.getAttribute('data-end')||el.getAttribute('data-date'); return !!s && ymdToLocal(s)<today; }
+          var inner=document.querySelector('.el-count-inner');
+          if(inner){
+            var cards=inner.querySelectorAll('.el-count-card[data-date]'), shown=0;
+            for(var i=0;i<cards.length;i++){ if(isPast(cards[i])) cards[i].classList.add('is-past'); else shown++; }
+            if(!shown){ inner.parentNode.style.display='none'; }
+            else if(shown<cards.length){ inner.setAttribute('data-n', shown); }
+          }
+          var btns=document.querySelectorAll('[data-cal][data-date]');
+          for(var j=0;j<btns.length;j++){
+            if(!isPast(btns[j])) continue;
+            var item=btns[j].closest('.el-tl-item, .el-forum-row, .el-state-forum');
+            if(item) item.classList.add('is-past');
+          }
+        })();
+
         /* ---------- smart "next deadline" banner ---------- */
         var KEY=[
           {label:'Register to vote for the Primary', date:'2026-08-10', cal:{title:'Register to vote — RI Primary', note:'Last day to register to vote in the RI Primary. vote.sos.ri.gov', file:'register-primary'}},
@@ -710,7 +742,8 @@
         }
         (function renderBanner(){
           var nk=nextKey(); var box=document.getElementById('el-banner');
-          if(!nk||!box) return;
+          if(!box) return;
+          if(!nk){ box.style.display='none'; return; }  // every deadline has passed: hide, don't leave "Loading…"
           var d=nk.d, item=nk.item;
           var when=WDAYS[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
           var left = nk.days===0 ? 'today' : (nk.days===1 ? 'tomorrow' : nk.days+' days left');
