@@ -202,8 +202,9 @@
       .el-cand-go{ font-size:.86rem; font-weight:700; color:var(--el-blue); white-space:nowrap; }
       .el-cand-foot{ background:var(--el-purple-bg); border-radius:14px; padding:22px 26px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
       .el-cand-foot p{ margin:0; color:var(--el-ink); font-weight:700; font-size:1.02rem; }
-      @media(max-width:880px){ .el-candidates{ grid-template-columns:1fr 1fr; } }
-      @media(max-width:560px){ .el-candidates{ grid-template-columns:1fr; } }
+      @media(max-width:1020px){ .el-candidates{ grid-template-columns:1fr 1fr; } }
+      @media(max-width:700px){ .el-candidates{ grid-template-columns:1fr; } }
+      @media(max-width:360px){ .el-cand{ flex-wrap:wrap; } } /* smallest phones: "View candidates" drops below the town */
 
       .el-updated{ text-align:center; color:#9aa3b2; font-size:.85rem; padding:6px 20px 54px; }
 
