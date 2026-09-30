@@ -11,6 +11,7 @@ so the whole series looks the same.
 | --- | --- |
 | `forum-middletown-town-council-2026-09-29.pdf` | Middletown Town Council — Tue 9/29, 6:30–8:00 PM, Middletown High School |
 | `forum-tiverton-town-council-2026-10-07.pdf` | Tiverton Town Council — Wed 10/7, 6:30–8:00 PM, Tiverton High School |
+| `forum-tiverton-school-committee-2026-10-08.pdf` | Tiverton School Committee — Thu 10/8, 6:30–7:30 PM, Tiverton Public Library |
 | `forum-little-compton-town-council-school-committee-2026-10-19.pdf` | Little Compton Town Council & School Committee — Mon 10/19, 6:30–8:00 PM, Little Compton Community Center |
 | `proofs/*.png` | 150 dpi images of each flyer, for email, texting, and social posts |
 
@@ -18,21 +19,28 @@ Each PDF is ready to print or email. The question-form link in the PDF is clicka
 
 ## What's on each flyer
 
-| | Middletown | Tiverton | Little Compton |
-| --- | --- | --- | --- |
-| Moderator | John Marion, Executive Director, Common Cause Rhode Island | Scott Pickering, Publisher, East Bay Media Group | Scott Pickering, Publisher, East Bay Media Group |
-| Question form | forms.gle/AtmNKLZ4EfBSneZ66 | forms.gle/vYepZb66P8nmq9816 | forms.gle/j7v9i4A8CP1tT9zw8 |
+| | Middletown | Tiverton Town Council | Tiverton School Committee | Little Compton |
+| --- | --- | --- | --- | --- |
+| Moderator | John Marion, Executive Director, Common Cause Rhode Island | Scott Pickering, Publisher, East Bay Media Group | Christine Stenning, President, League of Women Voters of Newport County | Scott Pickering, Publisher, East Bay Media Group |
+| Question form | forms.gle/AtmNKLZ4EfBSneZ66 | forms.gle/vYepZb66P8nmq9816 | forms.gle/vYepZb66P8nmq9816 (the Town Council form) | forms.gle/j7v9i4A8CP1tT9zw8 |
 
-All three form links were opened before printing, and each goes to the Google Form
-for its own town. The forms' titles are "Middletown Town Council Forum", "Tiverton
-Town Council Forum", and "Little Compton Town Council and School Committee".
+Every form link was opened before printing. The Middletown, Tiverton Town Council,
+and Little Compton links each go to that forum's own Google Form. The forms' titles
+are "Middletown Town Council Forum", "Tiverton Town Council Forum", and "Little
+Compton Town Council and School Committee".
+
+The Tiverton School Committee flyer reuses the Tiverton Town Council form, at the
+owner's request (Sept 30). That form's title still reads "Tiverton Town Council
+Forum". Its three question boxes have no way to say which forum a question is for.
+Keep the form open through Oct 8, not just until the Town Council forum on Oct 7.
 
 ## Differences from the Portsmouth flyer
 
 - **QR code for the question form.** This is the one addition to the layout. It sits
   in the empty right side of the "Questions for the candidates?" row, so people
   don't have to type a 17-character link off a printed page. It prints just under
-  1 in. square, and the build scans every code back to its form URL (see Checks).
+  1 in. square (0.75 in. on the Tiverton School Committee flyer, see Location
+  lines), and the build scans every code back to its form URL (see Checks).
   Scan a printed copy with a phone before a big run. To turn it off, set
   `QR_DEFAULT = False` in `source/build_flyers.py`, or add `"qr": False` to one forum.
 - **Little Compton headline.** "Town Council & School Committee Candidates Forum" is
@@ -43,14 +51,17 @@ Town Council Forum", and "Little Compton Town Council and School Committee".
   RI". The flyer uses the organization's name as it appears on its logo:
   "Executive Director, Common Cause Rhode Island".
 - **Location lines.** Portsmouth had a second location line ("Little Theatre").
-  None of these three has one, so the location row is shorter. The question row
-  takes up that space, which keeps the card and everything below it in the same
-  place as on Portsmouth.
+  Middletown, Tiverton Town Council, and Little Compton don't, so their location
+  row is shorter. The question row takes up that space, which keeps the card and
+  everything below it in the same place as on Portsmouth. The Tiverton School
+  Committee flyer has a second location line (the library's street address) and a
+  moderator title, so its rows are the same heights as Portsmouth's. Its question
+  row is shorter, and the QR prints at 0.75 in. It still scans at print resolution.
 
 **Confirm before printing:** the partner strip still shows the same five logos as
 Portsmouth: Greater Newport Chamber of Commerce, Newport This Week, East Bay Media
 Group, Common Cause Rhode Island, and AARP Rhode Island. Check that all five are
-partners on these three forums too. If not, delete that logo's line from `PARTNERS`
+partners on each of these forums too. If not, delete that logo's line from `PARTNERS`
 in the build script and rebuild. The row re-centers on its own.
 
 ## Specs
@@ -92,7 +103,7 @@ original:
 
 ```bash
 cd source
-python3 build_flyers.py              # all three
+python3 build_flyers.py              # all four
 python3 build_flyers.py middletown   # one forum (any part of the file name works)
 ```
 

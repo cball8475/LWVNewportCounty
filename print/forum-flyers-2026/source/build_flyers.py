@@ -74,6 +74,24 @@ FORUMS = [
         "form": "https://forms.gle/vYepZb66P8nmq9816",
     },
     {
+        # Requested Sept 30. The owner chose to reuse the Tiverton Town Council
+        # question form (its title reads "Tiverton Town Council Forum"). The
+        # moderator's title is from the About page's board list. With the street
+        # address, both rows have a second line, as on the Portsmouth original,
+        # so the QR prints smaller than on the other three flyers (0.75 in).
+        "slug": "forum-tiverton-school-committee-2026-10-08",
+        "town": "Tiverton",
+        "title": ["School Committee", "Candidates Forum"],
+        "iso_date": "2026-10-08",
+        "date": "Thursday, October 8, 2026",
+        "time": "6:30 &ndash; 7:30 PM",
+        "location": "Tiverton Public Library",
+        "location_sub": "34 Roosevelt Avenue",
+        "moderator": "Christine Stenning",
+        "moderator_sub": "President, League of Women Voters of Newport County",
+        "form": "https://forms.gle/vYepZb66P8nmq9816",
+    },
+    {
         # Two races at one forum. "Town Council & School Committee Candidates
         # Forum" won't fit two lines at the series headline size, so the
         # headline names the races and the red "Candidates Forum" label above
