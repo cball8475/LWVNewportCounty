@@ -74,11 +74,10 @@ FORUMS = [
         "form": "https://forms.gle/vYepZb66P8nmq9816",
     },
     {
-        # Requested Sept 30. The owner chose to reuse the Tiverton Town Council
-        # question form (its title reads "Tiverton Town Council Forum"). The
-        # moderator's title is from the About page's board list. With the street
-        # address, both rows have a second line, as on the Portsmouth original,
-        # so the QR prints smaller than on the other three flyers (0.75 in).
+        # Requested Sept 30. The moderator's title is from the About page's
+        # board list. With the street address, both rows have a second line, as
+        # on the Portsmouth original, so the QR prints at 0.75 in instead of
+        # the 0.92 in it gets on flyers with one-line location rows.
         "slug": "forum-tiverton-school-committee-2026-10-08",
         "town": "Tiverton",
         "title": ["School Committee", "Candidates Forum"],
@@ -89,7 +88,23 @@ FORUMS = [
         "location_sub": "34 Roosevelt Avenue",
         "moderator": "Christine Stenning",
         "moderator_sub": "President, League of Women Voters of Newport County",
-        "form": "https://forms.gle/vYepZb66P8nmq9816",
+        "form": "https://forms.gle/ndiMoAC5JxtJj3g69",
+    },
+    {
+        # Requested Sept 30 as "Jamestown Library". The flyer uses the
+        # library's own name and street address (jplri.org), set the same way as
+        # the Tiverton School Committee flyer.
+        "slug": "forum-jamestown-town-council-2026-10-13",
+        "town": "Jamestown",
+        "title": ["Town Council", "Candidates Forum"],
+        "iso_date": "2026-10-13",
+        "date": "Tuesday, October 13, 2026",
+        "time": "6:30 &ndash; 8:00 PM",
+        "location": "Jamestown Philomenian Library",
+        "location_sub": "26 North Road",
+        "moderator": "Christine Stenning",
+        "moderator_sub": "President, League of Women Voters of Newport County",
+        "form": "https://forms.gle/bfBExiaofFCJULZC6",
     },
     {
         # Two races at one forum. "Town Council & School Committee Candidates
