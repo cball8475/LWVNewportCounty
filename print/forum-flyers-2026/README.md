@@ -12,7 +12,7 @@ so the whole series looks the same.
 | `forum-middletown-town-council-2026-09-29.pdf` | Middletown Town Council — Tue 9/29, 6:30–8:00 PM, Middletown High School |
 | `forum-tiverton-town-council-2026-10-07.pdf` | Tiverton Town Council — Wed 10/7, 6:30–8:00 PM, Tiverton High School |
 | `forum-tiverton-school-committee-2026-10-08.pdf` | Tiverton School Committee — Thu 10/8, 6:30–7:30 PM, Tiverton Public Library |
-| `forum-jamestown-town-council-2026-10-13.pdf` | Jamestown Town Council — Tue 10/13, 6:30–8:00 PM, Jamestown Philomenian Library |
+| `forum-jamestown-town-council-2026-10-19.pdf` | Jamestown Town Council — Mon 10/19, 6:30–8:00 PM, Jamestown Philomenian Library |
 | `forum-little-compton-town-council-school-committee-2026-10-19.pdf` | Little Compton Town Council & School Committee — Mon 10/19, 6:30–8:00 PM, Little Compton Community Center |
 | `proofs/*.png` | 150 dpi images of each flyer, for email, texting, and social posts |
 
@@ -25,7 +25,7 @@ Each PDF is ready to print or email. The question-form link in the PDF is clicka
 | Middletown Town Council | John Marion, Executive Director, Common Cause Rhode Island | forms.gle/AtmNKLZ4EfBSneZ66 |
 | Tiverton Town Council | Scott Pickering, Publisher, East Bay Media Group | forms.gle/vYepZb66P8nmq9816 |
 | Tiverton School Committee | Christine Stenning, President, League of Women Voters of Newport County | forms.gle/ndiMoAC5JxtJj3g69 |
-| Jamestown Town Council | Christine Stenning, President, League of Women Voters of Newport County | forms.gle/bfBExiaofFCJULZC6 |
+| Jamestown Town Council | Angela Lima, League of Women Voters of Newport County | forms.gle/bfBExiaofFCJULZC6 |
 | Little Compton Town Council & School Committee | Scott Pickering, Publisher, East Bay Media Group | forms.gle/j7v9i4A8CP1tT9zw8 |
 
 Every form link was opened before printing, and each goes to the Google Form for its
@@ -49,10 +49,12 @@ Committee".
   it covers the rest. This keeps it the same size as the other towns' headlines.
 - **Moderator title wording.** The request read "Executive Director Common Cause,
   RI". The flyer uses the organization's name as it appears on its logo:
-  "Executive Director, Common Cause Rhode Island". The Jamestown request read
-  "President League of Women Voters Newport County". The flyer uses the League's
-  name as it appears on its logo: "President, League of Women Voters of Newport
-  County". The Tiverton School Committee flyer uses the same line.
+  "Executive Director, Common Cause Rhode Island". Requests have written the League
+  as "League of Women Voters Newport County". The flyers use its name as it appears
+  on its logo, "League of Women Voters of Newport County": "President, League of
+  Women Voters of Newport County" under Christine Stenning on the Tiverton School
+  Committee flyer, and the League's name alone under Angela Lima on the Jamestown
+  flyer.
 - **Library names.** The requests read "Tiverton Library" and "Jamestown Library".
   The flyers use the names the libraries use for themselves, "Tiverton Public
   Library" and "Jamestown Philomenian Library". Each has its street address on a
@@ -62,7 +64,7 @@ Committee".
   row is shorter. The question row takes up that space, which keeps the card and
   everything below it in the same place as on Portsmouth. The Tiverton School
   Committee and Jamestown flyers each have a second location line (the library's
-  street address) and a moderator title, so their rows are the same heights as
+  street address) and a second moderator line, so their rows are the same heights as
   Portsmouth's. Their question row is shorter, and the QR prints at 0.75 in. It
   still scans at print resolution.
 

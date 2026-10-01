@@ -93,17 +93,20 @@ FORUMS = [
     {
         # Requested Sept 30 as "Jamestown Library". The flyer uses the
         # library's own name and street address (jplri.org), set the same way as
-        # the Tiverton School Committee flyer.
-        "slug": "forum-jamestown-town-council-2026-10-13",
+        # the Tiverton School Committee flyer. Changed Oct 1: moved from Tue 10/13
+        # to Mon 10/19 with a new moderator (time, place and form unchanged). The
+        # request read "League of Women Voters Newport County"; the flyer uses
+        # the League's name as it appears on its logo.
+        "slug": "forum-jamestown-town-council-2026-10-19",
         "town": "Jamestown",
         "title": ["Town Council", "Candidates Forum"],
-        "iso_date": "2026-10-13",
-        "date": "Tuesday, October 13, 2026",
+        "iso_date": "2026-10-19",
+        "date": "Monday, October 19, 2026",
         "time": "6:30 &ndash; 8:00 PM",
         "location": "Jamestown Philomenian Library",
         "location_sub": "26 North Road",
-        "moderator": "Christine Stenning",
-        "moderator_sub": "President, League of Women Voters of Newport County",
+        "moderator": "Angela Lima",
+        "moderator_sub": "League of Women Voters of Newport County",
         "form": "https://forms.gle/bfBExiaofFCJULZC6",
     },
     {
