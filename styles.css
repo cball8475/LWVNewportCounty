@@ -617,7 +617,46 @@ p {
 
 .feed-updated {
     font-size: 14px;
+    font-style: italic;
     color: var(--muted);
+}
+
+/* Featured story (e.g. a court win): gold edge on the light surface */
+.news-card--highlight {
+    background: var(--surface);
+    border-left: 6px solid var(--lwv-gold);
+}
+
+/* An image with a caption inside a story */
+.news-card__figure {
+    margin: var(--space-5) 0 0;
+    text-align: center;
+}
+
+.news-card__figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+.news-card__figure figcaption { margin-top: 8px; font-style: italic; }
+
+/* Section heading with a hairline and short purple bar underneath */
+.heading-rule {
+    position: relative;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.heading-rule::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 56px;
+    height: 3px;
+    background: var(--lwv-purple);
 }
 
 /* ── PAGE LAYOUT: inner pages ───────────────────────────────────────────────
@@ -629,8 +668,8 @@ p {
 }
 
 /* Boxes sitting in the text flow get breathing room above and below */
-.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid, .stack),
-.prose > section > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid, .stack) { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid, .stack, .alert),
+.prose > section > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid, .stack, .alert) { margin-top: var(--space-6); margin-bottom: var(--space-6); }
 .prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid):first-child { margin-top: 0; }
 
 /* Readable line length for a paragraph inside a wide box */
@@ -728,8 +767,14 @@ p {
 
 /* Headings that open a card or grid cell sit tight to the top (and to an icon above them) */
 .prose .card__title,
+.prose .alert__title,
+.prose .news-card__title,
+.prose .media__title,
 .prose .card-grid > * > :first-child,
 .prose .card > .icon + :is(h3, h4) { margin-top: 0; }
+
+/* Text after a row of buttons */
+.btn-row + p { margin-top: var(--space-4); }
 
 /* Muted small print (sources, footnotes, past-dated notes) */
 .note {
@@ -894,6 +939,113 @@ p {
     color: var(--body);
     border-bottom: 1px solid var(--hairline);
 }
+
+/* ── COMPONENT: ACTION ALERT (action-alerts.html) ─────────────────────────────
+   One alert: a badge, a title, an optional image beside text (.media),
+   dated .update-box notes, a table or quote, and action buttons.           */
+.alert {
+    margin: var(--space-6) 0;
+    padding: var(--space-5);
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-left: 6px solid var(--lwv-red);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.alert > :last-child { margin-bottom: 0; }
+.alert__title { margin: 0 0 var(--space-4); font-size: 26px; }
+
+/* Small label above a title (e.g. "URGENT", "GOOD NEWS") */
+.badge {
+    display: inline-block;
+    margin-bottom: var(--space-3);
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--lwv-purple);
+    border-radius: 999px;
+}
+
+.badge--red { background: var(--lwv-red); }
+.badge--blue { background: var(--lwv-blue); }
+
+/* Image beside text; stacks on narrow screens */
+.media {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-5);
+    margin: var(--space-5) 0;
+}
+
+.media--center { align-items: center; }
+.media__img { width: 240px; max-width: 100%; height: auto; flex-shrink: 0; border-radius: var(--radius); }
+.media__img--framed { border: 1px solid var(--hairline); }
+.media__img--sm { width: 160px; }
+.media__body { flex: 1; min-width: min(260px, 100%); }
+.media__body > :last-child,
+.media > div > :last-child { margin-bottom: 0; }
+.media__title { margin: 0 0 8px; font-size: 20px; color: var(--lwv-purple-dark); }
+
+/* Dated update at the top of an alert: "Update — Month D, YYYY" */
+.update-box {
+    margin: var(--space-5) 0;
+    padding: var(--space-4) var(--space-5);
+    background: #fdf3f5;
+    border: 1px solid #f1d0d7;
+    border-left: 4px solid var(--lwv-red);
+    border-radius: var(--radius);
+}
+
+.update-box > :last-child { margin-bottom: 0; }
+
+.update-box__label {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lwv-red);
+}
+
+/* A sub-section inside an alert, set off by a rule */
+.alert__section {
+    margin-top: var(--space-5);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--hairline);
+}
+
+.alert__sources {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--hairline);
+}
+
+.panel__lead { font-weight: 600; }
+
+/* Red button for the main action in an urgent alert */
+.btn--red { background: var(--lwv-red); border-color: var(--lwv-red); }
+.btn--red:hover { background: #9a0c2a; border-color: #9a0c2a; }
+
+/* Tables that need sideways scrolling on phones; first-column labels */
+.table--wide { min-width: 640px; }
+.table__label { font-weight: 600; color: var(--ink); }
+
+/* Pull quote with a source line */
+.quote {
+    margin: var(--space-5) 0;
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border-left: 4px solid var(--lwv-blue);
+    border-radius: var(--radius);
+}
+
+.quote ul { font-style: italic; margin-bottom: 8px; }
+.quote__source { margin: 0; font-size: 15px; color: var(--muted); }
 
 /* ── PAGE HEADER WITH PHOTO ──────────────────────────────────────────────────
    .page-header--photo: title and lead on the left, the page's photo on the

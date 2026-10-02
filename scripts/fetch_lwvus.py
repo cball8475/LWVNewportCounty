@@ -29,10 +29,9 @@ Strategy:
   - Exit non-zero only on unrecoverable failure. Commit step in the
     workflow is a no-op if nothing changed.
 
-Brand palette (used in the rendered HTML): navy #1B3A6B, gold #C5A028.
-Styling is mostly inline classes so you can theme it with the site's
-existing CSS. Add matching rules to your stylesheet (see README block
-at the bottom of this file for suggested CSS).
+Markup: each item is an <article class="news-card"> styled by the site's
+styles.css (.news-card, .eyebrow, .link-cta, .feed-updated). Change the
+markup here and those rules together.
 """
 
 import glob
@@ -199,8 +198,8 @@ def _fmt_date(raw):
 
 def render_html_block(items):
     """
-    Render items as article cards matching the hand-written press-release
-    cards on news.html (inline styles, site palette).
+    Render items as .news-card articles (styled in styles.css), matching the
+    news-post cards on news.html.
     """
     html_lines = []
     for it in items:
@@ -210,26 +209,20 @@ def render_html_block(items):
         summary = _escape(it.get("summary", ""))
 
         label = "Press Release &bull; LWVUS" + (f" &bull; {date}" if date else "")
-        html_lines.append('        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">')
-        html_lines.append(
-            f'            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; '
-            f'text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">{label}</p>'
-        )
-        html_lines.append(f'            <h3 style="margin: 0 0 12px 0; color: #003d7a;">{title}</h3>')
+        html_lines.append('        <article class="news-card">')
+        html_lines.append(f'            <p class="eyebrow eyebrow--plain">{label}</p>')
+        html_lines.append(f'            <h3 class="news-card__title">{title}</h3>')
         if summary:
             html_lines.append(f'            <p>{summary}</p>')
-        html_lines.append('            <p style="margin-top: 15px;">')
         html_lines.append(
-            f'                <a href="{link}" target="_blank" rel="noopener" '
-            f'style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; '
-            f'font-weight: 600; display: inline-block; font-size: 14px;">Read Full Statement &rarr;</a>'
+            f'            <p><a href="{link}" target="_blank" rel="noopener" '
+            f'class="link-cta">Read Full Statement &rarr;</a></p>'
         )
-        html_lines.append('            </p>')
         html_lines.append('        </article>')
 
     updated = datetime.now(timezone.utc).strftime("%B %d, %Y")
     html_lines.append(
-        f'        <p style="color: #888; font-size: 13px; font-style: italic; margin-top: 20px;">'
+        f'        <p class="feed-updated">'
         f'Updated automatically from the '
         f'<a href="{PRESS_URL}" target="_blank" rel="noopener">LWVUS newsroom</a> on {updated}.</p>'
     )
@@ -343,17 +336,5 @@ if __name__ == "__main__":
 
 
 # -----------------------------------------------------------------------------
-# Suggested CSS (paste into your site's main stylesheet)
-# -----------------------------------------------------------------------------
-# .lwvus-news-list { display: grid; gap: 1.25rem; margin: 1rem 0; }
-# .lwvus-news-item {
-#     border-left: 4px solid #C5A028;   /* LWVNC gold */
-#     padding: 0.75rem 1rem;
-#     background: #F8F6EF;              /* cream */
-# }
-# .lwvus-news-title { margin: 0 0 0.25rem; }
-# .lwvus-news-title a { color: #1B3A6B; text-decoration: none; }  /* navy */
-# .lwvus-news-title a:hover { text-decoration: underline; }
-# .lwvus-news-date { font-size: 0.875rem; color: #555; margin: 0 0 0.5rem; }
-# .lwvus-news-summary { margin: 0; line-height: 1.5; }
-# .lwvus-news-updated { font-size: 0.8rem; color: #666; margin-top: 1rem; }
+# Styling: the rendered cards use .news-card, .eyebrow, .link-cta and
+# .feed-updated from styles.css; no extra CSS is needed.

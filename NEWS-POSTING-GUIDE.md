@@ -11,9 +11,9 @@ Use this for anything you want on the site: local League news, LWVRI updates, or
    - **Headline** (required)
    - **Section** — Newport County, Rhode Island, or United States
    - **Story** (required) — paragraphs separated by a blank line
-   - **Category label** — the small red label, e.g. "Press Release" or "Breaking Victory" (blank = "News")
+   - **Category label** — the small label above the headline, e.g. "Press Release" or "Breaking Victory" (blank = "News")
    - **Date** — blank = today
-   - **Link** — shown as a "Read More →" button
+   - **Link** — shown as a "Read More →" link
    - **Image** — a web image URL, or a file already in the site's `images/` folder
 3. Press **Submit new issue**. That's it.
 
