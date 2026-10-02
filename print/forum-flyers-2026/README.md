@@ -12,7 +12,7 @@ so the whole series looks the same.
 | `forum-middletown-town-council-2026-09-29.pdf` | Middletown Town Council — Tue 9/29, 6:30–8:00 PM, Middletown High School |
 | `forum-tiverton-town-council-2026-10-07.pdf` | Tiverton Town Council — Wed 10/7, 6:30–8:00 PM, Tiverton High School |
 | `forum-tiverton-school-committee-2026-10-08.pdf` | Tiverton School Committee — Thu 10/8, 6:30–7:30 PM, Tiverton Public Library |
-| `forum-jamestown-town-council-2026-10-19.pdf` | Jamestown Town Council — Mon 10/19, 6:30–8:00 PM, Jamestown Philomenian Library |
+| `forum-jamestown-town-council-2026-10-19.pdf` | Jamestown Town Council — Mon 10/19, 5:30–7:00 PM, Jamestown Philomenian Library |
 | `forum-little-compton-town-council-school-committee-2026-10-19.pdf` | Little Compton Town Council & School Committee — Mon 10/19, 6:30–8:00 PM, Little Compton Community Center |
 | `proofs/*.png` | 150 dpi images of each flyer, for email, texting, and social posts |
 
