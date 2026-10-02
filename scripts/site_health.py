@@ -113,9 +113,20 @@ def check_upcoming_events():
     if not m:
         findings.append(("skip", "events.html: couldn't find the Upcoming Events section"))
         return
-    # Card date badge: month label div, the 48px day number, then the card's <h3> title.
-    cards = re.findall(r">\s*" + MONTH_RE + r"\s*</div>\s*<div[^>]*font-size:\s*48px[^>]*>\s*(\d{1,2})\s*</div>"
-                       r".*?<h3[^>]*>(.*?)</h3>", m.group(1), re.S)
+    section = m.group(1)
+    # Card date badge, then the card's <h3> title. Two formats:
+    #  - current (.event-item): <span class="date-tile__month">Oct</span><span class="date-tile__day">14</span>
+    #  - older inline-styled cards: a month label div, then a div with a 48px day number.
+    cards = re.findall(r'class="date-tile__month"[^>]*>\s*' + MONTH_RE + r'\s*</span>\s*'
+                       r'<span[^>]*class="date-tile__day"[^>]*>\s*(\d{1,2})\s*</span>'
+                       r".*?<h3[^>]*>(.*?)</h3>", section, re.S)
+    cards += re.findall(r">\s*" + MONTH_RE + r"\s*</div>\s*<div[^>]*font-size:\s*48px[^>]*>\s*(\d{1,2})\s*</div>"
+                        r".*?<h3[^>]*>(.*?)</h3>", section, re.S)
+    # A card in neither format would otherwise be skipped silently and read as "none past".
+    unread = len(re.findall(r"<h3\b", section, re.I)) - len(cards)
+    if unread > 0:
+        findings.append(("warn", f"events.html: {unread} card(s) under Upcoming Events have no date tile "
+                                 "(see the card template in events.html), so their dates weren't checked"))
     past = [(to_date(mon, day), text_of(title)) for mon, day, title in cards]
     past = [(d, t) for d, t in past if d and d < TODAY]
     for d, t in past:

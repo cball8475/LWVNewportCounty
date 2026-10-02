@@ -23,7 +23,7 @@
     <style>
         /* 2026 Candidate Forums list: the script at the bottom of the page tags each
            date whose data-date has passed, matching the "Past" tag on the Elections hub. */
-        .forum-date.is-past { color: #7a8595; }
+        .forum-date.is-past { color: var(--muted); }
         .forum-date.is-past::after { content: " \00B7  Past"; font-weight: 600; font-size: .85em; }
     </style>
 </head>
@@ -76,41 +76,60 @@
 
     <main id="main">
 
-    <div class="hero-image">
-        <img src="images/league-table.jpg" alt="LWV table at community event">
-    </div>
-
-    <div class="page-header">
-        <h1>Calendar &amp; Events</h1>
-        <p class="lead">Join us for voter registration drives, candidate forums, educational programs, and community gatherings across Newport County.</p>
-    </div>
-
-    <div class="container">
-        <a href="elections-2026.html" style="text-decoration: none; display: block; margin: 40px 0 10px;">
-          <div style="background: linear-gradient(135deg,#8B1A7A 0%,#6d1460 100%); color:#fff; padding: 26px 32px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; box-shadow: 0 6px 18px rgba(109,20,96,0.18);">
+    <div class="page-header page-header--photo">
+        <div class="page-header__inner">
             <div>
-              <div style="font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #ffd84d; font-weight: 700;">Newport County · 2026</div>
-              <div style="font-size: 1.35rem; font-weight: 800; margin-top: 4px; color:#fff;">Elections 2026 Hub</div>
-              <p style="color: rgba(255,255,255,0.92); margin: 6px 0 0; font-size: 0.97rem;">All the key dates, the full candidate forum schedule, and who's running — in one place.</p>
+                <h1>Calendar &amp; Events</h1>
+                <p class="lead">Join us for voter registration drives, candidate forums, educational programs, and community gatherings across Newport County.</p>
             </div>
-            <span class="btn" style="background:#ffd84d; color:#3a2a00; border-color:#ffd84d; flex-shrink:0;">Go to Elections 2026 →</span>
-          </div>
+            <div class="page-header__photo">
+                <img src="images/league-table.jpg" alt="LWV table at community event" width="548" height="450">
+            </div>
+        </div>
+    </div>
+
+    <div class="container container--narrow page-body prose">
+        <!-- Elections 2026 promo: same block on vote.html -->
+        <a href="elections-2026.html" class="promo">
+            <div>
+                <p class="promo__eyebrow">Newport County · 2026</p>
+                <p class="promo__title">Elections 2026 Hub</p>
+                <p class="promo__text">All the key dates, the full candidate forum schedule, and who's running — in one place.</p>
+            </div>
+            <span class="btn btn--gold">Go to Elections 2026 →</span>
         </a>
 
         <h2>Upcoming Events</h2>
 
-        <p style="margin: 20px 0 40px; font-size: 1.05em;">For upcoming League events, see the <a href="#candidate-forums" style="font-weight: 700; color: #003d7a;">2026 Candidate Forums</a> schedule below and the <a href="elections-2026.html#forums" style="font-weight: 700; color: #003d7a;">Elections 2026 hub</a>.</p>
+        <!-- EVENT CARD TEMPLATE: copy it above the pointer line below, soonest
+             event first, and fill in the month, day, title, meta line,
+             description and link. scripts/site_health.py reads the date tile
+             and the <h3>, so keep those two classes and the <h3>.
+             When the last card goes, keep the pointer line.
+
+        <div class="event-item">
+            <div class="date-tile"><span class="date-tile__month">Oct</span><span class="date-tile__day">14</span></div>
+            <div class="event-item__body">
+                <h3 class="event-item__title">Event title</h3>
+                <p class="event-item__meta">Wednesday, October 14 &bull; 6:30 PM &bull; Location, Town</p>
+                <p>One or two sentences about the event.</p>
+                <p><a href="https://example.org" class="link-cta" target="_blank" rel="noopener">Details &amp; RSVP &rarr;</a></p>
+            </div>
+        </div>
+        -->
+
+        <p class="lead">For upcoming League events, see the <a href="#candidate-forums">2026 Candidate Forums</a> schedule below and the <a href="elections-2026.html#forums">Elections 2026 hub</a>.</p>
 
         <!-- REGULAR PROGRAMS -->
-        <h2 style="margin-top: 60px;">Regular Programs</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 30px 0 60px;">
-            <div style="border: 1px solid #e0e0e0; padding: 25px 30px;">
-                <h3 style="color: #003d7a; margin-top: 0;">Quarterly Member Meetings</h3>
+        <h2>Regular Programs</h2>
+        <div class="card-grid card-grid--2">
+            <div class="card card--top">
+                <h3 class="card__title">Quarterly Member Meetings</h3>
                 <p><strong>Announced in advance &bull; 5:30 PM</strong></p>
                 <p>Regular gatherings for members and the public to discuss current issues and plan activities. Locations rotate around the areas in Newport County.</p>
             </div>
-            <div style="border: 1px solid #e0e0e0; padding: 25px 30px;">
-                <h3 style="color: #003d7a; margin-top: 0;">Board Meetings</h3>
+            <div class="card card--top">
+                <h3 class="card__title">Board Meetings</h3>
                 <p><strong>First Wednesday &bull; 1:00 PM</strong></p>
                 <p>The Officers and Board of Directors meet to guide League activities. Members are welcome to observe these meetings.</p>
             </div>
@@ -118,10 +137,10 @@
 
         <!-- 2026 CANDIDATE FORUMS -->
         <h2 id="candidate-forums">2026 Candidate Forums</h2>
-        <div style="border-left: 6px solid #d32f2f; background: #f9f9f9; padding: 30px 35px; margin: 30px 0 60px;">
-            <p style="font-size: 1.05em; margin-bottom: 14px;">The League is hosting nonpartisan candidate forums across Newport County so voters can hear directly from candidates before the 2026 primary and general elections.</p>
-            <p style="margin-bottom: 8px;"><strong>2026 forum schedule</strong> — times and locations announced as each forum is confirmed:</p>
-            <ul style="margin: 0 0 16px 24px; line-height: 1.9;">
+        <div class="card card--accent card--roomy">
+            <p class="lead">The League is hosting nonpartisan candidate forums across Newport County so voters can hear directly from candidates before the 2026 primary and general elections.</p>
+            <p><strong>2026 forum schedule</strong> — times and locations announced as each forum is confirmed:</p>
+            <ul class="forum-list">
                 <li><strong>State Senate Primary, District 13</strong> &mdash; <span class="forum-date" data-date="2026-08-04">Aug 4</span></li>
                 <li><strong>Portsmouth</strong> &mdash; <span class="forum-date" data-date="2026-09-15">Town Council Sept 15</span>, <span class="forum-date" data-date="2026-10-22">School Committee Oct 22</span></li>
                 <li><strong>Newport</strong> &mdash; <span class="forum-date" data-date="2026-09-17">School Committee Sept 17</span>, <span class="forum-date" data-date="2026-09-24">City Council Sept 24</span></li>
@@ -130,8 +149,8 @@
                 <li><strong>Tiverton</strong> &mdash; <span class="forum-date" data-date="2026-10-07">Town Council Oct 7</span>, <span class="forum-date" data-date="2026-10-08">School Committee Oct 8</span></li>
                 <li><strong>Jamestown</strong> &mdash; <span class="forum-date" data-date="2026-10-15">School Committee Oct 15</span>, <span class="forum-date" data-date="2026-10-19">Town Council Oct 19</span></li>
             </ul>
-            <p style="margin-bottom: 12px;"><a href="elections-2026.html#forums" style="font-weight: 700; color: #003d7a;">See full details and add any forum to your calendar on the Elections 2026 hub &rarr;</a></p>
-            <p style="margin-bottom: 0;">Interested in helping? Forum teams handle candidate invitations, question development, timekeeping, and venue coordination. <a href="mailto:presidentlwvnc25@gmail.com">Contact us to volunteer &rarr;</a></p>
+            <p><a href="elections-2026.html#forums" class="link-cta">See full details and add any forum to your calendar on the Elections 2026 hub &rarr;</a></p>
+            <p>Interested in helping? Forum teams handle candidate invitations, question development, timekeeping, and venue coordination. <a href="mailto:presidentlwvnc25@gmail.com">Contact us to volunteer &rarr;</a></p>
         </div>
 
     </div>

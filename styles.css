@@ -531,6 +531,7 @@ p {
     padding: var(--space-5);
 }
 
+.card { overflow-wrap: break-word; }   /* long web addresses wrap instead of overflowing */
 .card > :first-child { margin-top: 0; }
 .card > :last-child { margin-bottom: 0; }
 
@@ -628,8 +629,44 @@ p {
 }
 
 /* Boxes sitting in the text flow get breathing room above and below */
-.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item) { margin-top: var(--space-6); margin-bottom: var(--space-6); }
-.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item):first-child { margin-top: 0; }
+.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid),
+.prose > section > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid) { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid):first-child { margin-top: 0; }
+
+/* Readable line length for a paragraph inside a wide box */
+.measure { max-width: 720px; margin-left: auto; margin-right: auto; }
+
+/* Card grids with a fixed column count from tablet up (one column on phones) */
+.card-grid--2,
+.card-grid--3 { grid-template-columns: 1fr; }
+
+@media (min-width: 768px) {
+    .card-grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .card-grid--3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Dark blue panel for voting tools (pair with .on-dark) */
+.panel.panel--blue {
+    background: var(--lwv-blue);
+    border-color: var(--lwv-blue);
+}
+
+.panel--blue .btn--light { color: var(--lwv-blue); }
+.panel--blue .btn--light:hover { color: var(--lwv-blue-dark); }
+
+/* Role or subtitle line under a card title (e.g. "U.S. Senator") */
+.card__role {
+    margin: 0 0 var(--space-3);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--lwv-purple);
+}
+
+/* Panel variant for side notes (e.g. tax information): gold edge */
+.panel.panel--note { border-left: 4px solid var(--lwv-gold); }
+
+/* PayPal donate button container (get-involved.html) */
+.paypal-box { width: 100%; max-width: 500px; margin: 0 auto var(--space-4); }
 
 .page-body > :first-child { margin-top: 0; }
 
@@ -821,7 +858,8 @@ p {
 /* ── PAGE HEADER WITH PHOTO ──────────────────────────────────────────────────
    .page-header--photo: title and lead on the left, the page's photo on the
    right with an offset purple frame (stacked on phones).                    */
-.page-header--photo {
+/* (.page-header.page-header--photo: beats the legacy .page-header rules below) */
+.page-header.page-header--photo {
     padding: 0;
     text-align: left;
 }
@@ -835,9 +873,9 @@ p {
     padding: var(--space-7) 20px;
 }
 
-.page-header--photo h1 { margin-left: 0; }
-.page-header--photo h1::after { margin-left: 0; }
-.page-header--photo .lead { margin: 0; }
+.page-header.page-header--photo h1 { margin: 0 0 16px; }
+.page-header.page-header--photo h1::after { margin: 20px 0 0; }
+.page-header.page-header--photo .lead { margin: 0; }
 
 .page-header__photo { margin: 0 8px 8px 0; }
 
@@ -853,7 +891,12 @@ p {
 
 @media (min-width: 768px) {
     .page-header__inner { padding: var(--space-8) 40px; }
+    .page-header.page-header--photo { padding: 0; }
 }
+
+/* A button followed by more text inside a callout needs a little room */
+.callout > .btn,
+.callout > p > .btn:only-child { margin-bottom: var(--space-4); }
 
 @media (min-width: 900px) {
     .page-header__inner { grid-template-columns: 1.15fr 0.85fr; gap: var(--space-7); }

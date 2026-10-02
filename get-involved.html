@@ -73,18 +73,22 @@
 
     <main id="main">
 
-    <div class="hero-image">
-        <img src="images/get-involved-hero.jpg" alt="League members at Supreme Court rally">
+    <div class="page-header page-header--photo">
+        <div class="page-header__inner">
+            <div>
+                <h1>Get Involved</h1>
+                <p class="lead">Make a difference in your community. Join us in empowering voters and defending democracy.</p>
+            </div>
+            <div class="page-header__photo">
+                <img src="images/get-involved-hero.jpg" alt="League members at Supreme Court rally" width="496" height="331">
+            </div>
+        </div>
     </div>
 
-    <div class="page-header" style="padding-top: 30px;">
-        <h1>Get Involved</h1>
-        <p class="lead">Make a difference in your community. Join us in empowering voters and defending democracy.</p>
-    </div>
-
-    <div class="container" id="membership">
+    <div class="container container--narrow page-body prose">
+        <section id="membership">
         <h2>Become a Member</h2>
-        <p style="font-size: 1.1em; margin-bottom: 40px;">Join the League and be part of a community working to protect democracy and empower voters. Your membership supports our voter education programs, candidate forums, and advocacy work.</p>
+        <p class="lead">Join the League and be part of a community working to protect democracy and empower voters. Your membership supports our voter education programs, candidate forums, and advocacy work.</p>
 
         <!-- MEMBERSHIP DUES. Must match the LWVRI join page, where members
              actually pay: https://my.lwv.org/rhode-island/membership
@@ -92,65 +96,63 @@
              Recommended: Individual $75, Household $150 for both, Student $25.
              Minimums: $20 per person, $40 for a household.
              The homepage (index.html, "How to Get Involved") repeats these. -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 40px 0 24px;">
-            <div style="background: #f8f8f8; padding: 35px; text-align: center;">
-                <h3 style="color: #d32f2f; margin-bottom: 10px;">Individual</h3>
-                <p style="font-size: 36px; font-weight: 700; color: #003d7a; margin: 20px 0;">$75</p>
-                <p style="color: #666;">Per year, recommended</p>
+        <div class="card-grid card-grid--3">
+            <div class="card price-card">
+                <h3 class="price-card__name">Individual</h3>
+                <p class="price">$75</p>
+                <p class="price-card__unit">Per year, recommended</p>
             </div>
-            <div style="background: #f8f8f8; padding: 35px; text-align: center; border: 3px solid #8B1A7A;">
-                <h3 style="color: #8B1A7A; margin-bottom: 10px;">Household</h3>
-                <p style="font-size: 36px; font-weight: 700; color: #003d7a; margin: 20px 0;">$150</p>
-                <p style="color: #666;">Per year for two members, recommended</p>
+            <div class="card price-card card--featured">
+                <h3 class="price-card__name">Household</h3>
+                <p class="price">$150</p>
+                <p class="price-card__unit">Per year for two members, recommended</p>
             </div>
-            <div style="background: #f8f8f8; padding: 35px; text-align: center;">
-                <h3 style="color: #d32f2f; margin-bottom: 10px;">Student</h3>
-                <p style="font-size: 36px; font-weight: 700; color: #003d7a; margin: 20px 0;">$25</p>
-                <p style="color: #666;">Per year, recommended</p>
+            <div class="card price-card">
+                <h3 class="price-card__name">Student</h3>
+                <p class="price">$25</p>
+                <p class="price-card__unit">Per year, recommended</p>
             </div>
         </div>
-        <p style="text-align: center; max-width: 720px; margin: 0 auto 60px;">These are the recommended dues set by LWV Rhode Island. You can also <strong>pay what you can</strong>, with a minimum of $20 per person or $40 for a household. Each household member needs their own email address. Membership includes the national League (LWVUS), LWV Rhode Island, and LWV Newport County.</p>
+        <p class="text-center measure dues-note">These are the recommended dues set by LWV Rhode Island. You can also <strong>pay what you can</strong>, with a minimum of $20 per person or $40 for a household. Each household member needs their own email address. Membership includes the national League (LWVUS), LWV Rhode Island, and LWV Newport County.</p>
 
-        <div style="text-align: center; background: #f8f8f8; padding: 40px; margin: 40px 0;">
+        <div class="callout text-center">
             <h3>Join the League Today</h3>
-            <p style="margin: 20px auto 30px;">Visit our membership portal to join LWV Newport County</p>
+            <p>Visit our membership portal to join LWV Newport County</p>
             <a href="https://my.lwv.org/rhode-island/membership" target="_blank" class="btn">Join Now</a>
-            <p style="margin-top: 20px; font-size: 14px; color: #666;">You can also join by clicking "JOIN" at <a href="https://portal.lwv.org/membership" target="_blank" style="color: #003d7a;">portal.lwv.org/membership</a></p>
+            <p class="note">You can also join by clicking "JOIN" at <a href="https://portal.lwv.org/membership" target="_blank">portal.lwv.org/membership</a></p>
         </div>
-    </div>
+        </section>
 
-    <div class="container" id="donate">
+        <section id="donate">
         <h2>Support Our Work</h2>
-        <p style="font-size: 1.1em; margin-bottom: 40px;">Your donation helps us register voters, host candidate forums, and advocate for good government in Newport County.</p>
+        <p class="lead">Your donation helps us register voters, host candidate forums, and advocate for good government in Newport County.</p>
 
-        <div style="background: white; padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-top: 4px solid #8B1A7A; text-align: center;">
-            <h3 style="margin-top: 0;">Make a Donation</h3>
-            <p style="margin-bottom: 30px;">Support our voter education and advocacy programs</p>
+        <div class="card card--top card--roomy text-center">
+            <h3>Make a Donation</h3>
+            <p>Support our voter education and advocacy programs</p>
 
-            <div style="display: flex; justify-content: center;">
-              <div id="paypal-container-F7T5QZZ3E526N" style="width: 100%; max-width: 500px;"></div>
-            </div>
+            <div id="paypal-container-F7T5QZZ3E526N" class="paypal-box"></div>
             <script>
               paypal.HostedButtons({
                 hostedButtonId: "F7T5QZZ3E526N",
               }).render("#paypal-container-F7T5QZZ3E526N")
             </script>
 
-            <p style="margin-top: 25px; font-size: 14px; color: #666;">Or mail a check to:<br><strong>LWV Newport County</strong><br>PO Box 4204<br>Middletown, RI 02842</p>
+            <p class="note">Or mail a check to:<br><strong>LWV Newport County</strong><br>PO Box 4204<br>Middletown, RI 02842</p>
         </div>
 
-        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 25px; margin: 30px 0; border-radius: 6px;">
-            <p style="margin: 0; color: #856404; font-size: 15px; line-height: 1.8;"><strong>Tax Information:</strong> The League of Women Voters of Newport County is organized as a 501(c)(4) nonprofit social welfare organization. Contributions to LWVNC are not tax-deductible as charitable contributions, but they do support our vital work in voter education, registration, and advocacy for good government. <strong>For tax-deductible giving,</strong> consider a donation to the <a href="https://my.lwv.org/rhode-island/donate" target="_blank" style="color: #856404; text-decoration: underline;">LWVRI Education Fund</a>, a 501(c)(3) that funds civic-education programming across Rhode Island.</p>
+        <div class="panel panel--note">
+            <p><strong>Tax Information:</strong> The League of Women Voters of Newport County is organized as a 501(c)(4) nonprofit social welfare organization. Contributions to LWVNC are not tax-deductible as charitable contributions, but they do support our vital work in voter education, registration, and advocacy for good government. <strong>For tax-deductible giving,</strong> consider a donation to the <a href="https://my.lwv.org/rhode-island/donate" target="_blank">LWVRI Education Fund</a>, a 501(c)(3) that funds civic-education programming across Rhode Island.</p>
         </div>
-    </div>
+        </section>
 
-    <div class="container">
         <h2>Volunteer Opportunities</h2>
-        <p style="font-size: 1.1em; margin-bottom: 50px;">Whether you have an hour or ongoing time to share, there's a place for you in the League. Choose the opportunities that fit your schedule and interests.</p>
+        <p class="lead">Whether you have an hour or ongoing time to share, there's a place for you in the League. Choose the opportunities that fit your schedule and interests.</p>
 
-        <div style="background: white; padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-top: 4px solid #003d7a; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.08)'">
+        <div class="card-grid card-grid--2">
+        <div class="card card--top">
             <h3>Voter Registration &amp; Voter Services</h3>
-            <p style="margin-bottom: 15px;"><strong>Time Commitment:</strong> 2-4 hours/month (flexible)</p>
+            <p><strong>Time Commitment:</strong> 2-4 hours/month (flexible)</p>
             <p><strong>What you'll do:</strong></p>
             <ul>
                 <li>Staff voter registration tables at community events</li>
@@ -161,9 +163,9 @@
             </ul>
         </div>
 
-        <div style="background: #fff; padding: 40px; margin: 40px 0; border-left: 4px solid #d32f2f;">
+        <div class="card card--top">
             <h3>Observer Corps</h3>
-            <p style="margin-bottom: 15px;"><strong>Time Commitment:</strong> 3-5 hours/month</p>
+            <p><strong>Time Commitment:</strong> 3-5 hours/month</p>
             <p>Be part of the Observer Corps by monitoring local government meetings. People elected the current officials, and the work of the government is to reflect the will of the people.</p>
             <p><strong>What you'll do:</strong></p>
             <ul>
@@ -174,9 +176,9 @@
             </ul>
         </div>
 
-        <div style="background: white; padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-top: 4px solid #003d7a; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.08)'">
+        <div class="card card--top">
             <h3>Membership and Events</h3>
-            <p style="margin-bottom: 15px;"><strong>Time Commitment:</strong> 2-3 hours/month</p>
+            <p><strong>Time Commitment:</strong> 2-3 hours/month</p>
             <p>Help keep moving the League forward. Whether you have an hour or a special skill to share, there is a place for you on the membership team.</p>
             <p><strong>What you'll do:</strong></p>
             <ul>
@@ -188,9 +190,9 @@
             </ul>
         </div>
 
-        <div style="background: #fff; padding: 40px; margin: 40px 0; border-left: 4px solid #d32f2f;">
+        <div class="card card--top">
             <h3>Advocacy</h3>
-            <p style="margin-bottom: 15px;"><strong>Time Commitment:</strong> Varies (especially during legislative session)</p>
+            <p><strong>Time Commitment:</strong> Varies (especially during legislative session)</p>
             <p><strong>What you'll do:</strong></p>
             <ul>
                 <li>Monitor legislation on League priority issues</li>
@@ -200,11 +202,12 @@
                 <li>Participate in coalition work with other organizations</li>
             </ul>
         </div>
+        </div>
 
-        <div style="background: white; padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border-top: 4px solid #d32f2f; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.08)'">
+        <div class="card card--top card--roomy">
             <h3>2026 Candidate Forums</h3>
-            <p style="margin-bottom: 15px;"><strong>August &ndash; October 2026 &bull; All Newport County Communities</strong></p>
-            <p>There will be forums in each of our Newport County cities and towns: Newport, Middletown, Jamestown, Portsmouth, Tiverton, and Little Compton, plus a State Senate primary forum. The <a href="elections-2026.html#forums" style="font-weight: 700; color: #003d7a;">full 2026 forum schedule is on our Elections 2026 hub</a>. Each forum needs a team to make it happen &mdash; and we need you.</p>
+            <p><strong>August &ndash; October 2026 &bull; All Newport County Communities</strong></p>
+            <p>There will be forums in each of our Newport County cities and towns: Newport, Middletown, Jamestown, Portsmouth, Tiverton, and Little Compton, plus a State Senate primary forum. The <a href="elections-2026.html#forums">full 2026 forum schedule is on our Elections 2026 hub</a>. Each forum needs a team to make it happen &mdash; and we need you.</p>
             <p><strong>What you'll do:</strong></p>
             <ul>
                 <li>Invite candidates and coordinate their participation</li>
@@ -212,20 +215,18 @@
                 <li>Recruit timekeepers and moderators</li>
                 <li>Find and secure a venue for your community's forum</li>
             </ul>
-            <p style="margin-top: 15px;"><a href="mailto:presidentlwvnc25@gmail.com">Contact Christine Stenning to join a forum team &rarr;</a></p>
+            <p><a href="mailto:presidentlwvnc25@gmail.com" class="link-cta">Contact Christine Stenning to join a forum team &rarr;</a></p>
         </div>
 
-        <div style="background: #003d7a; color: #FFFFFF; padding: 50px; margin: 60px 0; text-align: center;">
-            <h2 style="color: white; margin-bottom: 20px;">Ready to Make a Difference?</h2>
-            <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px; font-size: 1.1em;">Contact us to learn more about volunteer opportunities.</p>
-            <a href="mailto:lwvnewportcounty@gmail.com" class="btn btn-secondary" style="background: white; color: #003d7a; border: none;">Email Us</a>
+        <div class="callout callout--blue text-center">
+            <h2>Ready to Make a Difference?</h2>
+            <p>Contact us to learn more about volunteer opportunities.</p>
+            <a href="mailto:lwvnewportcounty@gmail.com" class="btn btn--blue">Email Us</a>
         </div>
 
         <h2>Stay Connected</h2>
         <p>Follow us on social media and subscribe to our newsletter to stay informed about upcoming events, volunteer opportunities, and important election information.</p>
-        <div style="margin: 30px 0;">
-            <a href="https://www.facebook.com/LWVNewportCounty/" target="_blank" class="btn btn-secondary">Follow on Facebook</a>
-        </div>
+        <p><a href="https://www.facebook.com/LWVNewportCounty/" target="_blank" class="btn btn--outline">Follow on Facebook</a></p>
     </div>
 
     </main>
