@@ -22,14 +22,16 @@
     <link rel="stylesheet" href="styles.css">
     <script>document.documentElement.className += ' js';</script>
     <style>
-      /* ===== Elections 2026 — scoped styles (el- prefix), aligned to site purple/blue ===== */
+      /* ===== Elections 2026 — scoped styles (el- prefix). Colours come from the
+         LWV brand tokens in styles.css; the fallbacks after each comma are the same values. ===== */
       :root{
-        --el-purple:#8B1A7A; --el-purple-light:#a8267d; --el-purple-deep:#6d1460;
-        --el-blue:#003d7a; --el-blue-light:#00509e;
-        --el-ink:#1a1a1a; --el-muted:#4a4a4a; --el-soft:#6b7280;
-        --el-line:#e5e7eb; --el-bg:#f9fafb; --el-purple-bg:#f5e6f1;
-        --el-shadow-sm:0 1px 3px rgba(0,0,0,.08); --el-shadow-md:0 6px 18px rgba(109,20,96,.12);
-        --el-shadow-lg:0 14px 38px rgba(109,20,96,.16);
+        --el-purple:var(--lwv-purple,#820263); --el-purple-light:#9a1a7b; --el-purple-deep:var(--lwv-purple-dark,#521C50);
+        --el-blue:var(--lwv-blue,#005596); --el-blue-light:#1b6aa6;
+        --el-ink:var(--ink,#1d1a22); --el-muted:var(--body,#3d3a42); --el-soft:var(--muted,#5c5862);
+        --el-line:var(--hairline,#e4e1e6); --el-bg:var(--surface,#f7f5f8); --el-purple-bg:var(--lwv-purple-tint,#f6ebf3);
+        --el-gold:var(--lwv-gold,#eca400);
+        --el-shadow-sm:0 1px 3px rgba(29,26,34,.08); --el-shadow-md:0 6px 18px rgba(82,28,80,.12);
+        --el-shadow-lg:0 14px 38px rgba(82,28,80,.16);
       }
       .el-wrap{ font-family:'Inter',-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--el-ink); }
       .el-wrap a{ color:var(--el-purple); }
@@ -46,7 +48,7 @@
       .el-hero-inner{ position:relative; z-index:1; }
       .el-hero-eyebrow{ text-transform:uppercase; letter-spacing:.2em; font-size:.82rem; font-weight:700; color:#f3d6ec; margin:0 0 14px; }
       .el-hero h1{ color:#fff; font-size:3.2rem; line-height:1.04; margin:0 0 16px; font-weight:800; letter-spacing:-.02em; }
-      .el-hero h1 span{ color:#ffd84d; }
+      .el-hero h1 span{ color:var(--el-gold); }
       .el-hero-sub{ max-width:660px; margin:0 auto 16px; font-size:1.16rem; line-height:1.6; color:rgba(255,255,255,.94); }
       .el-hero-towns{ font-size:.92rem; color:rgba(255,255,255,.72); margin:0 0 30px; letter-spacing:.02em; }
       .el-jump{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
@@ -56,9 +58,9 @@
       /* ===== SMART DEADLINE BANNER ===== */
       .el-banner{ background:var(--el-blue); color:#fff; }
       .el-banner-inner{ max-width:1100px; margin:0 auto; padding:16px 20px; display:flex; align-items:center; gap:16px 22px; flex-wrap:wrap; justify-content:center; text-align:center; }
-      .el-banner .el-b-flag{ font-weight:800; text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; background:#ffd84d; color:#3a2a00; padding:5px 12px; border-radius:999px; white-space:nowrap; }
+      .el-banner .el-b-flag{ font-weight:800; text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; background:var(--el-gold); color:var(--el-ink); padding:5px 12px; border-radius:999px; white-space:nowrap; }
       .el-banner .el-b-text{ font-size:1.05rem; font-weight:600; }
-      .el-banner .el-b-text b{ color:#ffd84d; }
+      .el-banner .el-b-text b{ color:#ffd27a; }  /* lighter gold: LWV gold on blue is under 4.5:1 */
       .el-banner .el-b-days{ font-weight:800; }
       .el-banner .el-cal{ background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.45); color:#fff; }
       .el-banner .el-cal:hover{ background:#fff; color:var(--el-blue); }
@@ -77,24 +79,26 @@
       .el-count-card.is-primary{ border-top-color:var(--el-purple); }
       .el-count-num{ font-size:2.2rem; font-weight:800; color:var(--el-blue); line-height:1; }
       .el-count-card.is-primary .el-count-num{ color:var(--el-purple); }
-      .el-count-num small{ font-size:.78rem; font-weight:600; color:#7a8595; display:block; margin-top:5px; letter-spacing:.04em; text-transform:uppercase; }
+      .el-count-num small{ font-size:.78rem; font-weight:600; color:var(--el-soft); display:block; margin-top:5px; letter-spacing:.04em; text-transform:uppercase; }
       .el-count-label{ font-size:.95rem; font-weight:700; color:var(--el-ink); margin-top:11px; }
-      .el-count-date{ font-size:.85rem; color:#6b7689; margin-top:3px; }
+      .el-count-date{ font-size:.85rem; color:var(--el-soft); margin-top:3px; }
       /* Past items: the script at the bottom adds .is-past from each item's data-date. */
       .el-count-card.is-past{ display:none; }
       .el-count-inner[data-n="3"]{ grid-template-columns:repeat(3,1fr); }
       .el-count-inner[data-n="2"]{ grid-template-columns:repeat(2,1fr); max-width:760px; }
       .el-count-inner[data-n="1"]{ grid-template-columns:minmax(0,360px); justify-content:center; }
-      .el-tl-item.is-past, .el-forum-row.is-past, .el-state-forum.is-past{ opacity:.55; }
+      .el-tl-item.is-past, .el-forum-row.is-past, .el-state-forum.is-past{ filter:grayscale(1); }
+      .el-tl-item.is-past *, .el-forum-row.is-past *, .el-state-forum.is-past *{ color:var(--el-soft) !important; }
+      .el-state-forum.is-past .el-sf-date{ background:var(--el-line); }
       .is-past [data-cal]{ display:none; }
-      .is-past .el-tl-date::after, .is-past .el-fr-date::after, .el-state-forum.is-past h3::after{ content:" · Past"; font-weight:600; color:#7a8595; font-size:.85em; }
+      .is-past .el-tl-date::after, .is-past .el-fr-date::after, .el-state-forum.is-past h3::after{ content:" · Past"; font-weight:600; color:var(--el-soft); font-size:.85em; }
 
       /* ===== SECTION SHELL ===== */
       .el-section{ max-width:1100px; margin:0 auto; padding:64px 20px; }
       .el-section h2{ font-size:2rem; color:var(--el-purple); margin:0 0 6px; font-weight:800; line-height:1.15; }
       .el-kicker{ text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; color:var(--el-blue); margin:0 0 8px; }
-      .el-intro{ color:#56627a; font-size:1.06rem; max-width:700px; margin:0 0 30px; line-height:1.65; }
-      .el-alt{ background:var(--el-bg); border-top:1px solid #eef1f6; border-bottom:1px solid #eef1f6; }
+      .el-intro{ color:var(--el-muted); font-size:1.06rem; max-width:700px; margin:0 0 30px; line-height:1.65; }
+      .el-alt{ background:var(--el-bg); border-top:1px solid var(--el-line); border-bottom:1px solid var(--el-line); }
 
       /* tools row (print / share) */
       .el-tools{ display:flex; gap:10px; flex-wrap:wrap; margin:-12px 0 26px; }
@@ -106,18 +110,18 @@
       .el-chip{ display:inline-block; padding:6px 15px; border-radius:999px; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; }
       .el-chip.primary{ background:var(--el-purple); color:#fff; }
       .el-chip.general{ background:var(--el-blue); color:#fff; }
-      .el-cycle-head .el-when{ color:#6b7689; font-size:.96rem; font-weight:600; }
+      .el-cycle-head .el-when{ color:var(--el-soft); font-size:.96rem; font-weight:600; }
       .el-timeline{ position:relative; margin:0 0 6px; padding:0; list-style:none; }
       .el-timeline::before{ content:""; position:absolute; left:13px; top:6px; bottom:26px; width:2px; background:var(--el-line); }
       .el-tl-item{ position:relative; padding:0 0 24px 46px; }
       .el-tl-item::before{ content:""; position:absolute; left:6px; top:3px; width:16px; height:16px; border-radius:50%; background:#fff; border:3px solid var(--el-blue); }
       .el-cycle-primary .el-tl-item::before{ border-color:var(--el-purple); }
-      .el-tl-item.is-eday::before{ background:var(--el-blue); box-shadow:0 0 0 4px rgba(0,61,122,.16); }
-      .el-cycle-primary .el-tl-item.is-eday::before{ background:var(--el-purple); box-shadow:0 0 0 4px rgba(139,26,122,.16); }
+      .el-tl-item.is-eday::before{ background:var(--el-blue); box-shadow:0 0 0 4px rgba(0,85,150,.16); }
+      .el-cycle-primary .el-tl-item.is-eday::before{ background:var(--el-purple); box-shadow:0 0 0 4px rgba(130,2,99,.16); }
       .el-tl-date{ font-weight:800; color:var(--el-ink); font-size:1.04rem; }
       .el-tl-title{ font-weight:700; color:var(--el-blue); margin:1px 0 2px; }
       .el-cycle-primary .el-tl-title{ color:var(--el-purple); }
-      .el-tl-note{ color:#6b7689; font-size:.94rem; }
+      .el-tl-note{ color:var(--el-soft); font-size:.94rem; }
 
       /* Add-to-calendar buttons */
       .el-cal{ display:inline-flex; align-items:center; gap:6px; margin-top:9px; font-size:.82rem; font-weight:700; color:var(--el-purple); background:#fff; border:1px solid var(--el-line); border-radius:999px; padding:6px 13px; cursor:pointer; transition:all .15s ease; line-height:1; }
@@ -130,13 +134,13 @@
       .el-way:hover{ box-shadow:var(--el-shadow-md); transform:translateY(-3px); }
       .el-way-ic{ width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:var(--el-purple-bg); margin-bottom:16px; }
       .el-way h3{ margin:0 0 8px; color:var(--el-purple); font-size:1.2rem; }
-      .el-way p{ color:#56627a; font-size:.97rem; line-height:1.6; margin:0 0 16px; flex:1; }
+      .el-way p{ color:var(--el-muted); font-size:.97rem; line-height:1.6; margin:0 0 16px; flex:1; }
       .el-way .el-way-link{ font-weight:700; text-decoration:none; color:var(--el-blue); }
       .el-way .el-way-link:hover{ text-decoration:underline; }
 
       /* ===== FORUMS ===== */
       .el-state-forum{ background:linear-gradient(135deg,var(--el-purple) 0%, var(--el-purple-deep) 100%); color:#fff; border-radius:14px; padding:24px 26px; display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-bottom:26px; box-shadow:var(--el-shadow-md); }
-      .el-state-forum .el-sf-date{ background:#ffd84d; color:#3a2a00; border-radius:12px; padding:12px 18px; text-align:center; font-weight:800; line-height:1.1; min-width:84px; }
+      .el-state-forum .el-sf-date{ background:var(--el-gold); color:var(--el-ink); border-radius:12px; padding:12px 18px; text-align:center; font-weight:800; line-height:1.1; min-width:84px; }
       .el-state-forum .el-sf-date span{ display:block; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; font-weight:700; }
       .el-state-forum .el-sf-date b{ font-size:1.6rem; }
       .el-state-forum .el-sf-body{ flex:1; min-width:200px; }
@@ -164,7 +168,7 @@
       .el-forum-row .el-fr-date{ font-weight:800; color:var(--el-blue); white-space:nowrap; font-size:.9rem; }
       .el-fr-cal{ flex:0 0 auto; width:34px; height:34px; padding:0; margin:0; border-radius:9px; justify-content:center; }
       .el-fr-cal span{ display:none; }
-      .el-forum-foot{ margin-top:20px; font-size:.9rem; color:#6b7689; }
+      .el-forum-foot{ margin-top:20px; font-size:.9rem; color:var(--el-soft); }
 
       /* ===== ACTION CARDS ===== */
       .el-actions{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -172,7 +176,7 @@
       .el-act:hover{ box-shadow:var(--el-shadow-md); }
       .el-act .el-act-body{ flex:1; min-width:0; }
       .el-act h3{ margin:0 0 8px; color:var(--el-purple); font-size:1.34rem; }
-      .el-act p{ color:#56627a; line-height:1.6; margin:0 0 18px; font-size:.99rem; }
+      .el-act p{ color:var(--el-muted); line-height:1.6; margin:0 0 18px; font-size:.99rem; }
       .el-btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px; background:var(--el-purple); color:#fff; text-decoration:none; font-weight:700; padding:13px 22px; border-radius:8px; font-size:1rem; transition:all .2s ease; border:2px solid var(--el-purple); min-height:48px; }
       .el-btn:hover{ background:var(--el-purple-light); border-color:var(--el-purple-light); color:#fff; transform:translateY(-2px); box-shadow:var(--el-shadow-md); }
       .el-btn.blue{ background:var(--el-blue); border-color:var(--el-blue); }
@@ -180,7 +184,7 @@
       .el-wrap a.el-btn{ color:#fff; }  /* beat .el-wrap a (purple) so button labels stay white */
       .el-qr{ flex:0 0 auto; text-align:center; }
       .el-qr img{ width:120px; height:120px; display:block; border:1px solid var(--el-line); border-radius:12px; padding:7px; background:#fff; }
-      .el-qr span{ display:block; font-size:.74rem; color:#7a8595; margin-top:8px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+      .el-qr span{ display:block; font-size:.74rem; color:var(--el-soft); margin-top:8px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
 
       /* ===== FAQ ===== */
       .el-faq{ max-width:840px; }
@@ -190,17 +194,17 @@
       .el-faq summary::-webkit-details-marker{ display:none; }
       .el-faq summary::after{ content:"+"; font-size:1.5rem; font-weight:700; color:var(--el-purple); line-height:1; transition:transform .2s ease; }
       .el-faq details[open] summary::after{ transform:rotate(45deg); }
-      .el-faq .el-faq-body{ padding:0 22px 20px; color:#56627a; line-height:1.7; font-size:1rem; }
+      .el-faq .el-faq-body{ padding:0 22px 20px; color:var(--el-muted); line-height:1.7; font-size:1rem; }
       .el-faq .el-faq-body a{ color:var(--el-blue); font-weight:700; }
 
       /* ===== WHO'S RUNNING ===== */
-      .el-soon{ background:linear-gradient(135deg,var(--el-blue) 0%, #002a55 100%); color:#fff; border-radius:16px; padding:42px 32px; text-align:center; position:relative; overflow:hidden; box-shadow:var(--el-shadow-md); }
+      .el-soon{ background:linear-gradient(135deg,var(--el-blue) 0%, #00365f 100%); color:#fff; border-radius:16px; padding:42px 32px; text-align:center; position:relative; overflow:hidden; box-shadow:var(--el-shadow-md); }
       .el-soon::before{ content:""; position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 14px,transparent 14px 28px); }
       .el-soon-inner{ position:relative; max-width:640px; margin:0 auto; }
-      .el-soon .el-badge{ display:inline-block; background:#ffd84d; color:#3a2a00; font-weight:800; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; padding:6px 16px; border-radius:999px; margin-bottom:16px; }
+      .el-soon .el-badge{ display:inline-block; background:var(--el-gold); color:var(--el-ink); font-weight:800; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; padding:6px 16px; border-radius:999px; margin-bottom:16px; }
       .el-soon h2{ color:#fff; margin:0 0 12px; font-size:1.8rem; }
       .el-soon p{ color:rgba(255,255,255,.9); line-height:1.65; margin:0 0 24px; }
-      .el-soon .el-btn{ background:#ffd84d; border-color:#ffd84d; color:#3a2a00; }
+      .el-soon .el-btn{ background:var(--el-gold); border-color:var(--el-gold); color:var(--el-ink); }
       .el-soon .el-btn:hover{ background:#fff; border-color:#fff; color:var(--el-blue); }
 
       /* ===== WHO'S RUNNING — candidate links ===== */
@@ -216,7 +220,7 @@
       @media(max-width:700px){ .el-candidates{ grid-template-columns:1fr; } }
       @media(max-width:360px){ .el-cand{ flex-wrap:wrap; } } /* smallest phones: "View candidates" drops below the town */
 
-      .el-updated{ text-align:center; color:#9aa3b2; font-size:.85rem; padding:6px 20px 54px; }
+      .el-updated{ text-align:center; color:var(--el-soft); font-size:.85rem; padding:6px 20px 54px; }
 
       /* ===== RESPONSIVE ===== */
       @media (max-width:880px){
@@ -464,7 +468,7 @@
           <div class="el-ways">
             <div class="el-way">
               <div class="el-way-ic">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 21V10l8-6 8 6v11" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 21V10l8-6 8 6v11" stroke="#820263" stroke-width="2" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="#820263" stroke-width="2" stroke-linejoin="round"/></svg>
               </div>
               <h3>In person on Election Day</h3>
               <p>Vote at your assigned polling place on Election Day — Primary on Sept 9, General on Nov 3. Polls are open 7:00 a.m. to 8:00 p.m. Not sure where you go? Look up your polling place first.</p>
@@ -472,7 +476,7 @@
             </div>
             <div class="el-way">
               <div class="el-way-ic">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3h11l3 3v15H5z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#8B1A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3h11l3 3v15H5z" stroke="#820263" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#820263" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
               <h3>Early in-person voting</h3>
               <p>Can't make Election Day? Vote early at your local board of canvassers — Aug 20–Sept 8 for the Primary, Oct 14–Nov 2 for the General. The final day ends at 4:00 p.m.</p>
@@ -480,7 +484,7 @@
             </div>
             <div class="el-way">
               <div class="el-way-ic">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 6l9 6 9-6" stroke="#8B1A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="#8B1A7A" stroke-width="2"/></svg>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 6l9 6 9-6" stroke="#820263" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="#820263" stroke-width="2"/></svg>
               </div>
               <h3>By mail ballot</h3>
               <p>Vote from home with a mail ballot. Apply by the deadline — Aug 19 for the Primary, Oct 13 for the General (applications due by 4:00 p.m.). Then return your ballot by Election Day.</p>
@@ -520,32 +524,32 @@
 
         <div class="el-forum-grid" id="el-forum-grid">
           <div class="el-town" data-town="newport">
-            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Newport</h3>
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Newport</h3>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Sept 17</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Newport School Committee" data-date="2026-09-17" data-note="LWV Newport County candidate forum: Newport School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-newport-school" aria-label="Add Newport School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">City Council</span><span class="el-fr-date">Sept 24</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Newport City Council" data-date="2026-09-24" data-note="LWV Newport County candidate forum: Newport City Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-newport-council" aria-label="Add Newport City Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
           </div>
           <div class="el-town" data-town="portsmouth">
-            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Portsmouth</h3>
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Portsmouth</h3>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 15</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Portsmouth Town Council" data-date="2026-09-15" data-note="LWV Newport County candidate forum: Portsmouth Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-portsmouth-council" aria-label="Add Portsmouth Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 22</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Portsmouth School Committee" data-date="2026-10-22" data-note="LWV Newport County candidate forum: Portsmouth School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-portsmouth-school" aria-label="Add Portsmouth School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
           </div>
           <div class="el-town" data-town="middletown">
-            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Middletown</h3>
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Middletown</h3>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 29</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Middletown Town Council" data-date="2026-09-29" data-note="LWV Newport County candidate forum: Middletown Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-middletown-council" aria-label="Add Middletown Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 21</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Middletown School Committee" data-date="2026-10-21" data-note="LWV Newport County candidate forum: Middletown School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-middletown-school" aria-label="Add Middletown School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
           </div>
           <div class="el-town" data-town="tiverton">
-            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Tiverton</h3>
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Tiverton</h3>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 7</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Tiverton Town Council" data-date="2026-10-07" data-note="LWV Newport County candidate forum: Tiverton Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-tiverton-council" aria-label="Add Tiverton Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 8</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Tiverton School Committee" data-date="2026-10-08" data-note="LWV Newport County candidate forum: Tiverton School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-tiverton-school" aria-label="Add Tiverton School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
           </div>
           <div class="el-town" data-town="jamestown">
-            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</h3>
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</h3>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 15</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Jamestown School Committee" data-date="2026-10-15" data-note="LWV Newport County candidate forum: Jamestown School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-jamestown-school" aria-label="Add Jamestown School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 19</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Jamestown Town Council" data-date="2026-10-19" data-note="LWV Newport County candidate forum: Jamestown Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-jamestown-council" aria-label="Add Jamestown Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
           </div>
           <div class="el-town" data-town="little-compton">
-            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#003d7a" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</h3>
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</h3>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Sept 22</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Little Compton Town Council" data-date="2026-09-22" data-note="LWV Newport County candidate forum: Little Compton Town Council. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-littlecompton-council" aria-label="Add Little Compton Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
             <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 19</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Little Compton School Committee" data-date="2026-10-19" data-note="LWV Newport County candidate forum: Little Compton School Committee. Time and location TBA — see lwvnewportcounty.org/events.html." data-file="forum-littlecompton-school" aria-label="Add Little Compton School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
           </div>
@@ -631,27 +635,27 @@
         <p class="el-intro">See who has filed to run for office in your town. These nonpartisan candidate lists are maintained by the League of Women Voters of Newport County and open in a new tab. For a personalized ballot and a side-by-side comparison of every candidate, also visit Vote411.</p>
         <div class="el-candidates">
           <a class="el-cand" href="https://bit.ly/4w3RLFE" target="_blank" rel="noopener">
-            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Newport</span>
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#820263" stroke-width="2" stroke-linejoin="round"/></svg>Newport</span>
             <span class="el-cand-go">View candidates →</span>
           </a>
           <a class="el-cand" href="https://bit.ly/4eIWBkp" target="_blank" rel="noopener">
-            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Middletown</span>
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#820263" stroke-width="2" stroke-linejoin="round"/></svg>Middletown</span>
             <span class="el-cand-go">View candidates →</span>
           </a>
           <a class="el-cand" href="https://bit.ly/3QDnEG4" target="_blank" rel="noopener">
-            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Portsmouth</span>
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#820263" stroke-width="2" stroke-linejoin="round"/></svg>Portsmouth</span>
             <span class="el-cand-go">View candidates →</span>
           </a>
           <a class="el-cand" href="https://bit.ly/4akI5hz" target="_blank" rel="noopener">
-            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Tiverton</span>
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#820263" stroke-width="2" stroke-linejoin="round"/></svg>Tiverton</span>
             <span class="el-cand-go">View candidates →</span>
           </a>
           <a class="el-cand" href="https://bit.ly/3SvxxpR" target="_blank" rel="noopener">
-            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</span>
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#820263" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</span>
             <span class="el-cand-go">View candidates →</span>
           </a>
           <a class="el-cand" href="https://bit.ly/4eAQYEQ" target="_blank" rel="noopener">
-            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#8B1A7A" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</span>
+            <span class="el-cand-town"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#820263" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</span>
             <span class="el-cand-go">View candidates →</span>
           </a>
         </div>
