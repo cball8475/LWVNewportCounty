@@ -4,166 +4,182 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News &amp; Updates - LWV Newport County</title>
+    <meta name="description" content="News from the League of Women Voters of Newport County, LWV Rhode Island and the national League.">
+    <meta property="og:title" content="News &amp; Updates - LWV Newport County">
+    <meta property="og:description" content="News from the League of Women Voters of Newport County, LWV Rhode Island and the national League.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="League of Women Voters of Newport County">
+    <meta property="og:url" content="https://lwvnewportcounty.org/news.html">
+    <meta property="og:image" content="https://lwvnewportcounty.org/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#521C50">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <script src="site.js" defer></script>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="images/logo-newport-county-transparent.png" alt="League of Women Voters of Newport County">
-            </a>
-        </div>
-    </header>
+    <a class="skip-link" href="#main">Skip to main content</a>
 
-    <nav>
-        <div class="container">
-            <a href="index.html" class="nav-brand" aria-label="LWV Newport County home"><img src="images/logo-nc-small.png" alt="LWV Newport County"></a>
-            <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.classList.toggle('open'); document.querySelector('nav ul').classList.toggle('open')">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="vote.html">Voter Resources</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="issues.html">Issues & Advocacy</a></li>
-                <li><a href="get-involved.html">Get Involved</a></li>
-                <li><a href="news.html" class="active">News</a></li>
-                <li><a href="action-alerts.html">Action Alerts</a></li>
+    <!-- ===== SITE HEADER: same on every page; current copy in nav-standard.html ===== -->
+    <header class="utility-bar">
+        <div class="container utility-bar__inner">
+            <p class="utility-bar__tag">Empowering voters. Defending democracy. Nonpartisan since 1920.</p>
+            <ul class="utility-bar__links">
                 <li><a href="find-your-rep.html">Find Your Rep</a></li>
+                <li><a href="action-alerts.html">Action Alerts</a></li>
                 <li><a href="members.html">Members</a></li>
             </ul>
         </div>
+    </header>
+
+    <nav class="site-nav" aria-label="Main">
+        <div class="container site-nav__inner">
+            <a href="index.html" class="site-nav__brand"><img src="images/logo-nc-transparent.png" alt="League of Women Voters of Newport County home" width="982" height="249"></a>
+            <a href="get-involved.html#donate" class="btn btn--sm site-nav__donate-bar">Donate</a>
+            <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-menu">
+                <span class="site-nav__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="site-nav__toggle-label">Menu</span>
+            </button>
+            <div class="site-nav__menu" id="site-menu">
+                <ul class="site-nav__links">
+                    <li class="site-nav__home"><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="vote.html">Voter Resources</a></li>
+                    <li><a href="elections-2026.html">Elections 2026</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="issues.html">Issues &amp; Advocacy</a></li>
+                    <li><a href="news.html" aria-current="page">News</a></li>
+                    <li><a href="get-involved.html">Get Involved</a></li>
+                </ul>
+                <div class="site-nav__actions">
+                    <a href="get-involved.html#membership" class="btn btn--outline btn--sm">Join</a>
+                    <a href="get-involved.html#donate" class="btn btn--sm site-nav__donate">Donate</a>
+                </div>
+                <ul class="site-nav__extra">
+                    <li><a href="find-your-rep.html">Find Your Rep</a></li>
+                    <li><a href="action-alerts.html">Action Alerts</a></li>
+                    <li><a href="members.html">Members</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
+
+    <main id="main">
 
     <div class="page-header">
         <h1>News &amp; Updates</h1>
         <p class="lead">Stay informed about our activities and the latest from the League of Women Voters.</p>
     </div>
 
-    <div class="container" style="max-width: 900px; padding: 60px 20px;">
+    <div class="container container--narrow page-body prose">
 
         <!-- NEWSLETTER SIGNUP -->
-        <div style="background: #f8f8f8; padding: 30px; margin-bottom: 60px; text-align: center; border: 1px solid #e0e0e0;">
-            <h3 style="margin-top: 0; color: #003d7a;">NEWS and NOTES Newsletter</h3>
+        <div class="callout text-center">
+            <h3>NEWS and NOTES Newsletter</h3>
             <p>Subscribe to our monthly newsletter for League activities, voter information, and civic engagement opportunities.</p>
-            <p style="margin-top: 15px;"><a href="mailto:lwvnewportcounty@gmail.com" style="background: #003d7a; color: white; padding: 12px 28px; text-decoration: none; font-weight: 600; display: inline-block;">Subscribe →</a></p>
+            <p><a href="mailto:lwvnewportcounty@gmail.com?subject=Subscribe%20to%20News%20%26%20Notes&amp;body=Please%20add%20me%20to%20the%20News%20%26%20Notes%20email%20list.%0D%0A%0D%0AName%3A%20%0D%0ATown%3A%20" class="btn">Subscribe →</a></p>
         </div>
 
         <!-- NEWS FROM LWVNC -->
-        <h2 style="border-bottom: 3px solid #d32f2f; padding-bottom: 12px;">News from LWV Newport County</h2>
+        <h2 class="heading-rule">News from LWV Newport County</h2>
 
         <!-- Posts submitted through the "Post News" form land here automatically (newest first). -->
         <!-- AUTO-NEWS-LWVNC:START -->
         <!-- AUTO-NEWS-LWVNC:END -->
 
-        <article style="border-left: 5px solid #2e7d32; background: #f1f8f2; padding: 35px 40px; margin: 30px 0;">
-            <img src="images/amore-voter-rolls-press-release.jpg" alt="Secretary of State Gregg M. Amore Statement on Ruling in Voter Rolls Lawsuit" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 20px;">
-            <p style="color: #2e7d32; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 10px 0;">Breaking Victory &bull; April 17, 2026</p>
-            <h3 style="margin: 0 0 15px 0; color: #003d7a;">Federal Judge in Rhode Island Dismisses DOJ Attempt to Seize Rhode Islanders' Voter Data</h3>
+        <article class="news-card news-card--highlight">
+            <img src="images/amore-voter-rolls-press-release.jpg" alt="Secretary of State Gregg M. Amore Statement on Ruling in Voter Rolls Lawsuit" class="news-card__img">
+            <p class="eyebrow eyebrow--plain">Breaking Victory &bull; April 17, 2026</p>
+            <h3 class="news-card__title">Federal Judge in Rhode Island Dismisses DOJ Attempt to Seize Rhode Islanders' Voter Data</h3>
             <p>Agreeing with arguments we made in court in March, U.S. District Court Judge Mary McElroy dismissed the U.S. Department of Justice's attempt to obtain Rhode Islanders' sensitive voter data &mdash; including driver's license numbers and partial Social Security numbers. <strong>This is a huge win for data privacy and voters' rights.</strong></p>
-            <p style="margin-top: 14px;">At the hearing, the DOJ's attorney failed to justify why the department needed this information, and acknowledged that the data would be shared with the Department of Homeland Security. Providing the data could also be used to create an unauthorized national voter database, and would be more vulnerable to hackers.</p>
-            <p style="margin-top: 14px;">Judge McElroy called the DOJ request a "fishing expedition" that federal law does not permit. Secretary of State Gregg M. Amore praised the ruling, calling recent DOJ demands "clear Constitutional overreaches."</p>
+            <p>At the hearing, the DOJ's attorney failed to justify why the department needed this information, and acknowledged that the data would be shared with the Department of Homeland Security. Providing the data could also be used to create an unauthorized national voter database, and would be more vulnerable to hackers.</p>
+            <p>Judge McElroy called the DOJ request a "fishing expedition" that federal law does not permit. Secretary of State Gregg M. Amore praised the ruling, calling recent DOJ demands "clear Constitutional overreaches."</p>
 
             <!-- Amore statement image -->
-            <div style="margin-top: 24px; text-align: center;">
-                <img src="images/amore-voter-data-statement.jpg" alt="Statement from Rhode Island Secretary of State Gregg M. Amore on the ruling: 'Today's decision affirms our position: the United States Department of Justice has no legal right to -- or need for -- the personally-identifiable information in our voter file...'" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.12);">
-                <p style="color: #666; font-size: 13px; margin-top: 8px; font-style: italic;">Secretary of State Gregg M. Amore's full statement on the ruling.</p>
-            </div>
+            <figure class="news-card__figure">
+                <img src="images/amore-voter-data-statement.jpg" alt="Statement from Rhode Island Secretary of State Gregg M. Amore on the ruling: 'Today's decision affirms our position: the United States Department of Justice has no legal right to -- or need for -- the personally-identifiable information in our voter file...'">
+                <figcaption class="note">Secretary of State Gregg M. Amore's full statement on the ruling.</figcaption>
+            </figure>
         </article>
 
-        <article style="border-bottom: 1px solid #e0e0e0; padding: 40px 0;">
-            <p style="color: #666; font-size: 14px; margin-bottom: 8px;">2026</p>
-            <h3 style="margin: 0 0 15px 0; color: #003d7a;">2026 Candidate Forums &amp; Election Calendar</h3>
+        <article class="news-card">
+            <p class="eyebrow eyebrow--plain">2026</p>
+            <h3 class="news-card__title">2026 Candidate Forums &amp; Election Calendar</h3>
             <p>The League of Women Voters of Newport County will host nonpartisan candidate forums across all six communities ahead of the 2026 elections — the State Primary on <strong>September 9</strong> and the General Election on <strong>November 3</strong>. The full forum schedule, key voting dates, and who's running are now on our Elections 2026 hub.</p>
-            <p style="margin-top: 15px;"><a href="elections-2026.html" style="font-weight: 700; color: #003d7a;">Visit the Elections 2026 hub →</a></p>
+            <p><a href="elections-2026.html" class="link-cta">Visit the Elections 2026 hub →</a></p>
         </article>
 
         <!-- NEWS FROM LWVRI -->
-        <h2 style="border-bottom: 3px solid #d32f2f; padding-bottom: 12px; margin-top: 60px;">News from LWV Rhode Island</h2>
+        <h2 class="heading-rule">News from LWV Rhode Island</h2>
 
         <!-- Posts submitted through the "Post News" form land here automatically (newest first). -->
         <!-- AUTO-NEWS-LWVRI:START -->
         <!-- news-post:11:START -->
-        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">
-            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">State League Update &bull; August 24, 2026</p>
-            <h3 style="margin: 0 0 12px 0; color: #003d7a;">An Update from the LWVRI Transition Team</h3>
+        <article class="news-card">
+            <p class="eyebrow eyebrow--plain">State League Update &bull; August 24, 2026</p>
+            <h3 class="news-card__title">An Update from the LWVRI Transition Team</h3>
             <p>Greetings from the LWVRI transition team. We are happy to announce that the transition team has temporarily become members of the state board for the League of Women Voters of Rhode Island. We have had two very good meetings with LWV US and feel very hopeful that the guidance they are offering will get the State League back on a good track and help us assess who we are and who we need to be.</p>
-            <p style="margin-top: 14px;">The transition team became part of the Board at the advice of our representatives from National, Whitney Oxendahl and Gabby Udell, because under Rhode Island law an organization like ours must have at least three board members. We joined the two remaining members, Rosemary Forbes-Woodside (LWVNC) and Marylen McKenna (LWVSC). The current members of the Board are Rosemary, Marylen, Faye Zuckerman (LWVRI member-at-large), Christine Martone (LWVSC), and Christine Stenning (LWVNC).</p>
-            <p style="margin-top: 14px;">Both Whitney and Gabby agreed that, given the amount of work local leagues are doing ahead of the midterm elections, putting the State League in a holding mode until after the midterms is prudent. That said, the board will meet, as there are needs that must be tended to at the State level. These are: first, the current board will fulfill the obligation of the former board to be part of the team holding a gubernatorial forum on September 30. Second, the commitment to gather data on those in our state who would be affected by potential passage of the SAVE Act. Third, the potential roll-out of a new website for the State League.</p>
-            <p style="margin-top: 14px;">Keep supporting your local leagues, because in doing so, you support the State League.</p>
-            <p style="margin-top: 14px;">Newport County note: two of the five current state board members come from our local League — Rosemary Forbes-Woodside and Christine Stenning, LWVNC's own President.</p>
-            <p style="margin-top: 15px;">
-                <a href="https://my.lwv.org/rhode-island" target="_blank" rel="noopener" style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 14px;">Read More &rarr;</a>
-            </p>
+            <p>The transition team became part of the Board at the advice of our representatives from National, Whitney Oxendahl and Gabby Udell, because under Rhode Island law an organization like ours must have at least three board members. We joined the two remaining members, Rosemary Forbes-Woodside (LWVNC) and Marylen McKenna (LWVSC). The current members of the Board are Rosemary, Marylen, Faye Zuckerman (LWVRI member-at-large), Christine Martone (LWVSC), and Christine Stenning (LWVNC).</p>
+            <p>Both Whitney and Gabby agreed that, given the amount of work local leagues are doing ahead of the midterm elections, putting the State League in a holding mode until after the midterms is prudent. That said, the board will meet, as there are needs that must be tended to at the State level. These are: first, the current board will fulfill the obligation of the former board to be part of the team holding a gubernatorial forum on September 30. Second, the commitment to gather data on those in our state who would be affected by potential passage of the SAVE Act. Third, the potential roll-out of a new website for the State League.</p>
+            <p>Keep supporting your local leagues, because in doing so, you support the State League.</p>
+            <p>Newport County note: two of the five current state board members come from our local League — Rosemary Forbes-Woodside and Christine Stenning, LWVNC's own President.</p>
+            <p><a href="https://my.lwv.org/rhode-island" target="_blank" rel="noopener" class="link-cta">Read More &rarr;</a></p>
         </article>
         <!-- news-post:11:END -->
         <!-- news-post:6:START -->
-        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">
-            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Voting Rights &bull; July 10, 2026</p>
-            <h3 style="margin: 0 0 12px 0; color: #003d7a;">Secretary of State Amore Pushes Back on DOJ &quot;Intimidation Letter&quot; Over Rhode Island's Voter Rolls</h3>
+        <article class="news-card">
+            <p class="eyebrow eyebrow--plain">Voting Rights &bull; July 10, 2026</p>
+            <h3 class="news-card__title">Secretary of State Amore Pushes Back on DOJ &quot;Intimidation Letter&quot; Over Rhode Island's Voter Rolls</h3>
             <p>Rhode Island Secretary of State Gregg M. Amore announced that he received a July 7 letter from the U.S. Department of Justice regarding compliance with federal voting laws — a letter he characterized as an intimidation tactic rather than a genuine offer of assistance. &quot;The actions of this Administration are intended to undermine your trust in our elections processes. This is unacceptable,&quot; Amore said.</p>
-            <p style="margin-top: 14px;">The Secretary detailed how Rhode Island already maintains accurate voter rolls: the state conducts regular voter list maintenance, including a statewide mailing in November 2025 — the first in over a decade — participates in information-sharing through the Electronic Registration Information Center (ERIC), and requires every voter to attest to their citizenship under penalty of perjury when registering.</p>
-            <p style="margin-top: 14px;">This letter follows the Justice Department's failed attempt to seize Rhode Islanders' sensitive voter data, which a federal judge dismissed in April — a case in which the League of Women Voters helped make the winning arguments in court. Amore encourages Rhode Islanders with questions about elections to contact their state and local election officials directly, and invites anyone with actual evidence of voter fraud to report it to his office. Trusted voting information is always available at vote.sos.ri.gov.</p>
-            <p style="margin-top: 15px;">
-                <a href="https://www.ri.gov/press/view/51131" target="_blank" rel="noopener" style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 14px;">Read More &rarr;</a>
-            </p>
+            <p>The Secretary detailed how Rhode Island already maintains accurate voter rolls: the state conducts regular voter list maintenance, including a statewide mailing in November 2025 — the first in over a decade — participates in information-sharing through the Electronic Registration Information Center (ERIC), and requires every voter to attest to their citizenship under penalty of perjury when registering.</p>
+            <p>This letter follows the Justice Department's failed attempt to seize Rhode Islanders' sensitive voter data, which a federal judge dismissed in April — a case in which the League of Women Voters helped make the winning arguments in court. Amore encourages Rhode Islanders with questions about elections to contact their state and local election officials directly, and invites anyone with actual evidence of voter fraud to report it to his office. Trusted voting information is always available at vote.sos.ri.gov.</p>
+            <p><a href="https://www.ri.gov/press/view/51131" target="_blank" rel="noopener" class="link-cta">Read More &rarr;</a></p>
         </article>
         <!-- news-post:6:END -->
         <!-- news-post:4:START -->
-        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">
-            <img src="images/rivra-protect-the-vote.png" alt="General Assembly Adjourns Without Passing the Rhode Island Voting Rights Act" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 20px;">
-            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Advocacy Update &bull; July 10, 2026</p>
-            <h3 style="margin: 0 0 12px 0; color: #003d7a;">General Assembly Adjourns Without Passing the Rhode Island Voting Rights Act</h3>
+        <article class="news-card">
+            <img src="images/rivra-protect-the-vote.png" alt="General Assembly Adjourns Without Passing the Rhode Island Voting Rights Act" class="news-card__img">
+            <p class="eyebrow eyebrow--plain">Advocacy Update &bull; July 10, 2026</p>
+            <h3 class="news-card__title">General Assembly Adjourns Without Passing the Rhode Island Voting Rights Act</h3>
             <p>The Rhode Island General Assembly ended its 2026 session without passing the Rhode Island Voting Rights Act (H 8334 / S 3143). Both bills were &quot;held for further study&quot; in committee — the Senate Judiciary Committee on April 7 and the House State Government &amp; Elections Committee on April 16 — and never received a floor vote.</p>
-            <p style="margin-top: 14px;">The RIVRA, sponsored by Representative Katherine Kazarian and Senate President Valarie J. Lawson, would codify the protections of the federal Voting Rights Act of 1965 into Rhode Island law, shielding voters here from federal rollbacks. It would protect Rhode Islanders against vote dilution, voter suppression, and voter intimidation, expand language access, and strengthen transparency and accountability in our elections.</p>
-            <p style="margin-top: 14px;">The League of Women Voters of Rhode Island testified in strong support of the bill. &quot;The U.S. Supreme Court has weakened key provisions of the landmark 1965 Voting Rights Act. Congress has failed to act. Federal enforcement has diminished. In this moment, states must lead,&quot; wrote LWVRI President Gene Thompson-Grove of Newport in testimony to the Senate Judiciary Committee. The League stands with a broad coalition — including the ACLU of Rhode Island, Common Cause Rhode Island, and The Womxn Project — in urging the General Assembly to pass the RIVRA when it reconvenes.</p>
-            <p style="margin-top: 14px;">Visit our Action Alerts page to learn how to tell your legislators that Rhode Island voters expect this bill to become law.</p>
-            <p style="margin-top: 15px;">
-                <a href="https://thewomxnproject.org/policy-work/2026-ri-voting-rights-act/" target="_blank" rel="noopener" style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 14px;">Read More &rarr;</a>
-            </p>
+            <p>The RIVRA, sponsored by Representative Katherine Kazarian and Senate President Valarie J. Lawson, would codify the protections of the federal Voting Rights Act of 1965 into Rhode Island law, shielding voters here from federal rollbacks. It would protect Rhode Islanders against vote dilution, voter suppression, and voter intimidation, expand language access, and strengthen transparency and accountability in our elections.</p>
+            <p>The League of Women Voters of Rhode Island testified in strong support of the bill. &quot;The U.S. Supreme Court has weakened key provisions of the landmark 1965 Voting Rights Act. Congress has failed to act. Federal enforcement has diminished. In this moment, states must lead,&quot; wrote LWVRI President Gene Thompson-Grove of Newport in testimony to the Senate Judiciary Committee. The League stands with a broad coalition — including the ACLU of Rhode Island, Common Cause Rhode Island, and The Womxn Project — in urging the General Assembly to pass the RIVRA when it reconvenes.</p>
+            <p>Visit our Action Alerts page to learn how to tell your legislators that Rhode Island voters expect this bill to become law.</p>
+            <p><a href="https://thewomxnproject.org/policy-work/2026-ri-voting-rights-act/" target="_blank" rel="noopener" class="link-cta">Read More &rarr;</a></p>
         </article>
         <!-- news-post:4:END -->
         <!-- AUTO-NEWS-LWVRI:END -->
 
-        <div style="background: #f9f9f9; border: 1px solid #e0e0e0; padding: 30px; margin: 30px 0;">
-            <p style="color: #666; font-style: italic;">News from LWVRI coming soon. Check back for updates from our state League.</p>
-            <p style="margin-top: 10px;"><a href="https://my.lwv.org/rhode-island" target="_blank">Visit LWV Rhode Island →</a></p>
-        </div>
-
         <!-- NEWS FROM LWVUS -->
-        <h2 style="border-bottom: 3px solid #d32f2f; padding-bottom: 12px; margin-top: 60px;">News from LWV United States</h2>
+        <h2 class="heading-rule">News from LWV United States</h2>
 
         <!-- Posts submitted through the "Post News" form land here automatically (newest first). -->
         <!-- AUTO-NEWS-LWVUS:START -->
         <!-- news-post:9:START -->
-        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">
-            <img src="images/mail-fail.jpg" alt="Federal Court Blocks US Postal Service from Implementing Executive Order Restricting Mail Voting" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 20px;">
-            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Court Victory &bull; August 11, 2026</p>
-            <h3 style="margin: 0 0 12px 0; color: #003d7a;">Federal Court Blocks US Postal Service from Implementing Executive Order Restricting Mail Voting</h3>
+        <article class="news-card">
+            <img src="images/mail-fail.jpg" alt="Federal Court Blocks US Postal Service from Implementing Executive Order Restricting Mail Voting" class="news-card__img">
+            <p class="eyebrow eyebrow--plain">Court Victory &bull; August 11, 2026</p>
+            <h3 class="news-card__title">Federal Court Blocks US Postal Service from Implementing Executive Order Restricting Mail Voting</h3>
             <p>The U.S. Postal Service has finalized a rule restricting the delivery of mail ballots. A federal court has blocked it. If the Supreme Court lifts the injunction, the rule takes effect. Either way, the League says NO — mail ballots belong to voters, not the USPS.</p>
-            <p style="margin-top: 14px;">On August 11, 2026, a federal district court in Boston issued a preliminary injunction blocking the Postal Service from implementing Section 3 of the President's executive order restricting mail voting — for the November 3 midterm elections and any earlier federal election. Section 3 would have restricted mail voting by giving the Postal Service authority to determine which voters could receive ballots.</p>
-            <p style="margin-top: 14px;">The court held unequivocally that &quot;the executive branch has no authority to regulate elections,&quot; and found the order is causing &quot;irreparable harm&quot; to voters and voting rights groups by creating confusion about the mail ballots millions of voters rely on. The case was brought by the League of Women Voters and the League of Women Voters of Massachusetts alongside a coalition of nonpartisan organizations, including the ACLU, the Legal Defense Fund, the Association of Americans Resident Overseas, U.S. Vote Foundation, OCA – Asian Pacific American Advocates, and Delta Sigma Theta Sorority, Inc.</p>
-            <p style="margin-top: 14px;">&quot;This ruling is a victory for voters and for the Constitution,&quot; said Marcia Johnson, the League's chief of activation and justice. &quot;Neither the president nor the US Postal Service has the authority to rewrite election rules.&quot;</p>
-            <p style="margin-top: 14px;">The injunction is a victory, but not the end of the story — the case can still reach the Supreme Court, and the finalized rule is waiting behind it. See our Action Alerts page for what you can do, including making a plan to request and return your mail ballot early.</p>
-            <p style="margin-top: 15px;">
-                <a href="https://www.lwv.org/newsroom/press-releases/federal-court-blocks-us-postal-service-implementing-executive-order" target="_blank" rel="noopener" style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 14px;">Read More &rarr;</a>
-            </p>
+            <p>On August 11, 2026, a federal district court in Boston issued a preliminary injunction blocking the Postal Service from implementing Section 3 of the President's executive order restricting mail voting — for the November 3 midterm elections and any earlier federal election. Section 3 would have restricted mail voting by giving the Postal Service authority to determine which voters could receive ballots.</p>
+            <p>The court held unequivocally that &quot;the executive branch has no authority to regulate elections,&quot; and found the order is causing &quot;irreparable harm&quot; to voters and voting rights groups by creating confusion about the mail ballots millions of voters rely on. The case was brought by the League of Women Voters and the League of Women Voters of Massachusetts alongside a coalition of nonpartisan organizations, including the ACLU, the Legal Defense Fund, the Association of Americans Resident Overseas, U.S. Vote Foundation, OCA – Asian Pacific American Advocates, and Delta Sigma Theta Sorority, Inc.</p>
+            <p>&quot;This ruling is a victory for voters and for the Constitution,&quot; said Marcia Johnson, the League's chief of activation and justice. &quot;Neither the president nor the US Postal Service has the authority to rewrite election rules.&quot;</p>
+            <p>The injunction is a victory, but not the end of the story — the case can still reach the Supreme Court, and the finalized rule is waiting behind it. See our Action Alerts page for what you can do, including making a plan to request and return your mail ballot early.</p>
+            <p><a href="https://www.lwv.org/newsroom/press-releases/federal-court-blocks-us-postal-service-implementing-executive-order" target="_blank" rel="noopener" class="link-cta">Read More &rarr;</a></p>
         </article>
         <!-- news-post:9:END -->
         <!-- news-post:2:START -->
-        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">
-            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Breaking Victory &bull; June 29, 2026</p>
-            <h3 style="margin: 0 0 12px 0; color: #003d7a;">WIN! Supreme Court Protects Mail Voting and Preserves States' Authority Over Ballot Receipt Rules</h3>
+        <article class="news-card">
+            <p class="eyebrow eyebrow--plain">Breaking Victory &bull; June 29, 2026</p>
+            <h3 class="news-card__title">WIN! Supreme Court Protects Mail Voting and Preserves States' Authority Over Ballot Receipt Rules</h3>
             <p>Today, the Supreme Court issued a decision upholding voters' rights and permitting Mississippi voters' ballots that are cast on time to be counted after Election Day according to state law.</p>
-            <p style="margin-top: 14px;">The decision reverses the Fifth Circuit's incorrect interpretation of federal Election Day statutes, which would have invalidated decades-old absentee ballot receipt laws and disenfranchised voters who followed all election rules but faced postal delays beyond their control.</p>
-            <p style="margin-top: 14px;">&quot;The League celebrates today's Court ruling, which upholds a state's authority to administer its own elections free from federal interference, including determining when validly cast mail ballots are counted,&quot; said Celina Stewart, CEO of the League of Women Voters. &quot;As we look toward the 2026 midterm elections, the League will continue working in communities across the country to ensure every eligible voter has the information, resources, and confidence to cast their ballot.&quot;</p>
-            <p style="margin-top: 15px;">
-                <a href="https://www.lwv.org/legal-center/republican-national-committee-v-wetzel-now-watson" target="_blank" rel="noopener" style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 14px;">Read More &rarr;</a>
-            </p>
+            <p>The decision reverses the Fifth Circuit's incorrect interpretation of federal Election Day statutes, which would have invalidated decades-old absentee ballot receipt laws and disenfranchised voters who followed all election rules but faced postal delays beyond their control.</p>
+            <p>&quot;The League celebrates today's Court ruling, which upholds a state's authority to administer its own elections free from federal interference, including determining when validly cast mail ballots are counted,&quot; said Celina Stewart, CEO of the League of Women Voters. &quot;As we look toward the 2026 midterm elections, the League will continue working in communities across the country to ensure every eligible voter has the information, resources, and confidence to cast their ballot.&quot;</p>
+            <p><a href="https://www.lwv.org/legal-center/republican-national-committee-v-wetzel-now-watson" target="_blank" rel="noopener" class="link-cta">Read More &rarr;</a></p>
         </article>
         <!-- news-post:2:END -->
         <!-- AUTO-NEWS-LWVUS:END -->
@@ -209,33 +225,54 @@
         <p style="color: #888; font-size: 13px; font-style: italic; margin-top: 20px;">Updated automatically from the <a href="https://www.lwv.org/newsroom/press-releases" target="_blank" rel="noopener">LWVUS newsroom</a> on October 02, 2026.</p>
 <!-- LWVUS_NEWS_END -->
 
-        <p style="margin-top: 30px; margin-bottom: 60px; text-align: center;">
+        <p class="text-center">
             <a href="https://www.lwv.org/newsroom/press-releases" target="_blank">View all press releases from LWV United States →</a>
         </p>
 
     </div>
 
-    <footer>
+    </main>
+
+    <!-- ===== SITE FOOTER: same on every page; current copy in nav-standard.html ===== -->
+    <footer class="site-footer">
         <div class="container">
-            <div>
-                <h4>League of Women Voters of Newport County</h4>
-                <p style="color: #666; line-height: 1.8;">A nonpartisan political organization encouraging informed and active participation in government.</p>
+            <div class="site-footer__grid">
+                <div>
+                    <a href="index.html" class="site-footer__logo"><img src="images/logo-nc-transparent.png" alt="League of Women Voters of Newport County home" width="982" height="249" loading="lazy"></a>
+                    <p>A nonpartisan political organization encouraging informed and active participation in government.</p>
+                    <p>The League never supports or opposes candidates or political parties.</p>
+                    <p><strong>Serving</strong> Newport, Jamestown, Little Compton, Middletown, Portsmouth and Tiverton.</p>
+                </div>
+                <div>
+                    <h2 class="site-footer__heading">News &amp; Notes newsletter</h2>
+                    <p>Our monthly newsletter: League activities, voter information and ways to get involved.</p>
+                    <a href="mailto:lwvnewportcounty@gmail.com?subject=Subscribe%20to%20News%20%26%20Notes&amp;body=Please%20add%20me%20to%20the%20News%20%26%20Notes%20email%20list.%0D%0A%0D%0AName%3A%20%0D%0ATown%3A%20" class="btn btn--gold btn--sm">Subscribe by email</a>
+                    <p class="site-footer__small">Opens your email app. Or write to <a href="mailto:lwvnewportcounty@gmail.com" class="site-footer__email">lwvnewportcounty@gmail.com</a>. <a href="news-notes.html">Read past issues</a></p>
+                </div>
+                <div>
+                    <h2 class="site-footer__heading">Quick links</h2>
+                    <ul class="site-footer__links">
+                        <li><a href="https://vote.sos.ri.gov/Voter/RegisterToVote" target="_blank" rel="noopener">Register to vote</a></li>
+                        <li><a href="https://www.vote411.org" target="_blank" rel="noopener">VOTE411.org</a></li>
+                        <li><a href="elections-2026.html">Elections 2026</a></li>
+                        <li><a href="find-your-rep.html">Find your representatives</a></li>
+                        <li><a href="https://my.lwv.org/rhode-island" target="_blank" rel="noopener">LWV Rhode Island</a></li>
+                        <li><a href="https://www.lwv.org" target="_blank" rel="noopener">LWV (national)</a></li>
+                        <li><a href="https://www.facebook.com/LWVNewportCounty/" target="_blank" rel="noopener">Facebook</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="site-footer__heading">Contact</h2>
+                    <p><a href="mailto:lwvnewportcounty@gmail.com" class="site-footer__email">lwvnewportcounty@gmail.com</a></p>
+                    <p><strong>President</strong><br>Christine Stenning<br><a href="mailto:presidentlwvnc25@gmail.com" class="site-footer__email">presidentlwvnc25@gmail.com</a></p>
+                    <p><strong>Treasurer</strong><br>Becky McSweeney<br><a href="mailto:rcmcsw@gmail.com" class="site-footer__email">rcmcsw@gmail.com</a></p>
+                    <p><strong>Mail</strong><br>LWV Newport County<br>PO Box 4204<br>Middletown, RI 02842</p>
+                </div>
             </div>
-            <div>
-                <h4>Links</h4>
-                <a href="https://vote.sos.ri.gov/Voter/RegisterToVote" target="_blank">Register to Vote</a>
-                <a href="https://vote411.org" target="_blank">Vote411.org</a>
-                <a href="https://www.lwv.org" target="_blank">LWV National</a>
-                <a href="https://my.lwv.org/rhode-island" target="_blank">LWV Rhode Island</a>
-                <a href="https://www.facebook.com/LWVNewportCounty/" target="_blank">Facebook</a>
+            <div class="site-footer__bottom">
+                <p>&copy; 2026 League of Women Voters of Newport County. A nonpartisan, nonprofit 501(c)(4) organization.</p>
+                <p><a href="get-involved.html#membership">Join</a> &middot; <a href="get-involved.html#donate">Donate</a> &middot; <a href="about.html">About us</a></p>
             </div>
-            <div>
-                <h4>Contact</h4>
-                <a href="mailto:lwvnewportcounty@gmail.com">lwvnewportcounty@gmail.com</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 League of Women Voters of Newport County. All rights reserved.
         </div>
     </footer>
 </body>

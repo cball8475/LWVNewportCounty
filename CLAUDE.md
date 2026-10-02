@@ -59,7 +59,8 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 - Set `executablePath` to `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
 - Load pages as `file://` and route-abort `http(s)` requests, because the sandbox has no general web access.
 - Capture at 390px and 1280px.
-- The pages use the Inter web font, which the sandbox can't load, so text widths come out wrong. For layout checks, fetch it with `npm pack @fontsource/inter` and answer the `fonts.googleapis.com` request with `@font-face` rules pointing at its `.woff2` files.
+- The pages use the Inter and IBM Plex Serif web fonts, which the sandbox can't load, so text widths come out wrong. For layout checks, fetch them with `npm pack @fontsource/inter @fontsource/ibm-plex-serif`, answer the `fonts.googleapis.com` request with `@font-face` rules for both families, and serve the `.woff2` files with `access-control-allow-origin: *` (a `file://` page needs CORS for fonts).
+- Run `axe-core`'s `color-contrast` rule on changed pages (`npm pack axe-core`, inject `axe.min.js`). Every restyled page passes; keep it that way.
 - To catch sideways scrolling, compare `document.documentElement.scrollWidth` with the viewport width at every width from 320 to 1280px. Content inside an `overflow-x:auto` box (the Elections sub-menu, wide tables) scrolls on its own and doesn't count.
 
 **Live site.** The sandbox proxy blocks `lwvnewportcounty.org` and `docs.google.com`. Check live pages with a web-scraping tool, or ask the owner.
@@ -68,9 +69,26 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 
 ## Architecture
 
-**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep` and `members` (encrypted).
+**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep`, `news-notes` (the newsletter archive, linked from the footer) and `members` (encrypted).
 
-The nav and footer are **copied into every page**. A nav or footer change has to be made on every page. Copy the nav from `index.html`: `nav-standard.html` is a reference snippet that lags behind (it's missing Find Your Rep). Most styling is inline; `styles.css` holds the shared base.
+**Design system.** `styles.css` holds the LWV brand tokens (`--lwv-blue`, `--lwv-red`, `--lwv-purple`, `--lwv-purple-dark`, `--lwv-gold`, AA-safe neutrals, a spacing scale) and the shared components. `docs/styleguide.html` (not published) shows each one with copy-paste markup. Headings are IBM Plex Serif; body text is Inter.
+
+- Build pages from the components instead of inline styles: `.page-header` (or `.page-header--photo`), a `.container.container--narrow.page-body.prose` content area, `.card`, `.callout` (the lwv.org box with a thick purple left and bottom border), `.panel`, `.promo`, `.eyebrow`, `.stat-bracket`, `.date-tile`, `.event-item`, `.alert`, `.update-box`, `.news-card`, `.table` in a `.table-wrap`, and the `.btn` variants. A rule only one page needs goes in that page's `<style>` block.
+- Gold is for rules, brackets and dark backgrounds. Gold text on white fails contrast.
+- The LEGACY section at the end of `styles.css` keeps old class names (`.site-header`, bare `nav`, `.cta-section`, `.impact-card`, …) working, mainly for the encrypted member portal until the bot rebuilds it. Don't use them in new work.
+- The Elections hub has its own `el-` styles; its `--el-*` variables point at the brand tokens.
+
+**Shared chrome.** Every page carries its own copy of the same chrome:
+- the `<head>` block: meta description, Open Graph tags, favicon, the Plex Serif + Inter font link, and `site.js`;
+- the skip link;
+- the utility bar;
+- the sticky `.site-nav` with Join and Donate;
+- the `.site-footer`;
+- `<main id="main">` around the page content.
+
+`nav-standard.html` is the current reference copy, with instructions. A chrome change has to be made on every page **and** in the member-portal template in `scripts/build-member-portal.js`. Mark the current page's link with `aria-current="page"`. `site.js` runs the phone/tablet menu; its 1180px width must match the nav breakpoint in `styles.css`.
+
+The newsletter signup is a pre-filled email ("Subscribe by email"). If the League sets up a signup form, swap that mailto link in every footer, in the portal template, and on `news.html` and `news-notes.html`.
 
 **Bot workflows.** Every workflow that pushes to `main` shares the concurrency group `site-content-push` and uses a rebase-and-retry push loop.
 
@@ -81,13 +99,13 @@ The nav and footer are **copied into every page**. A nav or footer change has to
 | `update-member-portal.yml` | 12:00 and 22:00 UTC, manual | `build-member-portal.js` reads published CSV tabs of the member-portal Google Sheet (tab GIDs are hardcoded) and writes `members-source.html`. StatiCrypt then encrypts it with secret `MEMBER_PASSWORD` into `members.html`. An inline check refuses to commit plaintext, keyed on the `lwvnc-portal-plaintext-sentinel` comment the builder emits. |
 | `validate-member-portal.yml` | a push touching `members.html` | Runs the same encryption check on human pushes. Pushes made with `GITHUB_TOKEN` don't trigger it, which is why the check also runs inline above. |
 
-Never hand-edit inside machine-owned marker blocks (`LWVUS_NEWS_*`, `AUTO-NEWS-*`, `news-post:*`). Bot commits land on `main` several times a day, so branches go stale fast. Bring `main` in with a merge rather than rebasing a shared branch.
+Never hand-edit inside machine-owned marker blocks (`LWVUS_NEWS_*`, `AUTO-NEWS-*`, `news-post:*`). Both generators emit `<article class="news-card">` markup, so restyle the cards by changing the generators and the `.news-card` rules together. To re-render existing posts, re-run `post-news.js` for each issue with its current body (action `edited`, `TZ=UTC`, ascending issue number), as the Sept/Oct 2026 redesign did. Bot commits land on `main` several times a day, so branches go stale fast. Bring `main` in with a merge rather than rebasing a shared branch.
 
 ## Events: hand-maintained
 
 Events are hand-written HTML. The Google Sheet events feed (`update-events.yml`) was retired in Sept 2026 after its sheet was deleted (PR #18). Nothing removes past events automatically, which is why the session digest checks for them.
 
-- **Where an event appears.** Cards go under "Upcoming Events" in `events.html`, soonest first. To add one, copy an existing card: a month label with a 48px day number, an `<h3>` title, a meta line ("Weekday, Month D • time • location"), a description and a link. The same event may also be promoted on `index.html` (a section after the Elections band), on `issues.html` ("News from LWVRI"), and on `elections-2026.html`. When it changes, change every copy.
+- **Where an event appears.** Cards go under "Upcoming Events" in `events.html`, soonest first. To add one, copy the commented-out card template under "Upcoming Events": an `.event-item` with a `.date-tile` (month and day), an `<h3>` title, a meta line ("Weekday, Month D • time • location"), a description and a link. `site_health.py` reads the date tile and the `<h3>`, and warns about any card there it can't read. The same event may also be promoted on `index.html` (a section after the Elections band), on `issues.html` ("News from LWVRI"), and on `elections-2026.html`. When it changes, change every copy.
 - **Candidate forums.** The schedule is the "2026 Candidate Forums" list in `events.html`. Full details and **Add to calendar** buttons are in `elections-2026.html#forums`; each button carries `data-cal data-title data-date="YYYY-MM-DD" [data-end]`. In the `events.html` list, each forum date is a `<span class="forum-date" data-date="YYYY-MM-DD">`, and a script at the bottom of that page tags passed dates "Past". When a forum is added or moves, update the date on both pages.
 - **Past items on the Elections hub.** The page's `hidePastItems()` script handles them from their dates. Countdown cards (`.el-count-card[data-date]`) hide and the row re-flows. Timeline entries and forums whose calendar button's `data-end`/`data-date` has passed are dimmed, tagged "Past" and lose the button. Give every new card or entry a `data-date`, or it never ages out.
 - **After an event:**
@@ -97,9 +115,11 @@ Events are hand-written HTML. The Google Sheet events feed (`update-events.yml`)
 
 ## Time-sensitive copy and facts
 
-- **Homepage banners.** The top of `index.html` has two time-sensitive blocks: the red alert banner (`vr-alert-band`, which currently covers the SAVE Act) and the Elections band facts (`el-home-fact`). Keep the Elections band's dates in the future and in date order, and swap an item out when its deadline passes. Every banner and dated box keeps an HTML comment naming its sources and the date it was last updated. Keep those comments current.
+- **Homepage banners.** The top of `index.html` has two time-sensitive blocks: the one-line red notice bar above the header (`.notice-bar`, which currently covers the SAVE Act) and the Elections band facts (`el-home-fact`). Keep the Elections band's dates in the future and in date order, and swap an item out when its deadline passes. Every banner and dated box keeps an HTML comment naming its sources and the date it was last updated. Keep those comments current. The Elections band keeps its original markup, including its own `<style>` block; `styles.css` restyles it with higher-specificity rules under "HOMEPAGE".
 - **Election dates.** Dates must match the official sources: the RI Board of Elections "Upcoming Elections" table (elections.ri.gov) and the Secretary of State's voter site (vote.sos.ri.gov). `elections-2026.html` holds the full, labeled deadlines (primary vs. general). `vote.html` lists the general-election deadlines, with the past primary as a one-line note. The homepage must agree with both.
-- **Dated updates in `action-alerts.html`.** Use the existing "Update — Month D, YYYY" box style, which sits at the top of the alert it updates.
+- **Dated updates in `action-alerts.html`.** Each alert is an `<article class="alert">`. An update is a `.update-box` whose `.update-box__label` reads "Update — Month D, YYYY", placed at the top of the alert it updates.
+- **Membership dues.** The prices on `get-involved.html` (and the homepage line) must match the LWVRI join page, where members actually pay (my.lwv.org/rhode-island/membership). The comment above the price cards records when that page was last checked.
+- **Scheduled homepage jobs (until Nov 4, 2026).** Routines set up on Sep 27, 2026 update the homepage Elections band on Oct 5, Oct 14 and Oct 23, and draft a cleanup PR on Nov 4. They work on branch `claude/fix-this-axlf34` and match the band by exact text. Keep the `<a href="elections-2026.html" class="el-home-band" …>` tag and the `el-home-fact` spans' wording unchanged; restyle the band only through CSS. The Oct 5 job merges itself only if no open PR on another branch touches `index.html`.
 - **Voice.** Write in the League's nonpartisan voice. The League takes positions on issues, never on candidates or parties. Don't confuse the **SAVE Act** (the legislation) with DHS's **SAVE database**, which is the subject of the League's own litigation.
 
 ## Print: flyers and palm cards

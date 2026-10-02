@@ -92,13 +92,13 @@ function safeUrl(url) {
   return '';
 }
 
-// ── render one card, matching the hand-written article style on news.html ──
+// ── render one card as a .news-card (styled in styles.css; see docs/styleguide.html) ──
 function renderCard(post, issueNumber) {
   const paragraphs = post.story.split(/\n\s*\n/)
     .map(p => esc(p.replace(/\s*\n\s*/g, ' ').trim()))
     .filter(Boolean);
   const bodyHTML = paragraphs
-    .map((p, i) => (i === 0 ? `            <p>${p}</p>` : `            <p style="margin-top: 14px;">${p}</p>`))
+    .map(p => `            <p>${p}</p>`)
     .join('\n');
 
   const label = `${esc(post.category || 'News')} &bull; ${esc(post.dateline)}`;
@@ -106,16 +106,16 @@ function renderCard(post, issueNumber) {
   const link = safeUrl(post.link);
 
   const imageHTML = image
-    ? `            <img src="${esc(image)}" alt="${esc(post.headline)}" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 20px;">\n`
+    ? `            <img src="${esc(image)}" alt="${esc(post.headline)}" class="news-card__img">\n`
     : '';
   const linkHTML = link
-    ? `\n            <p style="margin-top: 15px;">\n                <a href="${esc(link)}" target="_blank" rel="noopener" style="background: #003d7a; color: white; padding: 10px 22px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 14px;">Read More &rarr;</a>\n            </p>`
+    ? `\n            <p><a href="${esc(link)}" target="_blank" rel="noopener" class="link-cta">Read More &rarr;</a></p>`
     : '';
 
   return `        <!-- news-post:${issueNumber}:START -->
-        <article style="border-bottom: 1px solid #e0e0e0; padding: 35px 0;">
-${imageHTML}            <p style="color: #d32f2f; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">${label}</p>
-            <h3 style="margin: 0 0 12px 0; color: #003d7a;">${esc(post.headline)}</h3>
+        <article class="news-card">
+${imageHTML}            <p class="eyebrow eyebrow--plain">${label}</p>
+            <h3 class="news-card__title">${esc(post.headline)}</h3>
 ${bodyHTML}${linkHTML}
         </article>
         <!-- news-post:${issueNumber}:END -->`;

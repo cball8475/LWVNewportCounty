@@ -4,48 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Issues & Advocacy - LWV Newport County</title>
+    <meta name="description" content="The League's 2026 advocacy priorities in Rhode Island and how we take nonpartisan action on issues that affect our communities.">
+    <meta property="og:title" content="Issues & Advocacy - LWV Newport County">
+    <meta property="og:description" content="The League's 2026 advocacy priorities in Rhode Island and how we take nonpartisan action on issues that affect our communities.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="League of Women Voters of Newport County">
+    <meta property="og:url" content="https://lwvnewportcounty.org/issues.html">
+    <meta property="og:image" content="https://lwvnewportcounty.org/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#521C50">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <script src="site.js" defer></script>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="images/logo-newport-county-transparent.png" alt="League of Women Voters of Newport County">
-            </a>
-            <a href="get-involved.html#donate" class="header-donate">Donate</a>
-        </div>
-    </header>
+    <a class="skip-link" href="#main">Skip to main content</a>
 
-    <nav>
-        <div class="container">
-            <a href="index.html" class="nav-brand" aria-label="LWV Newport County home"><img src="images/logo-nc-small.png" alt="LWV Newport County"></a>
-            <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.classList.toggle('open'); document.querySelector('nav ul').classList.toggle('open')">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="vote.html">Voter Resources</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="issues.html" class="active">Issues & Advocacy</a></li>
-                <li><a href="get-involved.html">Get Involved</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="action-alerts.html">Action Alerts</a></li>
+    <!-- ===== SITE HEADER: same on every page; current copy in nav-standard.html ===== -->
+    <header class="utility-bar">
+        <div class="container utility-bar__inner">
+            <p class="utility-bar__tag">Empowering voters. Defending democracy. Nonpartisan since 1920.</p>
+            <ul class="utility-bar__links">
                 <li><a href="find-your-rep.html">Find Your Rep</a></li>
+                <li><a href="action-alerts.html">Action Alerts</a></li>
                 <li><a href="members.html">Members</a></li>
             </ul>
         </div>
+    </header>
+
+    <nav class="site-nav" aria-label="Main">
+        <div class="container site-nav__inner">
+            <a href="index.html" class="site-nav__brand"><img src="images/logo-nc-transparent.png" alt="League of Women Voters of Newport County home" width="982" height="249"></a>
+            <a href="get-involved.html#donate" class="btn btn--sm site-nav__donate-bar">Donate</a>
+            <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-menu">
+                <span class="site-nav__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="site-nav__toggle-label">Menu</span>
+            </button>
+            <div class="site-nav__menu" id="site-menu">
+                <ul class="site-nav__links">
+                    <li class="site-nav__home"><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="vote.html">Voter Resources</a></li>
+                    <li><a href="elections-2026.html">Elections 2026</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="issues.html" aria-current="page">Issues &amp; Advocacy</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="get-involved.html">Get Involved</a></li>
+                </ul>
+                <div class="site-nav__actions">
+                    <a href="get-involved.html#membership" class="btn btn--outline btn--sm">Join</a>
+                    <a href="get-involved.html#donate" class="btn btn--sm site-nav__donate">Donate</a>
+                </div>
+                <ul class="site-nav__extra">
+                    <li><a href="find-your-rep.html">Find Your Rep</a></li>
+                    <li><a href="action-alerts.html">Action Alerts</a></li>
+                    <li><a href="members.html">Members</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
+
+    <main id="main">
 
     <div class="page-header">
         <h1>Issues & Advocacy</h1>
         <p class="lead">The League takes action on issues that affect our communities and our democracy.</p>
     </div>
 
-    <div class="container">
+    <div class="container container--narrow page-body prose">
 
         <!-- ===== NEWS FROM LWVRI ===== -->
         <h2>News from LWVRI</h2>
@@ -53,37 +83,37 @@
         <!-- Gubernatorial Forum — held September 30, 2026, RWU School of Law. The promo (registration
              buttons, event details) was retired 2026-10-01; the full event card is in events-archive.html.
              No recording or replay had been posted as of 2026-10-01 (checked Ocean State Media and RWU Law). -->
-        <div style="background: linear-gradient(135deg, #f9fafb 0%, white 100%); padding: 35px 45px; margin: 40px 0 60px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #8B1A7A;">
-            <p style="text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem; font-weight: 700; color: #8B1A7A; margin: 0 0 6px;">Statewide Event &bull; September 30, 2026</p>
-            <h3 style="margin: 0 0 12px; color: #003d7a;">Rhode Island Gubernatorial Forum</h3>
-            <p style="margin: 0;">The forum took place on Wednesday, September 30, 2026, at Roger Williams University School of Law, where candidates for Governor shared their vision for Rhode Island. It was co-sponsored by the <strong>League of Women Voters</strong>, <strong>Women's Fund Rhode Island</strong>, <strong>Roger Williams University School of Law</strong>, and <strong>Ocean State Media</strong>.</p>
+        <div class="card card--accent card--roomy">
+            <p class="eyebrow eyebrow--plain">Statewide Event &bull; September 30, 2026</p>
+            <h3 class="card__title">Rhode Island Gubernatorial Forum</h3>
+            <p>The forum took place on Wednesday, September 30, 2026, at Roger Williams University School of Law, where candidates for Governor shared their vision for Rhode Island. It was co-sponsored by the <strong>League of Women Voters</strong>, <strong>Women's Fund Rhode Island</strong>, <strong>Roger Williams University School of Law</strong>, and <strong>Ocean State Media</strong>.</p>
         </div>
 
         <!-- ===== NEWS FROM LWVUS ===== -->
         <h2>News from LWVUS</h2>
-        <div style="display: flex; flex-direction: column; gap: 25px; margin: 40px 0 60px;">
+        <div class="stack">
 
-            <div style="background: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #003d7a;">
-                <h3 style="margin-top: 0;">Statement About the President's Unilateral Military Action in Iran</h3>
-                <a href="https://www.lwv.org/newsroom/press-releases/statement-about-presidents-unilateral-military-action-iran" target="_blank" class="btn" style="display: inline-block; margin-top: 10px;">Read the Statement →</a>
+            <div class="card card--accent-blue">
+                <h3 class="card__title">Statement About the President's Unilateral Military Action in Iran</h3>
+                <a href="https://www.lwv.org/newsroom/press-releases/statement-about-presidents-unilateral-military-action-iran" target="_blank" class="link-cta">Read the Statement →</a>
             </div>
 
-            <div style="background: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #003d7a;">
-                <h3 style="margin-top: 0;">Statement from the League of Women Voters on Reported Elections Executive Order</h3>
-                <a href="https://www.lwv.org/newsroom/press-releases/statement-league-women-voters-reported-elections-executive-order" target="_blank" class="btn" style="display: inline-block; margin-top: 10px;">Read the Statement →</a>
+            <div class="card card--accent-blue">
+                <h3 class="card__title">Statement from the League of Women Voters on Reported Elections Executive Order</h3>
+                <a href="https://www.lwv.org/newsroom/press-releases/statement-league-women-voters-reported-elections-executive-order" target="_blank" class="link-cta">Read the Statement →</a>
             </div>
 
-            <div style="background: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #003d7a;">
-                <h3 style="margin-top: 0;">Civil Rights Groups Urge the Supreme Court to Strike Down Trump's Birthright Citizenship Executive Order</h3>
-                <a href="https://www.lwv.org/newsroom/press-releases/civil-rights-groups-urge-supreme-court-strike-down-trumps-birthright" target="_blank" class="btn" style="display: inline-block; margin-top: 10px;">Read the Statement →</a>
+            <div class="card card--accent-blue">
+                <h3 class="card__title">Civil Rights Groups Urge the Supreme Court to Strike Down Trump's Birthright Citizenship Executive Order</h3>
+                <a href="https://www.lwv.org/newsroom/press-releases/civil-rights-groups-urge-supreme-court-strike-down-trumps-birthright" target="_blank" class="link-cta">Read the Statement →</a>
             </div>
 
         </div>
         <!-- ===== STATE LEGISLATIVE PRIORITIES ===== -->
         <h2>League of Women Voters Rhode Island 2026 State Legislative Priorities</h2>
-        <p style="font-size: 1.1em; margin-bottom: 50px;">The League's advocacy for the 2026 session of the Rhode Island General Assembly will be guided by the following principles:</p>
+        <p class="lead">The League's advocacy for the 2026 session of the Rhode Island General Assembly will be guided by the following principles:</p>
 
-        <div style="background: linear-gradient(135deg, #f9fafb 0%, white 100%); padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #003d7a;">
+        <div class="card card--accent card--roomy">
             <h3>Voting Rights &amp; Defending Democracy</h3>
             <p>LWVRI supports:</p>
             <ul>
@@ -91,42 +121,42 @@
                 <li>A <strong>State Voting Rights Act</strong> to protect and expand access to the ballot.</li>
                 <li><strong>Funding for the Civics Education Mandate</strong> to ensure meaningful civic learning in schools.</li>
             </ul>
-            <p style="margin-top: 18px;"><a href="elections-2026.html" style="font-weight: 700; color: #003d7a;">Putting it into practice — see key dates, candidate forums, and how to vote on our Elections 2026 hub &rarr;</a></p>
+            <p><a href="elections-2026.html" class="link-cta">Putting it into practice — see key dates, candidate forums, and how to vote on our Elections 2026 hub &rarr;</a></p>
         </div>
 
-        <div style="background: #fff; padding: 40px; margin: 40px 0; border-left: 4px solid #d32f2f;">
+        <div class="card card--accent card--roomy">
             <h3>Equitable Education</h3>
             <p>All Rhode Island students deserve equitable, adequate school funding, regardless of district wealth. State funding for education should be at a level that ensures programs of comparable substance and quality are available to all, regardless of the wealth of the specific school district.</p>
         </div>
 
-        <div style="background: linear-gradient(135deg, #f9fafb 0%, white 100%); padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #003d7a;">
+        <div class="card card--accent card--roomy">
             <h3>Climate &amp; Environment</h3>
             <p>The League supports policies that address climate change, promote renewable energy, reduce fossil fuel dependence, and cut waste, while supporting economic prosperity.</p>
         </div>
 
-        <div style="background: #fff; padding: 40px; margin: 40px 0; border-left: 4px solid #d32f2f;">
+        <div class="card card--accent card--roomy">
             <h3>Women's Reproductive Health and Health Care Equity</h3>
             <p>LWVRI advocates for affordable, accessible health care, with attention to maternal health disparities and reproductive freedom. The League also supports measures to protect children's safety and mental health, to include reducing gun violence.</p>
         </div>
 
-        <div style="background: linear-gradient(135deg, #f9fafb 0%, white 100%); padding: 45px; margin: 40px 0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #003d7a;">
+        <div class="card card--accent card--roomy">
             <h3>Social Justice</h3>
             <p>The League of Women Voters is committed to promoting equity and justice for all people. We work to ensure that all voices are heard in the democratic process and that policies address systemic inequities in our communities.</p>
         </div>
 
-        <div style="background: #fff; padding: 40px; margin: 40px 0; border-left: 4px solid #d32f2f;">
+        <div class="card card--accent card--roomy">
             <h3>Government Transparency</h3>
             <p>We believe that government should be open, accountable, and accessible to all citizens. The League advocates for stronger open meetings laws, public records access, and transparency in government decision-making at all levels.</p>
         </div>
 
-        <div style="background: #003d7a; color: white; padding: 50px; margin: 60px 0; text-align: center;">
-            <h2 style="color: white; margin-bottom: 20px;">Get Involved in Advocacy</h2>
-            <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px; font-size: 1.1em;">Join us in making a difference on the issues that matter to our community.</p>
-            <a href="get-involved.html" class="btn btn-secondary" style="background: white; color: #003d7a; border: none;">Volunteer Today</a>
+        <div class="callout callout--blue text-center">
+            <h2>Get Involved in Advocacy</h2>
+            <p>Join us in making a difference on the issues that matter to our community.</p>
+            <a href="get-involved.html" class="btn btn--blue">Volunteer Today</a>
         </div>
 
         <h2>How We Advocate</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin: 40px 0 80px;">
+        <div class="card-grid card-grid--3">
             <div>
                 <h3>Study &amp; Research</h3>
                 <p>We thoroughly research issues before taking positions, ensuring our advocacy is informed by facts and diverse perspectives.</p>
@@ -142,37 +172,48 @@
         </div>
     </div>
 
-    <footer>
+    </main>
+
+    <!-- ===== SITE FOOTER: same on every page; current copy in nav-standard.html ===== -->
+    <footer class="site-footer">
         <div class="container">
-            <div>
-                <h4>League of Women Voters of Newport County</h4>
-                <p>A nonpartisan political organization encouraging informed and active participation in government.</p>
-                <p style="margin-top: 20px;"><strong>Serving:</strong> Newport, Jamestown, Little Compton, Middletown, Portsmouth, and Tiverton</p>
-
-                <h4 style="margin-top: 30px;">Newsletter Signup</h4>
-                <p>Stay informed with our monthly NEWS and NOTES newsletter.</p>
-                <a href="get-involved.html" class="btn" style="margin-top: 10px; display: inline-flex;">Subscribe</a>
+            <div class="site-footer__grid">
+                <div>
+                    <a href="index.html" class="site-footer__logo"><img src="images/logo-nc-transparent.png" alt="League of Women Voters of Newport County home" width="982" height="249" loading="lazy"></a>
+                    <p>A nonpartisan political organization encouraging informed and active participation in government.</p>
+                    <p>The League never supports or opposes candidates or political parties.</p>
+                    <p><strong>Serving</strong> Newport, Jamestown, Little Compton, Middletown, Portsmouth and Tiverton.</p>
+                </div>
+                <div>
+                    <h2 class="site-footer__heading">News &amp; Notes newsletter</h2>
+                    <p>Our monthly newsletter: League activities, voter information and ways to get involved.</p>
+                    <a href="mailto:lwvnewportcounty@gmail.com?subject=Subscribe%20to%20News%20%26%20Notes&amp;body=Please%20add%20me%20to%20the%20News%20%26%20Notes%20email%20list.%0D%0A%0D%0AName%3A%20%0D%0ATown%3A%20" class="btn btn--gold btn--sm">Subscribe by email</a>
+                    <p class="site-footer__small">Opens your email app. Or write to <a href="mailto:lwvnewportcounty@gmail.com" class="site-footer__email">lwvnewportcounty@gmail.com</a>. <a href="news-notes.html">Read past issues</a></p>
+                </div>
+                <div>
+                    <h2 class="site-footer__heading">Quick links</h2>
+                    <ul class="site-footer__links">
+                        <li><a href="https://vote.sos.ri.gov/Voter/RegisterToVote" target="_blank" rel="noopener">Register to vote</a></li>
+                        <li><a href="https://www.vote411.org" target="_blank" rel="noopener">VOTE411.org</a></li>
+                        <li><a href="elections-2026.html">Elections 2026</a></li>
+                        <li><a href="find-your-rep.html">Find your representatives</a></li>
+                        <li><a href="https://my.lwv.org/rhode-island" target="_blank" rel="noopener">LWV Rhode Island</a></li>
+                        <li><a href="https://www.lwv.org" target="_blank" rel="noopener">LWV (national)</a></li>
+                        <li><a href="https://www.facebook.com/LWVNewportCounty/" target="_blank" rel="noopener">Facebook</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="site-footer__heading">Contact</h2>
+                    <p><a href="mailto:lwvnewportcounty@gmail.com" class="site-footer__email">lwvnewportcounty@gmail.com</a></p>
+                    <p><strong>President</strong><br>Christine Stenning<br><a href="mailto:presidentlwvnc25@gmail.com" class="site-footer__email">presidentlwvnc25@gmail.com</a></p>
+                    <p><strong>Treasurer</strong><br>Becky McSweeney<br><a href="mailto:rcmcsw@gmail.com" class="site-footer__email">rcmcsw@gmail.com</a></p>
+                    <p><strong>Mail</strong><br>LWV Newport County<br>PO Box 4204<br>Middletown, RI 02842</p>
+                </div>
             </div>
-
-            <div>
-                <h4>Quick Links</h4>
-                <a href="https://vote.sos.ri.gov/Voter/RegisterToVote" target="_blank">Register to Vote</a>
-                <a href="https://vote411.org" target="_blank">Vote411.org</a>
-                <a href="https://www.lwv.org" target="_blank">LWV National</a>
-                <a href="https://my.lwv.org/rhode-island" target="_blank">LWV Rhode Island</a>
-                <a href="https://www.facebook.com/LWVNewportCounty/" target="_blank">Facebook</a>
+            <div class="site-footer__bottom">
+                <p>&copy; 2026 League of Women Voters of Newport County. A nonpartisan, nonprofit 501(c)(4) organization.</p>
+                <p><a href="get-involved.html#membership">Join</a> &middot; <a href="get-involved.html#donate">Donate</a> &middot; <a href="about.html">About us</a></p>
             </div>
-
-            <div>
-                <h4>Contact</h4>
-                <p><strong>General:</strong><br><a href="mailto:lwvnewportcounty@gmail.com">lwvnewportcounty@gmail.com</a></p>
-                <p style="margin-top: 15px;"><strong>President:</strong><br>Christine Stenning<br><a href="mailto:presidentlwvnc25@gmail.com">presidentlwvnc25@gmail.com</a></p>
-                <p style="margin-top: 15px;"><strong>Treasurer:</strong><br>Becky McSweeney<br><a href="mailto:rcmcsw@gmail.com">rcmcsw@gmail.com</a></p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 League of Women Voters of Newport County. All rights reserved.</p>
-            <p>A nonpartisan, nonprofit organization. | <a href="about.html">About Us</a> | <a href="get-involved.html">Get Involved</a></p>
         </div>
     </footer>
 </body>
