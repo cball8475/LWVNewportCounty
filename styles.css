@@ -469,7 +469,7 @@ p {
 
 .stat-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));   /* columns may not grow past the screen */
     gap: var(--space-5) var(--space-4);
     text-align: center;
 }
@@ -1105,6 +1105,147 @@ p {
 @media (max-width: 479px) {
     .event-item { flex-direction: column; }
 }
+
+/* ── HOMEPAGE (index.html) ───────────────────────────────────────────────── */
+
+/* One-line urgent notice above the utility bar (e.g. the SAVE Act) */
+.notice-bar {
+    background: var(--lwv-red);
+    color: var(--white);
+    --focus-color: var(--white);
+}
+
+.notice-bar__inner { padding-top: 10px; padding-bottom: 10px; }
+
+.notice-bar p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--white);
+    text-align: center;
+}
+
+.notice-bar a {
+    color: var(--white);
+    font-weight: 700;
+    text-decoration-thickness: 2px;
+    white-space: nowrap;
+}
+
+.notice-bar a:hover { color: var(--white); }
+
+.notice-bar__label {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 1px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--lwv-red);
+    background: var(--white);
+    border-radius: 999px;
+}
+
+/* Hero: headline, mission and two actions beside a local photo */
+.home-hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
+}
+
+.container.home-hero__inner {   /* .container's padding shorthand would reset the top/bottom */
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+    padding-top: var(--space-7);
+    padding-bottom: var(--space-7);
+}
+
+.home-hero h1 { margin: 0 0 var(--space-4); }
+.home-hero .lead { margin: 0 0 var(--space-5); max-width: 560px; }
+
+.home-hero__photo img {
+    max-height: 440px;
+    object-position: center 35%;
+}
+
+@media (max-width: 899px) {
+    .home-hero__photo img { max-height: 300px; }   /* keep the Elections band near the top on phones */
+}
+
+@media (min-width: 900px) {
+    .container.home-hero__inner {
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: var(--space-8);
+        padding-top: var(--space-8);
+        padding-bottom: var(--space-8);
+    }
+}
+
+/* Elections 2026 band. Its markup (incl. its own <style> block) must stay
+   unchanged for the scheduled homepage jobs, so it is restyled here with
+   selectors that outrank its inline rules. */
+a.el-home-band {
+    background: var(--lwv-purple-dark);
+    border-top: 0;
+    border-bottom: 6px solid var(--lwv-gold);
+    padding: var(--space-7) 20px;
+    --focus-color: var(--lwv-gold);
+}
+
+a.el-home-band:hover { filter: none; background: #481846; }
+.el-home-band .el-home-inner { max-width: 1120px; }
+
+.el-home-band .el-home-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--lwv-gold);
+}
+
+.el-home-band .el-home-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--white);
+}
+
+.el-home-band .el-home-title span,
+.el-home-band .el-home-fact b { color: var(--lwv-gold); }
+
+.el-home-band .el-home-fact {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.el-home-band .el-home-cta {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--lwv-gold);
+    border-radius: var(--radius);
+    box-shadow: none;
+}
+
+a.el-home-band:hover .el-home-cta { background: var(--lwv-gold-dark); }
+
+@media (max-width: 640px) {
+    .el-home-band .el-home-title { font-size: 26px; }
+}
+
+/* Spacing for the plain homepage sections between the bands */
+.container.home-section { padding-top: var(--space-7); padding-bottom: var(--space-4); }
+.home-section > h2:first-child,
+.home-section > .section-head:first-child h2 { margin-top: 0; }
+
+/* Vote / Learn / Act cards: two links side by side at the bottom */
+.pathway { display: flex; flex-direction: column; }
+.pathway > p:not(.pathway__links) { flex: 1; }
+.pathway__links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-bottom: 0; }
+.pathway__links .card__more { margin-top: 0; }
 
 /* ── ACCESSIBILITY ───────────────────────────────────────────────────────── */
 
@@ -1974,6 +2115,12 @@ footer:not(:where(.site-footer)) a:hover {
 
 /* PHONES: compact stat boxes so two fit side by side down to a 320px screen */
 @media (max-width: 599px) {
+    .stat-grid { gap: var(--space-4) var(--space-3); }
+    .stat-bracket { padding: var(--space-4) var(--space-2); }
+    .stat-bracket::before,
+    .stat-bracket::after { width: 28px; height: 28px; }
+    .stat-bracket__num { font-size: 40px; }
+    .stat-bracket__label { font-size: 12px; letter-spacing: 0.04em; }
     .impact-section { padding-left: 0; padding-right: 0; }
     .impact-grid { gap: 12px; }
     .impact-card { padding: 28px 8px; }
@@ -2015,7 +2162,7 @@ footer:not(:where(.site-footer)) a:hover {
 /* Four stats in one row only from 900px; narrower screens keep two rows of two */
 @media (min-width: 900px) {
     .impact-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .stat-grid { grid-template-columns: repeat(4, 1fr); }
+    .stat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 /* LARGE DESKTOP */
