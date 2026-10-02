@@ -629,8 +629,8 @@ p {
 }
 
 /* Boxes sitting in the text flow get breathing room above and below */
-.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid),
-.prose > section > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid) { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+.prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid, .stack),
+.prose > section > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid, .stack) { margin-top: var(--space-6); margin-bottom: var(--space-6); }
 .prose > :is(.card, .callout, .panel, .promo, .table-wrap, .event-item, .card-grid):first-child { margin-top: 0; }
 
 /* Readable line length for a paragraph inside a wide box */
@@ -662,6 +662,41 @@ p {
     color: var(--lwv-purple);
 }
 
+/* Vertical list of cards with even gaps */
+.stack { display: flex; flex-direction: column; gap: var(--space-4); }
+
+/* A card inside another card (e.g. an event inside the LWVRI card on About) */
+.card .nested-card { margin-top: var(--space-4); box-shadow: none; }
+
+/* Officers table (about.html) */
+.officers-table__name { font-weight: 600; color: var(--ink); }
+.officers-table__role { color: var(--lwv-purple); font-weight: 600; }
+
+/* Board member cards (about.html) */
+.board-card { padding: 18px 20px; }
+.board-card__name { font-weight: 700; color: var(--ink); }
+.board-card__role { margin-top: 4px; font-size: 15px; color: var(--lwv-purple); }
+.board-card--emeritus { background: var(--surface); border-top: 4px solid var(--hairline-strong); }
+.board-card--emeritus .board-card__role { color: var(--muted); }
+
+/* The six towns served (about.html) */
+.town-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    margin: var(--space-5) 0 var(--space-7);
+}
+
+.town {
+    padding: 16px 12px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--lwv-purple-dark);
+    background: var(--lwv-purple-tint);
+    border-bottom: 3px solid var(--lwv-purple);
+    border-radius: var(--radius);
+}
+
 /* Panel variant for side notes (e.g. tax information): gold edge */
 .panel.panel--note { border-left: 4px solid var(--lwv-gold); }
 
@@ -690,6 +725,11 @@ p {
 .prose h3 { margin-top: 36px; }
 .prose h4 { margin-top: 28px; }
 .prose :is(h2, h3, h4) + :is(p, ul, ol) { margin-top: 0; }
+
+/* Headings that open a card or grid cell sit tight to the top (and to an icon above them) */
+.prose .card__title,
+.prose .card-grid > * > :first-child,
+.prose .card > .icon + :is(h3, h4) { margin-top: 0; }
 
 /* Muted small print (sources, footnotes, past-dated notes) */
 .note {
