@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LWVNC Style Guide</title>
+    <!-- Internal reference, not published: _config.yml excludes docs/.
+         Open this file in a browser to see every component in styles.css,
+         then copy the markup you need. Sample text below is placeholder. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Layout for this reference page only */
+        .sg-section { padding: 48px 0; border-bottom: 1px solid var(--hairline); }
+        .sg-section > .container > h2:first-child { margin-top: 0; }
+        .sg-note { font-size: 15px; color: var(--muted); margin: 0 0 24px; max-width: 760px; }
+        .sg-note code, .sg-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; background: var(--surface); padding: 1px 6px; border-radius: 3px; color: var(--ink); }
+        .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+        .sg-swatch { border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; background: #fff; }
+        .sg-swatch div { height: 72px; }
+        .sg-swatch p { font-size: 13px; line-height: 1.45; margin: 0; padding: 10px 12px; color: var(--ink); }
+        .sg-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+        .sg-dark { background: var(--lwv-purple-dark); padding: 24px; border-radius: var(--radius); }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <p class="eyebrow eyebrow--center">Internal reference</p>
+        <h1>LWVNC Style Guide</h1>
+        <p class="lead">Every colour and component in <span class="sg-code">styles.css</span>. Copy the markup from this file instead of writing inline styles.</p>
+    </div>
+
+    <!-- COLOURS -->
+    <section class="sg-section">
+        <div class="container">
+            <h2>Colours</h2>
+            <p class="sg-note">Official LWV brand palette (lwv.org/brand-standards). Use the token name, e.g. <code>var(--lwv-purple)</code>, never a raw hex value. Gold is for rules, brackets and dark backgrounds; gold text on white is too faint to read.</p>
+            <div class="sg-swatches">
+                <div class="sg-swatch"><div style="background:var(--lwv-purple)"></div><p><b>--lwv-purple</b><br>#820263 · buttons, links, accents</p></div>
+                <div class="sg-swatch"><div style="background:var(--lwv-purple-dark)"></div><p><b>--lwv-purple-dark</b><br>#521C50 · headings, dark bands</p></div>
+                <div class="sg-swatch"><div style="background:var(--lwv-blue)"></div><p><b>--lwv-blue</b><br>#005596 · voting info, secondary</p></div>
+                <div class="sg-swatch"><div style="background:var(--lwv-red)"></div><p><b>--lwv-red</b><br>#be0f34 · urgent notices only</p></div>
+                <div class="sg-swatch"><div style="background:var(--lwv-gold)"></div><p><b>--lwv-gold</b><br>#eca400 · brackets, rules, on dark</p></div>
+                <div class="sg-swatch"><div style="background:var(--ink)"></div><p><b>--ink</b><br>#1d1a22 · strong text</p></div>
+                <div class="sg-swatch"><div style="background:var(--body)"></div><p><b>--body</b><br>#3d3a42 · paragraphs</p></div>
+                <div class="sg-swatch"><div style="background:var(--muted)"></div><p><b>--muted</b><br>#5c5862 · captions, labels</p></div>
+                <div class="sg-swatch"><div style="background:var(--surface)"></div><p><b>--surface</b><br>#f7f5f8 · light sections</p></div>
+                <div class="sg-swatch"><div style="background:var(--lwv-purple-tint)"></div><p><b>--lwv-purple-tint</b><br>#f6ebf3 · hover/active wash</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TYPE -->
+    <section class="sg-section">
+        <div class="container container--narrow">
+            <p class="eyebrow">Typography</p>
+            <h1>Heading 1 — Empowering Voters</h1>
+            <h2>Heading 2 — Defending Democracy</h2>
+            <h3>Heading 3 — Candidate forums in all six towns</h3>
+            <h4>Heading 4 — Small sans-serif label heading</h4>
+            <p class="lead">Lead paragraph: one or two sentences that introduce a page or section, set a little larger than body text.</p>
+            <p>Body paragraph in Inter. Plain links inside text are bold and underlined, like <a href="#">this link to voter resources</a>, so readers can spot them at a glance.</p>
+            <p><a class="link-cta" href="#">Text link with an arrow &rarr;</a></p>
+        </div>
+    </section>
+
+    <!-- EYEBROWS -->
+    <section class="sg-section">
+        <div class="container container--narrow">
+            <h2>Eyebrow labels</h2>
+            <p class="sg-note">Small uppercase label above a heading. <code>.eyebrow</code> runs a hairline to the right; <code>.eyebrow--center</code> puts short rules on both sides; <code>.eyebrow--plain</code> has none.</p>
+            <p class="eyebrow">Your vote matters</p>
+            <p class="eyebrow eyebrow--center">Newport County · 2026</p>
+            <p class="eyebrow eyebrow--plain">LWVNC &bull; Plain label</p>
+        </div>
+    </section>
+
+    <!-- BUTTONS -->
+    <section class="sg-section">
+        <div class="container">
+            <h2>Buttons</h2>
+            <p class="sg-note">One solid button per group; the rest outline. On dark bands use gold for the main action.</p>
+            <div class="btn-row">
+                <a href="#" class="btn">Join the League</a>
+                <a href="#" class="btn btn--outline">Learn More</a>
+                <a href="#" class="btn btn--blue">Check Your Registration</a>
+                <a href="#" class="btn btn--sm">Small button</a>
+            </div>
+            <div class="sg-dark" style="margin-top: 24px;">
+                <div class="btn-row">
+                    <a href="#" class="btn btn--gold">Explore Elections 2026</a>
+                    <a href="#" class="btn btn--light">Donate</a>
+                    <a href="#" class="btn btn--ghost">Find Your Polling Place</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALLOUT -->
+    <section class="sg-section">
+        <div class="container">
+            <h2>Callout</h2>
+            <p class="sg-note">The lwv.org "Find Your Local League" box: thick purple left and bottom border. Use it once per page for the main action. <code>.callout--split</code> puts the button beside the text on wider screens.</p>
+            <div class="callout callout--split">
+                <div>
+                    <h3>Become a Member</h3>
+                    <p>Placeholder text: membership supports voter education, candidate forums and advocacy across Newport County.</p>
+                </div>
+                <div class="btn-row">
+                    <a href="#" class="btn">Join the League</a>
+                    <a href="#" class="btn btn--outline">Donate</a>
+                </div>
+            </div>
+            <div class="callout callout--blue" style="margin-top: 32px; max-width: 640px;">
+                <h3>Are you registered to vote?</h3>
+                <p>Placeholder text for a blue variant used on voting information.</p>
+                <a href="#" class="btn btn--blue">Check Your Registration</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STAT BRACKETS -->
+    <section class="sg-section band--surface">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <p class="eyebrow eyebrow--center">Our impact</p>
+                <h2>Stat brackets</h2>
+                <p class="sg-note" style="margin: 0 auto;">Gold corner brackets around a number or short fact. Use <code>.stat-grid</code> for a row of four (two per row on phones).</p>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-bracket"><span class="stat-bracket__num">200+</span><span class="stat-bracket__label">Voters registered</span></div>
+                <div class="stat-bracket"><span class="stat-bracket__num">7</span><span class="stat-bracket__label">Candidate forums</span></div>
+                <div class="stat-bracket"><span class="stat-bracket__num">161</span><span class="stat-bracket__label">Active members</span></div>
+                <div class="stat-bracket"><span class="stat-bracket__num">6</span><span class="stat-bracket__label">Towns served</span></div>
+            </div>
+            <div class="stat-bracket" style="max-width: 420px; margin: 48px auto 0;">
+                <p>Prose version: <strong>a highlighted figure</strong> followed by a sentence of context, like the VOTE411 stat on lwv.org.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATE TILES -->
+    <section class="sg-section">
+        <div class="container">
+            <h2>Date tiles</h2>
+            <p class="sg-note">Calendar-style dates for deadlines and event cards.</p>
+            <div class="sg-row">
+                <div class="date-tile"><span class="date-tile__month">Oct</span><span class="date-tile__day">14</span><span class="date-tile__dow">Wed</span></div>
+                <div class="date-tile"><span class="date-tile__month">Oct</span><span class="date-tile__day">19</span></div>
+                <div class="date-tile"><span class="date-tile__month">Nov</span><span class="date-tile__day">3</span><span class="date-tile__dow">Tue</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="sg-section">
+        <div class="container">
+            <h2>Cards</h2>
+            <p class="sg-note">Only cards that are links (<code>.card--link</code>) react to hover. Accent rules: <code>.card--accent</code> (purple, left), <code>--accent-blue</code>, <code>--accent-red</code>, <code>.card--top</code>.</p>
+            <div class="card-grid">
+                <a href="#" class="card card--link card--top">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="1"/><path d="M8 11V4h8v7"/><path d="M10 7.5l1.5 1.5L14 6.5"/></svg>
+                    <h3 class="card__title">Vote</h3>
+                    <p>Placeholder: register, check your status, find your polling place.</p>
+                    <span class="card__more">Voter resources &rarr;</span>
+                </a>
+                <a href="#" class="card card--link card--top">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>
+                    <h3 class="card__title">Learn</h3>
+                    <p>Placeholder: nonpartisan candidate forums and issue briefings.</p>
+                    <span class="card__more">Forums &amp; issues &rarr;</span>
+                </a>
+                <a href="#" class="card card--link card--top">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+                    <h3 class="card__title">Act</h3>
+                    <p>Placeholder: join, volunteer, or contact your representatives.</p>
+                    <span class="card__more">Get involved &rarr;</span>
+                </a>
+            </div>
+            <div class="card-grid" style="margin-top: 24px;">
+                <div class="card"><h3 class="card__title">Plain card</h3><p>White box with a hairline border.</p></div>
+                <div class="card card--accent"><h3 class="card__title">Accent card</h3><p>Purple rule on the left.</p></div>
+                <div class="card card--accent-blue"><h3 class="card__title">Blue accent</h3><p>For voting information.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS CARD -->
+    <section class="sg-section">
+        <div class="container container--narrow">
+            <h2>News card</h2>
+            <p class="sg-note">Rendered by <code>scripts/post-news.js</code> and <code>scripts/fetch_lwvus.py</code>; don't hand-edit cards inside the news marker blocks.</p>
+            <article class="news-card">
+                <p class="eyebrow eyebrow--plain">LWVNC &bull; October 1, 2026</p>
+                <h3 class="news-card__title">Sample news headline</h3>
+                <p>Placeholder summary paragraph for a news post.</p>
+                <p><a class="link-cta" href="#">Read more &rarr;</a></p>
+            </article>
+        </div>
+    </section>
+
+    <!-- DARK BAND -->
+    <section class="band band--dark">
+        <div class="container container--narrow">
+            <p class="eyebrow">Dark band</p>
+            <h2 style="margin-top: 0;">Text on dark purple</h2>
+            <p>Headings turn white and paragraphs turn soft white inside <code class="sg-code">.band--dark</code>, <code class="sg-code">.band--blue</code> or <code class="sg-code">.on-dark</code>. The keyboard focus ring switches to gold.</p>
+            <div class="btn-row">
+                <a href="#" class="btn btn--gold">Main action</a>
+                <a href="#" class="btn btn--ghost">Secondary</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="band band--blue">
+        <div class="container container--narrow">
+            <p class="eyebrow">Blue band</p>
+            <h2 style="margin-top: 0;">Text on LWV blue</h2>
+            <p>Use for voting and elections information.</p>
+        </div>
+    </section>
+
+    <!-- LEGACY -->
+    <section class="sg-section">
+        <div class="container">
+            <h2>Legacy classes (restyled)</h2>
+            <p class="sg-note">Older pages still use these. They now match the new look; don't use them for new work.</p>
+            <div class="cta-section">
+                <h2>.cta-section</h2>
+                <p>Now a centred callout instead of a purple gradient panel.</p>
+                <a href="#" class="btn">Join the League Today</a>
+            </div>
+            <section class="impact-section" style="margin: 0;">
+                <div class="impact-grid">
+                    <div class="impact-card"><span class="impact-number">200+</span><span class="impact-label">.impact-card</span></div>
+                    <div class="impact-card"><span class="impact-number">7</span><span class="impact-label">Candidate Forums</span></div>
+                    <div class="impact-card"><span class="impact-number">161</span><span class="impact-label">Active Members</span></div>
+                    <div class="impact-card"><span class="impact-number">6</span><span class="impact-label">Towns Served</span></div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+</body>
+</html>

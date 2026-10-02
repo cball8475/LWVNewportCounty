@@ -1,4 +1,19 @@
-/* LWV Newport County - PROFESSIONAL DESIGN SYSTEM */
+/* ==========================================================================
+   LWV Newport County — shared design system
+   --------------------------------------------------------------------------
+   Colours are the official LWV brand palette (lwv.org/brand-standards):
+   Blue #005596, Red #be0f34, Purple #820263, Dark Purple #521C50, Gold #eca400.
+   Headings use IBM Plex Serif (as lwv.org does); body text uses Inter. Each
+   page's <head> loads both from Google Fonts.
+
+   Use the tokens (var(--…)) and component classes below instead of inline
+   styles. docs/styleguide.html shows every component; open it in a browser
+   and copy the markup you need.
+
+   The "LEGACY" section near the end restyles the older class names so pages
+   that still use them pick up the new look. Don't use those classes for new
+   work.
+   ========================================================================== */
 
 * {
     margin: 0;
@@ -6,59 +21,654 @@
     box-sizing: border-box;
 }
 
+/* ── TOKENS ──────────────────────────────────────────────────────────────── */
 :root {
-    --primary-blue: #003d7a;
-    --primary-red: #d32f2f;
-    --accent-purple: #8B1A7A;
-    --accent-purple-light: #a8267d;
-    --text-dark: #1a1a1a;
-    --text-medium: #4a4a4a;
-    --text-light: #666;
-    --bg-light: #f9fafb;
-    --bg-purple-light: #f5e6f1;
-    --bg-white: #ffffff;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
-    --border-radius: 8px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* LWV brand palette */
+    --lwv-blue: #005596;
+    --lwv-blue-dark: #00447a;
+    --lwv-red: #be0f34;
+    --lwv-purple: #820263;
+    --lwv-purple-dark: #521C50;
+    --lwv-purple-tint: #f6ebf3;      /* purple wash for hover/active states */
+    --lwv-gold: #eca400;             /* gold on white is low-contrast: use it for
+                                        rules, brackets and dark backgrounds only */
+    --lwv-gold-dark: #c98b00;
+
+    /* Neutrals (every text colour passes WCAG AA on white and on --surface) */
+    --ink: #1d1a22;                  /* headings, strong text */
+    --body: #3d3a42;                 /* paragraphs */
+    --muted: #5c5862;                /* captions, labels, footnotes */
+    --hairline: #e4e1e6;             /* 1px borders and dividers */
+    --hairline-strong: #cfcad3;
+    --surface: #f7f5f8;              /* light section background */
+    --surface-strong: #f1eef3;       /* callout box background */
+    --white: #ffffff;
+
+    /* Roles */
+    --heading: var(--lwv-purple-dark);
+    --link: var(--lwv-purple);
+    --link-hover: var(--lwv-purple-dark);
+    --focus-color: var(--lwv-blue);  /* overridden to gold/white on dark backgrounds */
+
+    /* Type */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+
+    /* Spacing scale — pick from these instead of one-off pixel values */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
+
+    /* Shape and depth */
+    --radius: 4px;
+    --shadow-sm: 0 1px 3px rgba(29, 26, 34, 0.08);
+    --shadow-md: 0 6px 18px rgba(29, 26, 34, 0.10);
+    --shadow-lg: 0 14px 34px rgba(29, 26, 34, 0.14);
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Legacy names: still referenced by older markup; they now point at the
+       brand palette. Prefer the names above in new work. */
+    --primary-blue: var(--lwv-blue);
+    --primary-red: var(--lwv-red);
+    --accent-purple: var(--lwv-purple);
+    --accent-purple-light: var(--lwv-purple-dark);
+    --text-dark: var(--ink);
+    --text-medium: var(--body);
+    --text-light: var(--muted);
+    --bg-light: var(--surface);
+    --bg-purple-light: var(--lwv-purple-tint);
+    --bg-white: var(--white);
+    --border-radius: var(--radius);
+    --transition: all 0.2s var(--ease);
 }
 
+/* ── BASE ────────────────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color: var(--text-dark);
-    background: var(--bg-white);
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--white);
     line-height: 1.7;
     font-size: 17px;
     -webkit-font-smoothing: antialiased;
 }
 
+/* Anchored sections land below the sticky nav instead of underneath it */
+[id] { scroll-margin-top: 96px; }
+
+img { max-width: 100%; height: auto; }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────────────────── */
 h1, h2, h3, h4 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
+    font-family: var(--font-serif);
+    font-weight: 600;
     line-height: 1.2;
     margin-bottom: 20px;
+    color: var(--ink);
 }
 
-h1 { font-size: 42px; letter-spacing: -0.02em; }
-h2 { font-size: 32px; margin-top: 60px; }
-h3 { font-size: 24px; margin-top: 30px; }
-h4 { font-size: 19px; margin-top: 20px; }
+h1, h2 { color: var(--heading); letter-spacing: -0.01em; }
+
+h1 { font-size: 38px; line-height: 1.12; }
+h2 { font-size: 30px; margin-top: 60px; }
+h3 { font-size: 22px; margin-top: 30px; }
+
+/* Small headings stay in the sans face; serif at this size looks fussy */
+h4 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 20px;
+}
 
 p {
-    color: var(--text-medium);
+    color: var(--body);
     line-height: 1.8;
     margin: 0 auto 16px;
 }
 
-html { scroll-behavior: smooth; }
+.lead {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--body);
+}
+
+/* Links: brand purple, underlined, like lwv.org. :where() keeps these at zero
+   specificity so any class (buttons, nav, footer) overrides them cleanly. */
+:where(a) {
+    color: var(--link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+:where(a:hover) {
+    color: var(--link-hover);
+    text-decoration-thickness: 2px;
+}
+
+/* Plain links inside running text are bold so they're easy to spot */
+:where(p, li) > a:not([class]) { font-weight: 600; }
+
+/* ── LAYOUT HELPERS ──────────────────────────────────────────────────────── */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container--narrow { max-width: 840px; }
+
+.text-center { text-align: center; }
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* Full-width section. Add .band--surface / --dark / --blue for a background. */
+.band { padding: var(--space-8) 0; }
+.band--surface { background: var(--surface); }
+.band--dark { background: var(--lwv-purple-dark); }
+.band--blue { background: var(--lwv-blue); }
+
+/* Text on a dark background (.band--dark, .band--blue, or any dark box) */
+.on-dark,
+.band--dark,
+.band--blue {
+    color: var(--white);
+    --focus-color: var(--lwv-gold);
+}
+
+.on-dark :is(h1, h2, h3, h4),
+.band--dark :is(h1, h2, h3, h4),
+.band--blue :is(h1, h2, h3, h4) { color: var(--white); }
+
+.on-dark p,
+.band--dark p,
+.band--blue p { color: rgba(255, 255, 255, 0.88); }
+
+.on-dark a:not([class]),
+.band--dark a:not([class]),
+.band--blue a:not([class]) { color: var(--white); }
+
+/* Section heading block: eyebrow + h2 + optional intro paragraph */
+.section-head {
+    max-width: 760px;
+    margin: 0 auto var(--space-7);
+}
+
+.section-head h2 { margin-top: 0; }
+.section-head--center { text-align: center; }
+
+/* Responsive grid of cards: as many ~260px columns as fit */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-5);
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 28px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--white);
+    background: var(--lwv-purple);
+    border: 2px solid var(--lwv-purple);
+    border-radius: var(--radius);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.btn:hover {
+    color: var(--white);
+    background: var(--lwv-purple-dark);
+    border-color: var(--lwv-purple-dark);
+}
+
+/* Outline: secondary action next to a solid button */
+.btn--outline,
+.btn-secondary {
+    color: var(--lwv-purple);
+    background: var(--white);
+    border-color: var(--lwv-purple);
+}
+
+.btn--outline:hover,
+.btn-secondary:hover {
+    color: var(--white);
+    background: var(--lwv-purple);
+    border-color: var(--lwv-purple);
+}
+
+.btn--blue,
+.btn-blue {
+    background: var(--lwv-blue);
+    border-color: var(--lwv-blue);
+}
+
+.btn--blue:hover,
+.btn-blue:hover {
+    background: var(--lwv-blue-dark);
+    border-color: var(--lwv-blue-dark);
+}
+
+/* Gold: the main action on a dark band (dark text keeps it readable) */
+.btn--gold {
+    color: var(--ink);
+    background: var(--lwv-gold);
+    border-color: var(--lwv-gold);
+}
+
+.btn--gold:hover {
+    color: var(--ink);
+    background: var(--lwv-gold-dark);
+    border-color: var(--lwv-gold-dark);
+}
+
+/* Light: white button on a dark band */
+.btn--light {
+    color: var(--lwv-purple);
+    background: var(--white);
+    border-color: var(--white);
+}
+
+.btn--light:hover {
+    color: var(--lwv-purple-dark);
+    background: var(--surface);
+    border-color: var(--surface);
+}
+
+/* Ghost: outlined secondary action on a dark band */
+.btn--ghost {
+    color: var(--white);
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.75);
+}
+
+.btn--ghost:hover {
+    color: var(--lwv-purple-dark);
+    background: var(--white);
+    border-color: var(--white);
+}
+
+.btn--sm {
+    min-height: 40px;
+    padding: 8px 18px;
+    font-size: 15px;
+}
+
+/* Row of buttons that wraps on small screens */
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+/* Bold text link with an arrow, e.g. "Read more →" */
+.link-cta {
+    font-weight: 700;
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.22em;
+}
+
+.link-cta:hover { color: var(--link-hover); }
+
+/* ── COMPONENT: EYEBROW ──────────────────────────────────────────────────────
+   Small uppercase label with a hairline rule, placed above a heading
+   (lwv.org's "YOUR VOTE MATTERS ————"). .eyebrow--center puts a short
+   rule on both sides; .eyebrow--plain has no rule.                          */
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.eyebrow::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline-strong);
+}
+
+.eyebrow--center { justify-content: center; }
+
+.eyebrow--center::before {
+    content: "";
+    flex: 0 1 56px;
+    height: 1px;
+    background: var(--hairline-strong);
+}
+
+.eyebrow--center::after { flex: 0 1 56px; }
+
+.eyebrow--plain::after,
+.eyebrow--plain::before { content: none; }
+
+.on-dark .eyebrow,
+.band--dark .eyebrow,
+.band--blue .eyebrow { color: rgba(255, 255, 255, 0.85); }
+
+.on-dark .eyebrow::before,
+.on-dark .eyebrow::after,
+.band--dark .eyebrow::before,
+.band--dark .eyebrow::after,
+.band--blue .eyebrow::before,
+.band--blue .eyebrow::after { background: rgba(255, 255, 255, 0.35); }
+
+/* ── COMPONENT: CALLOUT ──────────────────────────────────────────────────────
+   Light box with a thick purple left and bottom border, like lwv.org's
+   "Find Your Local League" box. Use it for the one action a section is
+   about (join, donate, check registration, newsletter). Its heading gets a
+   short purple rule above it.                                               */
+.callout {
+    background: var(--surface-strong);
+    border-left: 8px solid var(--lwv-purple);
+    border-bottom: 8px solid var(--lwv-purple);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-6) var(--space-5);
+}
+
+.callout > :last-child,
+.callout--split > * > :last-child { margin-bottom: 0; }
+
+.callout :is(h2, h3):first-child,
+.callout .callout__title { margin-top: 0; margin-bottom: var(--space-3); }
+
+.callout :is(h2, h3):first-child::before,
+.callout .callout__title::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin-bottom: var(--space-4);
+    background: var(--lwv-purple);
+}
+
+.callout--blue { border-color: var(--lwv-blue); }
+.callout--blue :is(h2, h3):first-child::before { background: var(--lwv-blue); }
+
+/* Two columns from tablet up: text on the left, action on the right */
+.callout--split {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+}
+
+/* ── COMPONENT: STAT BRACKET ─────────────────────────────────────────────────
+   A number or short fact framed by gold corner brackets (top-left and
+   bottom-right), like lwv.org's VOTE411 stat.                               */
+.stat-bracket {
+    position: relative;
+    padding: var(--space-5) var(--space-5);
+}
+
+.stat-bracket::before,
+.stat-bracket::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 0 solid var(--lwv-gold);
+    pointer-events: none;
+}
+
+.stat-bracket::before { top: 0; left: 0; border-top-width: 4px; border-left-width: 4px; }
+.stat-bracket::after { bottom: 0; right: 0; border-bottom-width: 4px; border-right-width: 4px; }
+
+.stat-bracket__num {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--lwv-purple);
+    margin-bottom: var(--space-2);
+}
+
+.stat-bracket__label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.stat-bracket p { font-size: 18px; line-height: 1.5; margin: 0; }
+.stat-bracket strong { color: var(--lwv-purple); }
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5) var(--space-4);
+    text-align: center;
+}
+
+/* ── COMPONENT: DATE TILE ────────────────────────────────────────────────────
+   Calendar-style date: month over a large serif day number.
+   <div class="date-tile"><span class="date-tile__month">Oct</span>
+        <span class="date-tile__day">14</span></div>                         */
+.date-tile {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 76px;
+    padding: 10px 12px 12px;
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-top: 4px solid var(--lwv-purple);
+    border-radius: var(--radius);
+    text-align: center;
+    line-height: 1;
+}
+
+.date-tile__month {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lwv-purple);
+}
+
+.date-tile__day {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 6px;
+}
+
+.date-tile__dow {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+/* ── COMPONENT: CARD ─────────────────────────────────────────────────────────
+   White box with a hairline border. Modifiers:
+   .card--accent      purple rule on the left (use --blue / --red for others)
+   .card--top         purple rule along the top
+   .card--link        the whole card is a link; hover changes border + shadow
+                      (only clickable cards react to hover)                  */
+.card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
+}
+
+.card > :first-child { margin-top: 0; }
+.card > :last-child { margin-bottom: 0; }
+
+.card__title {
+    font-size: 21px;
+    margin: 0 0 var(--space-2);
+}
+
+.card--accent { border-left: 4px solid var(--lwv-purple); }
+.card--accent-blue { border-left: 4px solid var(--lwv-blue); }
+.card--accent-red { border-left: 4px solid var(--lwv-red); }
+.card--top { border-top: 4px solid var(--lwv-purple); }
+
+.card--link {
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.card--link:hover {
+    color: inherit;
+    border-color: var(--lwv-purple);
+    box-shadow: var(--shadow-md);
+}
+
+.card--link:hover .card__more { text-decoration-thickness: 2px; }
+
+/* "Learn more →" line at the bottom of a link card (looks like a link) */
+.card__more {
+    display: inline-block;
+    margin-top: var(--space-3);
+    font-weight: 700;
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+/* Icon at the top of a card (inline SVG drawn with stroke="currentColor") */
+.icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.card .icon { color: var(--lwv-purple); margin-bottom: var(--space-3); }
+
+/* ── COMPONENT: NEWS CARD ────────────────────────────────────────────────────
+   Used by the news generators (scripts/post-news.js, scripts/fetch_lwvus.py).
+   Change the generators' markup together with these rules.                 */
+.news-card {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-left: 4px solid var(--lwv-purple);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    margin: 0 0 var(--space-5);
+}
+
+.news-card .eyebrow { margin-bottom: var(--space-2); }
+.news-card .eyebrow::after { content: none; }
+
+.news-card__title {
+    font-size: 22px;
+    margin: 0 0 var(--space-3);
+}
+
+.news-card__img {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: var(--space-4) 0;
+    border-radius: var(--radius);
+}
+
+.news-card p { margin-left: 0; margin-right: 0; }
+
+.feed-updated {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* ── ACCESSIBILITY ───────────────────────────────────────────────────────── */
+
+/* "Skip to main content" link: hidden until a keyboard user tabs to it */
+.skip-link {
+    position: absolute;
+    left: 12px;
+    top: -100px;
+    z-index: 1000;
+    padding: 12px 18px;
+    background: var(--lwv-purple-dark);
+    color: var(--white);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radius);
+}
+
+.skip-link:focus { top: 12px; color: var(--white); }
+
+/* Visible focus ring for keyboard users only (not on mouse click) */
+:focus-visible {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 3px;
+}
+
+/* Respect the "reduce motion" setting: no smooth scrolling or animations */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================================================
+   LEGACY — older class names, restyled to match the new system.
+   Pages move to the components above as they're redesigned; don't use
+   these in new work. The member portal (scripts/build-member-portal.js)
+   also uses .site-header, .logo, nav and .page-header.
+   ========================================================================== */
 
 /* HEADER */
 .site-header {
-    background: linear-gradient(135deg, #8B1A7A 0%, #a8267d 100%);
+    background: var(--lwv-purple);
     padding: 20px 0;
-    border-bottom: 3px solid var(--accent-purple);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
+    --focus-color: var(--white);
 }
 
 .site-header .container {
@@ -71,9 +681,9 @@ html { scroll-behavior: smooth; }
 }
 
 .logo {
-    background: white;
+    background: var(--white);
     padding: 8px 14px;
-    border-radius: 6px;
+    border-radius: var(--radius);
     display: inline-flex;
     align-items: center;
     text-decoration: none;
@@ -86,28 +696,25 @@ html { scroll-behavior: smooth; }
 }
 
 .header-donate {
-    background: white;
-    color: var(--accent-purple);
+    background: var(--white);
+    color: var(--lwv-purple);
     padding: 12px 24px;
-    border-radius: 6px;
+    border-radius: var(--radius);
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
     transition: var(--transition);
-    box-shadow: var(--shadow-sm);
 }
 
 .header-donate:hover {
-    background: var(--bg-light);
-    color: var(--accent-purple);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    background: var(--surface);
+    color: var(--lwv-purple-dark);
 }
 
 /* NAVIGATION */
 nav {
-    background: var(--bg-white);
-    border-bottom: 1px solid #e5e7eb;
+    background: var(--white);
+    border-bottom: 1px solid var(--hairline);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -133,23 +740,23 @@ nav li { flex: 0 0 auto; }
 nav a {
     display: block;
     padding: 16px 24px;
-    color: var(--text-medium);
+    color: var(--body);
     text-decoration: none;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
     border-bottom: 3px solid transparent;
     transition: var(--transition);
     white-space: nowrap;
 }
 
 nav a:hover, nav a.active {
-    color: var(--accent-purple);
-    border-bottom-color: var(--accent-purple);
-    background: var(--bg-purple-light);
+    color: var(--lwv-purple);
+    border-bottom-color: var(--lwv-purple);
+    background: var(--lwv-purple-tint);
 }
 
-/* NAV BRAND - small logo shown in the sticky nav on mobile only, so the
-   site stays identifiable once the big header scrolls away */
+/* Small logo shown in the sticky nav on mobile only, so the site stays
+   identifiable once the big header scrolls away */
 .nav-brand {
     display: none;
     align-items: center;
@@ -163,7 +770,7 @@ nav a:hover, nav a.active {
     display: block;
 }
 
-/* HAMBURGER BUTTON - hidden on desktop */
+/* Hamburger button: hidden on desktop */
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -180,7 +787,7 @@ nav a:hover, nav a.active {
     display: block;
     height: 3px;
     width: 100%;
-    background-color: var(--accent-purple);
+    background-color: var(--lwv-purple);
     border-radius: 2px;
     transition: var(--transition);
 }
@@ -189,13 +796,7 @@ nav a:hover, nav a.active {
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* HERO IMAGE (full-width banner photo) */
+/* FULL-WIDTH BANNER PHOTO */
 .hero-image {
     width: 100%;
     display: block;
@@ -207,19 +808,20 @@ nav a:hover, nav a.active {
     display: block;
 }
 
-/* HERO TEXT SECTION */
+/* HERO TEXT SECTION (homepage, action alerts, newsletter archive) */
 .hero-section {
-    background: linear-gradient(to bottom, var(--bg-light) 0%, white 100%);
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
     padding: 60px 20px;
     text-align: center;
 }
 
-.hero-section h1 { max-width: 800px; margin: 0 auto 20px; }
+.hero-section h1 { max-width: 820px; margin: 0 auto 20px; }
 
 .hero-section .lead {
     font-size: 20px;
-    color: var(--text-medium);
-    max-width: 650px;
+    color: var(--body);
+    max-width: 660px;
     margin: 0 auto 35px;
     line-height: 1.6;
 }
@@ -231,71 +833,35 @@ nav a:hover, nav a.active {
     flex-wrap: wrap;
 }
 
-/* PAGE HEADER (inner pages) */
+/* PAGE HEADER (inner pages): calm editorial header, serif title over a
+   short gold rule on a light background */
 .page-header {
-    background: linear-gradient(135deg, #8B1A7A 0%, #a8267d 100%);
-    color: white;
-    padding: 50px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
+    padding: 56px 20px 48px;
     text-align: center;
 }
 
-.page-header h1 { color: white; margin: 0 0 15px 0; }
-.page-header .lead { color: rgba(255,255,255,0.9); margin: 0 auto; max-width: 600px; }
+.page-header h1 { margin: 0 auto 16px; max-width: 900px; }
 
-/* BUTTONS */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 32px;
-    background: var(--accent-purple);
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: var(--transition);
-    border: 2px solid var(--accent-purple);
-    cursor: pointer;
-    min-height: 48px;
-    justify-content: center;
+.page-header h1::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 4px;
+    margin: 20px auto 0;
+    background: var(--lwv-gold);
 }
 
-.btn:hover {
-    background: var(--accent-purple-light);
-    border-color: var(--accent-purple-light);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
+.page-header .lead { color: var(--body); margin: 0 auto; max-width: 640px; }
 
-.btn-secondary {
-    background: white;
-    color: var(--accent-purple);
-    border: 2px solid var(--accent-purple);
-}
-
-.btn-secondary:hover {
-    background: var(--accent-purple);
-    color: white;
-}
-
-.btn-blue {
-    background: var(--primary-blue);
-    border-color: var(--primary-blue);
-}
-
-.btn-blue:hover {
-    background: #00509e;
-    border-color: #00509e;
-}
-
-/* IMPACT STATS */
+/* IMPACT STATS: numbers framed by gold corner brackets */
 .impact-section {
-    background: var(--bg-light);
+    background: var(--surface);
     padding: 60px 20px;
     margin: 60px 0;
-    border-top: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
 }
 
 .impact-grid {
@@ -307,38 +873,43 @@ nav a:hover, nav a.active {
 }
 
 .impact-card {
-    background: white;
+    position: relative;
     padding: 40px 30px;
     text-align: center;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-sm);
-    border-left: 4px solid var(--accent-purple);
-    transition: var(--transition);
 }
 
-.impact-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+.impact-card::before,
+.impact-card::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 0 solid var(--lwv-gold);
+    pointer-events: none;
 }
+
+.impact-card::before { top: 0; left: 0; border-top-width: 4px; border-left-width: 4px; }
+.impact-card::after { bottom: 0; right: 0; border-bottom-width: 4px; border-right-width: 4px; }
 
 .impact-number {
+    font-family: var(--font-serif);
     font-size: 48px;
-    font-weight: 800;
-    color: var(--accent-purple);
+    font-weight: 600;
+    color: var(--lwv-purple);
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     line-height: 1;
 }
 
 .impact-label {
-    font-size: 14px;
-    color: var(--text-light);
+    font-size: 13px;
+    color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-weight: 700;
 }
 
-/* IMAGE CARDS */
+/* IMAGE CARDS (not clickable, so no hover effect) */
 .image-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -347,16 +918,11 @@ nav a:hover, nav a.active {
 }
 
 .image-card {
-    background: white;
-    border-radius: var(--border-radius);
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-}
-
-.image-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-sm);
 }
 
 .image-card img {
@@ -368,28 +934,26 @@ nav a:hover, nav a.active {
 
 .image-caption {
     padding: 20px;
-    background: white;
-    border-top: 3px solid var(--accent-purple);
+    background: var(--white);
+    border-top: 3px solid var(--lwv-purple);
 }
 
-.image-caption h3 { margin: 0 0 8px 0; font-size: 18px; }
-.image-caption p { margin: 0; font-size: 15px; color: var(--text-light); }
+.image-caption h3 { margin: 0 0 8px 0; font-size: 19px; }
+.image-caption p { margin: 0; font-size: 15px; color: var(--muted); }
 
-/* EVENT CARDS */
+/* EVENT CARDS (not used on current pages; kept for reference) */
 .event-card {
-    background: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     margin-bottom: 30px;
-    transition: var(--transition);
 }
 
-.event-card:hover { box-shadow: var(--shadow-lg); }
-
 .event-header {
-    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
-    color: white;
+    background: var(--lwv-purple);
+    color: var(--white);
     padding: 30px;
 }
 
@@ -404,9 +968,8 @@ nav a:hover, nav a.active {
 
 .event-title {
     font-size: 24px;
-    font-weight: 700;
     margin: 0 0 15px 0;
-    color: white;
+    color: var(--white);
 }
 
 .event-location { font-size: 16px; margin: 0; opacity: 0.95; }
@@ -416,12 +979,12 @@ nav a:hover, nav a.active {
 /* SECTION DIVIDERS */
 .section-divider {
     height: 1px;
-    background: #e5e7eb;
+    background: var(--hairline);
     margin: 60px 0;
     max-width: 1200px;
 }
 
-/* CONTENT SECTIONS */
+/* CONTENT SECTIONS: 800px reading column */
 .content-section {
     max-width: 800px;
     margin: 0 auto;
@@ -436,32 +999,38 @@ nav a:hover, nav a.active {
 
 .content-section li { margin-bottom: 10px; }
 
-/* CTA SECTIONS */
+/* CTA SECTION: now a centred callout box (purple left + bottom border) */
 .cta-section {
-    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
-    padding: 60px 40px;
+    background: var(--surface-strong);
+    border-left: 8px solid var(--lwv-purple);
+    border-bottom: 8px solid var(--lwv-purple);
+    box-shadow: var(--shadow-md);
+    padding: 48px 28px;
     text-align: center;
     margin: 60px 0;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-lg);
 }
 
-.cta-section h2 { color: white; margin: 0 0 15px 0; font-size: 32px; }
+.cta-section h2 { margin: 0 0 15px 0; }
+
+.cta-section h2::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 0 auto 18px;
+    background: var(--lwv-purple);
+}
 
 .cta-section p {
-    color: rgba(255,255,255,0.95);
     font-size: 18px;
     max-width: 600px;
-    margin: 0 auto 30px;
+    margin: 0 auto 28px;
 }
-
-.cta-section .btn { background: white; color: var(--accent-purple); border-color: white; }
-.cta-section .btn:hover { background: var(--bg-light); }
 
 /* FOOTER */
 footer {
-    background: linear-gradient(to bottom, #f3f4f6 0%, #e5e7eb 100%);
-    border-top: 4px solid var(--accent-purple);
+    background: var(--surface);
+    border-top: 4px solid var(--lwv-purple);
     padding: 60px 20px 30px;
     margin-top: 80px;
 }
@@ -473,29 +1042,29 @@ footer .container {
     max-width: 1200px;
 }
 
-footer h4 { font-size: 16px; margin-bottom: 15px; font-weight: 700; color: var(--text-dark); }
-footer p { color: var(--text-light); font-size: 14px; line-height: 1.7; }
+footer h4 { font-size: 16px; margin-bottom: 15px; color: var(--ink); }
+footer p { color: var(--muted); font-size: 14px; line-height: 1.7; }
 
 footer a {
-    color: var(--text-light);
+    color: var(--muted);
     text-decoration: none;
     display: block;
     margin-bottom: 10px;
     font-size: 14px;
-    transition: var(--transition);
+    transition: color 0.2s var(--ease);
 }
 
 footer a:hover {
-    color: var(--accent-purple);
-    transform: translateX(4px);
+    color: var(--lwv-purple);
+    text-decoration: underline;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 30px;
     margin-top: 30px;
-    border-top: 1px solid #d1d5db;
-    color: var(--text-light);
+    border-top: 1px solid var(--hairline-strong);
+    color: var(--muted);
     font-size: 13px;
 }
 
@@ -510,13 +1079,8 @@ footer a:hover {
         min-height: 52px;
     }
 
-    .nav-brand {
-        display: inline-flex;
-    }
-
-    .nav-toggle {
-        display: flex;
-    }
+    .nav-brand { display: inline-flex; }
+    .nav-toggle { display: flex; }
 
     nav ul {
         display: none;
@@ -525,17 +1089,15 @@ footer a:hover {
         position: absolute;
         top: 100%;
         right: 0;
-        background: white;
+        background: var(--white);
         width: 240px;
         box-shadow: var(--shadow-lg);
-        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        border-radius: 0 0 var(--radius) var(--radius);
         z-index: 200;
         padding: 8px 0;
     }
 
-    nav ul.open {
-        display: flex;
-    }
+    nav ul.open { display: flex; }
 
     nav ul li {
         flex: unset;
@@ -551,59 +1113,69 @@ footer a:hover {
 
     nav ul li a:hover, nav ul li a.active {
         border-bottom: none;
-        border-left-color: var(--accent-purple);
-        background: var(--bg-purple-light);
+        border-left-color: var(--lwv-purple);
+        background: var(--lwv-purple-tint);
     }
 }
 
-/* SMALL PHONES: long one-word titles ("Representatives") would run off a 320-359px screen */
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* SMALL PHONES: long one-word titles ("Representatives") would run off a
+   320–359px screen */
 @media (max-width: 359px) {
-    h1 { font-size: 36px; }
+    h1 { font-size: 32px; }
 }
 
-/* PHONES: compact impact cards so two fit side by side down to a 320px screen */
+/* PHONES: compact stat boxes so two fit side by side down to a 320px screen */
 @media (max-width: 599px) {
     .impact-section { padding-left: 0; padding-right: 0; }
     .impact-grid { gap: 12px; }
     .impact-card { padding: 28px 8px; }
+    .impact-card::before,
+    .impact-card::after { width: 28px; height: 28px; }
     .impact-number { font-size: 40px; }
-    .impact-label { font-size: 12px; letter-spacing: 0.3px; }
+    .impact-label { font-size: 12px; letter-spacing: 0.04em; }
 }
 
 /* TABLET */
 @media (min-width: 600px) {
-    h1 { font-size: 52px; }
-    h2 { font-size: 38px; }
+    h1 { font-size: 46px; }
+    h2 { font-size: 34px; }
     .hero-section .lead { font-size: 22px; }
     .image-grid { grid-template-columns: repeat(2, 1fr); }
     .image-card img { height: 280px; }
+    .callout { padding: var(--space-7) var(--space-7); }
+    .cta-section { padding: 60px 48px; }
+    .stat-bracket__num { font-size: 56px; }
 }
 
 /* DESKTOP */
 @media (min-width: 768px) {
     .container { padding: 0 40px; }
-    h1 { font-size: 58px; }
+    h1 { font-size: 52px; }
     .logo img { height: 70px; }
+    .band { padding: var(--space-9) 0; }
     .hero-section { padding: 90px 40px 70px; }
+    .page-header { padding: 72px 40px 60px; }
     .impact-section { padding: 80px 40px; }
-    .impact-card { padding: 50px 40px; }
+    .impact-card { padding: 48px 32px; }
     .impact-number { font-size: 56px; }
     .image-grid { grid-template-columns: repeat(3, 1fr); gap: 35px; }
     .image-card img { height: 300px; }
+    .callout--split { grid-template-columns: 1fr auto; gap: var(--space-7); }
     footer .container { grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
 }
 
-/* Four impact cards in one row only from 900px; narrower screens keep two rows of two */
+/* Four stats in one row only from 900px; narrower screens keep two rows of two */
 @media (min-width: 900px) {
-    .impact-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .impact-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .stat-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* LARGE DESKTOP */
 @media (min-width: 1024px) {
-    h1 { font-size: 64px; }
+    h1 { font-size: 56px; }
     .logo img { height: 75px; }
 }
-
-/* ACCESSIBILITY */
-.btn:focus, a:focus { outline: 2px solid var(--accent-purple); outline-offset: 2px; }
-img { max-width: 100%; height: auto; }
