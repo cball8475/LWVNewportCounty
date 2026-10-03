@@ -10,6 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="League of Women Voters of Newport County">
     <meta property="og:url" content="https://lwvnewportcounty.org/about.html">
+    <link rel="canonical" href="https://lwvnewportcounty.org/about.html">
     <meta property="og:image" content="https://lwvnewportcounty.org/images/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#521C50">
@@ -33,6 +34,31 @@
             .town-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
+    <!-- Breadcrumb for search results (Home > this page). -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://lwvnewportcounty.org/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "About Us",
+              "item": "https://lwvnewportcounty.org/about.html"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -238,7 +264,7 @@
             <div class="card">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 21h18"/></svg>
                 <h3 class="card__title">State League</h3>
-                <p><a href="https://my.lwv.org/rhode-island/lwv-newport-county" target="_blank">LWV Rhode Island</a></p>
+                <p><a href="https://my.lwv.org/rhode-island" target="_blank">LWV Rhode Island</a></p>
             </div>
         </div>
 

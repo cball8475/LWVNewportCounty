@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Public pages for search engines. Submitted in Google Search Console.
+     Adding or removing a page? Update this list, and give the page a
+     <link rel="canonical"> and BreadcrumbList JSON-LD (see about.html).
+     members.html (password-protected) and the unlinked record pages are left
+     out on purpose; robots.txt asks crawlers to skip them. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://lwvnewportcounty.org/</loc></url>
+  <url><loc>https://lwvnewportcounty.org/about.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/vote.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/elections-2026.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/events.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/issues.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/action-alerts.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/get-involved.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/news.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/news-notes.html</loc></url>
+  <url><loc>https://lwvnewportcounty.org/find-your-rep.html</loc></url>
+</urlset>

@@ -7,7 +7,10 @@
      On each page:
        1. In <head>, after <title>: the meta description, Open Graph tags,
           favicon, font links and <script src="site.js" defer></script>
-          (copy them from any page, e.g. about.html).
+          (copy them from any page, e.g. about.html). Each page also has its
+          own <link rel="canonical"> after og:url and a BreadcrumbList JSON-LD
+          block before </head>, and is listed in sitemap.xml (see CLAUDE.md,
+          "Search engines"). The member portal skips these.
        2. Right after <body>: the skip link, utility bar and main nav below.
           Mark the current page's link with aria-current="page".
        3. Wrap the page content in <main id="main"> ... </main>.
