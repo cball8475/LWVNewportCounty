@@ -90,6 +90,12 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 
 The newsletter signup is a pre-filled email ("Subscribe by email"). If the League sets up a signup form, swap that mailto link in every footer, in the portal template, and on `news.html` and `news-notes.html`.
 
+**Search engines.** These are per page, not chrome, so the member portal doesn't need them.
+- `sitemap.xml` lists the public pages. `robots.txt` points to it and asks crawlers to skip `members.html` and the unlinked working files.
+- Each public page has a `<link rel="canonical">` right after `og:url`, and a BreadcrumbList JSON-LD block (Home > page) just before `</head>`. A new page needs both, plus a sitemap entry.
+- `index.html` carries WebSite and Organization (`NGO`) JSON-LD: the site name, the "LWVNC" alias, logo, email, mailing address and social profiles. Update it when any of those change.
+- The FAQ at `about.html#faq` is repeated word for word in that page's FAQPage JSON-LD. Edit both together, and keep dates and dues out of the answers.
+
 **Bot workflows.** Every workflow that pushes to `main` shares the concurrency group `site-content-push` and uses a rebase-and-retry push loop.
 
 | Workflow | Trigger | Effect |

@@ -1,0 +1,10 @@
+# lwvnewportcounty.org
+# members.html is the password-protected member portal. The other three are
+# unlinked working files (see CLAUDE.md), not pages for the public.
+User-agent: *
+Disallow: /members.html
+Disallow: /events-archive.html
+Disallow: /event-section.html
+Disallow: /nav-standard.html
+
+Sitemap: https://lwvnewportcounty.org/sitemap.xml

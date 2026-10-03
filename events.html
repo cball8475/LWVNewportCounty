@@ -10,6 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="League of Women Voters of Newport County">
     <meta property="og:url" content="https://lwvnewportcounty.org/events.html">
+    <link rel="canonical" href="https://lwvnewportcounty.org/events.html">
     <meta property="og:image" content="https://lwvnewportcounty.org/images/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#521C50">
@@ -26,6 +27,31 @@
         .forum-date.is-past { color: var(--muted); }
         .forum-date.is-past::after { content: " \00B7  Past"; font-weight: 600; font-size: .85em; }
     </style>
+    <!-- Breadcrumb for search results (Home > this page). -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://lwvnewportcounty.org/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Calendar & Events",
+              "item": "https://lwvnewportcounty.org/events.html"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to main content</a>

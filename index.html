@@ -10,6 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="League of Women Voters of Newport County">
     <meta property="og:url" content="https://lwvnewportcounty.org/">
+    <link rel="canonical" href="https://lwvnewportcounty.org/">
     <meta property="og:image" content="https://lwvnewportcounty.org/images/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#521C50">
@@ -20,6 +21,68 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <script src="site.js" defer></script>
     <link rel="stylesheet" href="styles.css">
+    <!-- Structured data for search engines: site name, and who the League is. Keep in step with the footer contacts and get-involved.html. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://lwvnewportcounty.org/#website",
+          "name": "League of Women Voters of Newport County",
+          "alternateName": [
+            "LWV Newport County",
+            "LWVNC"
+          ],
+          "url": "https://lwvnewportcounty.org/",
+          "publisher": {
+            "@id": "https://lwvnewportcounty.org/#organization"
+          }
+        },
+        {
+          "@type": "NGO",
+          "@id": "https://lwvnewportcounty.org/#organization",
+          "name": "League of Women Voters of Newport County",
+          "alternateName": [
+            "LWV Newport County",
+            "LWVNC"
+          ],
+          "url": "https://lwvnewportcounty.org/",
+          "logo": "https://lwvnewportcounty.org/images/logo-newport-county.png",
+          "description": "Nonpartisan voter information, candidate forums and advocacy for Newport, Jamestown, Little Compton, Middletown, Portsmouth and Tiverton, Rhode Island.",
+          "email": "lwvnewportcounty@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "postOfficeBoxNumber": "4204",
+            "addressLocality": "Middletown",
+            "addressRegion": "RI",
+            "postalCode": "02842",
+            "addressCountry": "US"
+          },
+          "areaServed": [
+            "Newport, RI",
+            "Jamestown, RI",
+            "Little Compton, RI",
+            "Middletown, RI",
+            "Portsmouth, RI",
+            "Tiverton, RI"
+          ],
+          "nonprofitStatus": "Nonprofit501c4",
+          "parentOrganization": {
+            "@type": "NGO",
+            "name": "League of Women Voters of Rhode Island",
+            "url": "https://my.lwv.org/rhode-island"
+          },
+          "sameAs": [
+            "https://www.facebook.com/LWVNewportCounty/",
+            "https://www.instagram.com/lwvnewportcounty/",
+            "https://www.lwv.org/local-leagues/lwv-newport-county",
+            "https://my.lwv.org/rhode-island/local-leagues-and-activities/lwv-newport-county"
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to main content</a>
