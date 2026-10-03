@@ -34,7 +34,7 @@
             .town-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
-    <!-- Breadcrumb for search results (Home > this page). -->
+    <!-- Breadcrumb for search results (Home > this page). FAQPage repeats the visible FAQ (#faq) word for word; edit both together. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,6 +53,67 @@
               "position": 2,
               "name": "About Us",
               "item": "https://lwvnewportcounty.org/about.html"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is LWVNC?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "LWVNC is the League of Women Voters of Newport County, the local League for Newport, Jamestown, Little Compton, Middletown, Portsmouth and Tiverton. We are part of the League of Women Voters of Rhode Island and the national League of Women Voters of the United States."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does the League endorse candidates or political parties?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The League is nonpartisan and never supports or opposes candidates or political parties at any level of government. We do take positions on public policy issues, such as voting rights, after member study and agreement."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who can join? Do I have to be a woman?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Membership is open to anyone 16 or older, of any gender."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does membership cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "LWV Rhode Island sets recommended dues, and you can pay what you can above a small minimum. One membership covers the national, state and Newport County Leagues. Current rates and the join link are on our Get Involved page."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my donation tax-deductible?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not when you give to LWV Newport County, which is a 501(c)(4) social welfare organization. For a tax-deductible gift, donate to the LWVRI Education Fund, a 501(c)(3) that funds civic education across Rhode Island."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I register to vote or check my registration in Rhode Island?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use the Rhode Island Secretary of State's voter website, vote.sos.ri.gov, to register online or check your registration. Our Voter Resources page lists the current deadlines."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does the League hold candidate forums?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. In election years we host nonpartisan forums for local candidates across Newport County. The schedule is on our Calendar & Events page."
+              }
             }
           ]
         }
@@ -247,6 +308,31 @@
             <div class="town">Portsmouth</div>
             <div class="town">Tiverton</div>
         </div>
+
+        <!-- FAQ: the FAQPage JSON-LD in <head> repeats these questions and answers;
+             change both together. Keep dates and dues out of the answers so they don't go stale. -->
+        <h2 id="faq">Frequently Asked Questions</h2>
+
+        <h3>What is LWVNC?</h3>
+        <p>LWVNC is the League of Women Voters of Newport County, the local League for Newport, Jamestown, Little Compton, Middletown, Portsmouth and Tiverton. We are part of the League of Women Voters of Rhode Island and the national League of Women Voters of the United States.</p>
+
+        <h3>Does the League endorse candidates or political parties?</h3>
+        <p>No. The League is nonpartisan and never supports or opposes candidates or political parties at any level of government. We do take positions on public policy issues, such as voting rights, after member study and agreement.</p>
+
+        <h3>Who can join? Do I have to be a woman?</h3>
+        <p>Membership is open to anyone 16 or older, of any gender.</p>
+
+        <h3>How much does membership cost?</h3>
+        <p>LWV Rhode Island sets recommended dues, and you can pay what you can above a small minimum. One membership covers the national, state and Newport County Leagues. Current rates and the join link are on our <a href="get-involved.html#membership">Get Involved</a> page.</p>
+
+        <h3>Is my donation tax-deductible?</h3>
+        <p>Not when you give to LWV Newport County, which is a 501(c)(4) social welfare organization. For a tax-deductible gift, donate to the <a href="https://my.lwv.org/rhode-island/donate" target="_blank" rel="noopener">LWVRI Education Fund</a>, a 501(c)(3) that funds civic education across Rhode Island.</p>
+
+        <h3>How do I register to vote or check my registration in Rhode Island?</h3>
+        <p>Use the Rhode Island Secretary of State's voter website, <a href="https://vote.sos.ri.gov" target="_blank" rel="noopener">vote.sos.ri.gov</a>, to register online or check your registration. Our <a href="vote.html">Voter Resources</a> page lists the current deadlines.</p>
+
+        <h3>Does the League hold candidate forums?</h3>
+        <p>Yes. In election years we host nonpartisan forums for local candidates across Newport County. The schedule is on our <a href="events.html">Calendar &amp; Events</a> page.</p>
 
         <!-- CONTACT -->
         <h2>Contact Us</h2>

@@ -94,6 +94,7 @@ The newsletter signup is a pre-filled email ("Subscribe by email"). If the Leagu
 - `sitemap.xml` lists the public pages. `robots.txt` points to it and asks crawlers to skip `members.html` and the unlinked working files.
 - Each public page has a `<link rel="canonical">` right after `og:url`, and a BreadcrumbList JSON-LD block (Home > page) just before `</head>`. A new page needs both, plus a sitemap entry.
 - `index.html` carries WebSite and Organization (`NGO`) JSON-LD: the site name, the "LWVNC" alias, logo, email, mailing address and social profiles. Update it when any of those change.
+- The FAQ at `about.html#faq` is repeated word for word in that page's FAQPage JSON-LD. Edit both together, and keep dates and dues out of the answers.
 - Google Search Console has a Domain property for `lwvnewportcounty.org` (verified Oct 3, 2026). The proof is a `google-site-verification=…` TXT record on `@` in Namecheap DNS, where the domain is registered. Never delete that record. Namecheap also runs the domain's free email forwarding: the MX records and the locked SPF TXT record. If DNS ever moves (a Cloudflare move after the Nov 2026 election has been discussed), first recreate every email forwarder there and copy the verification record.
 
 **Bot workflows.** Every workflow that pushes to `main` shares the concurrency group `site-content-push` and uses a rebase-and-retry push loop.
