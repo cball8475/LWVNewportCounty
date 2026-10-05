@@ -97,17 +97,20 @@ FORUMS = [
         # to Mon 10/19 with a new moderator. The request read "League of Women
         # Voters Newport County"; the flyer uses the League's name as it appears
         # on its logo. Changed Oct 2: time moved from 6:30-8:00 to 5:30-7:00 PM.
-        # Place and form are unchanged.
-        "slug": "forum-jamestown-town-council-2026-10-19",
+        # Changed Oct 5: back to Tue 10/13, 6:30-7:30 PM, moderated by the
+        # League president (who sent the change). The venue is being confirmed,
+        # so the location reads "To be announced" until it arrives; don't
+        # print this flyer before then. The form is unchanged.
+        "slug": "forum-jamestown-town-council-2026-10-13",
         "town": "Jamestown",
         "title": ["Town Council", "Candidates Forum"],
-        "iso_date": "2026-10-19",
-        "date": "Monday, October 19, 2026",
-        "time": "5:30 &ndash; 7:00 PM",
-        "location": "Jamestown Philomenian Library",
-        "location_sub": "26 North Road",
-        "moderator": "Angela Lima",
-        "moderator_sub": "League of Women Voters of Newport County",
+        "iso_date": "2026-10-13",
+        "date": "Tuesday, October 13, 2026",
+        "time": "6:30 &ndash; 7:30 PM",
+        "location": "To be announced",
+        "location_sub": None,
+        "moderator": "Christine Stenning",
+        "moderator_sub": "President, League of Women Voters of Newport County",
         "form": "https://forms.gle/bfBExiaofFCJULZC6",
     },
     {
