@@ -69,7 +69,7 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 
 ## Architecture
 
-**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep`, `news-notes` (the newsletter archive, linked from the footer) and `members` (encrypted).
+**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep`, `news-notes` (the newsletter archive, linked from the footer), `accessibility` (how to have the site read aloud, linked from the footer's bottom row) and `members` (encrypted).
 
 **Design system.** `styles.css` holds the LWV brand tokens (`--lwv-blue`, `--lwv-red`, `--lwv-purple`, `--lwv-purple-dark`, `--lwv-gold`, AA-safe neutrals, a spacing scale) and the shared components. `docs/styleguide.html` (not published) shows each one with copy-paste markup. Headings are IBM Plex Serif; body text is Inter.
 
@@ -91,7 +91,8 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 The newsletter signup is a pre-filled email ("Subscribe by email"). If the League sets up a signup form, swap that mailto link in every footer, in the portal template, and on `news.html` and `news-notes.html`.
 
 **Search engines.** These are per page, not chrome, so the member portal doesn't need them.
-- `sitemap.xml` lists the public pages. `robots.txt` points to it and asks crawlers to skip `members.html` and the unlinked working files.
+- `sitemap.xml` lists the public pages. `robots.txt` points to it and asks crawlers to skip `members.html`, the unlinked working files, the precinct sample-ballot PDFs and `print/`.
+- Link to the homepage as `./`, never `index.html`, so internal links match the canonical `/` (in the chrome and in the member-portal template).
 - Each public page has a `<link rel="canonical">` right after `og:url`, and a BreadcrumbList JSON-LD block (Home > page) just before `</head>`. A new page needs both, plus a sitemap entry.
 - `index.html` carries WebSite and Organization (`NGO`) JSON-LD: the site name, the "LWVNC" alias, logo, email, mailing address and social profiles. Update it when any of those change.
 - The FAQ at `about.html#faq` is repeated word for word in that page's FAQPage JSON-LD. Edit both together, and keep dates and dues out of the answers.

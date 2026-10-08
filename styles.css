@@ -167,6 +167,11 @@ p {
 
 .text-center { text-align: center; }
 
+/* Heading level comes from the page outline, look comes from the class: lets a
+   heading move up a level for screen readers without changing how it looks. */
+.h3-look { font-size: 22px; color: var(--ink); letter-spacing: normal; }
+.h4-look { font-family: var(--font-sans); font-weight: 700; font-size: 18px; }
+
 .visually-hidden {
     position: absolute !important;
     width: 1px;
@@ -743,6 +748,8 @@ p {
 .paypal-box { width: 100%; max-width: 500px; margin: 0 auto var(--space-4); }
 
 .page-body > :first-child { margin-top: 0; }
+/* A screen-reader-only heading opening the page body: the block after it is the visible first child */
+.page-body > .visually-hidden:first-child + * { margin-top: 0; }
 
 /* Long-form text: comfortable list spacing, purple list markers */
 .prose ul,

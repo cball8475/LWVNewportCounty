@@ -6,5 +6,9 @@ Disallow: /members.html
 Disallow: /events-archive.html
 Disallow: /event-section.html
 Disallow: /nav-standard.html
+# Precinct sample ballots: one precinct's districts each, so a search visitor should land on
+# elections-2026.html#ballot (which explains that) rather than a PDF. print/ holds printer proofs.
+Disallow: /documents/sample-ballots-2026/
+Disallow: /print/
 
 Sitemap: https://lwvnewportcounty.org/sitemap.xml
