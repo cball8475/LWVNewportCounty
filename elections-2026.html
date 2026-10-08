@@ -359,13 +359,13 @@
           <p class="el-hero-sub">Everything you need to vote with confidence this year — key dates, how to vote, candidate forums, and how to make sure you're ready when the polls open.</p>
           <p class="el-hero-towns">Serving Newport · Middletown · Portsmouth · Tiverton · Jamestown · Little Compton</p>
           <div class="el-jump">
-            <a href="#ballot">📋 Your Ballot</a>
-            <a href="#dates">🗓 Key Dates</a>
-            <a href="#vote">🗳 How to Vote</a>
-            <a href="#forums">🎤 Forums</a>
-            <a href="#check">✓ Check Registration</a>
-            <a href="#pollworker">🤝 Poll Workers</a>
-            <a href="#faq">❓ FAQ</a>
+            <a href="#ballot"><span aria-hidden="true">📋</span> Your Ballot</a>
+            <a href="#dates"><span aria-hidden="true">🗓</span> Key Dates</a>
+            <a href="#vote"><span aria-hidden="true">🗳</span> How to Vote</a>
+            <a href="#forums"><span aria-hidden="true">🎤</span> Forums</a>
+            <a href="#check"><span aria-hidden="true">✓</span> Check Registration</a>
+            <a href="#pollworker"><span aria-hidden="true">🤝</span> Poll Workers</a>
+            <a href="#faq"><span aria-hidden="true">❓</span> FAQ</a>
           </div>
         </div>
       </section>
@@ -373,7 +373,7 @@
       <!-- ===== SMART DEADLINE BANNER (live) ===== -->
       <div class="el-banner" id="el-banner" hidden>
         <div class="el-banner-inner">
-          <span class="el-b-flag">⏰ Next Deadline</span>
+          <span class="el-b-flag"><span aria-hidden="true">⏰</span> Next Deadline</span>
           <span class="el-b-text" id="el-banner-text">Loading…</span>
           <button class="el-cal" id="el-banner-cal" type="button" hidden>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -933,8 +933,8 @@
         <p class="el-intro">Rhode Island runs two elections in 2026 — a statewide Primary in September and the General Election in November. Each has its own registration deadline, mail ballot deadline, and early voting window. Polls are open <strong>7:00&nbsp;a.m.&nbsp;to&nbsp;8:00&nbsp;p.m.</strong> on both Election Days. Tap <strong>Add to calendar</strong> on any date to save it to your phone.</p>
 
         <div class="el-tools">
-          <button class="el-tool" type="button" onclick="window.print()">🖨 Print these dates</button>
-          <button class="el-tool" type="button" id="el-share">🔗 Share this page</button>
+          <button class="el-tool" type="button" onclick="window.print()"><span aria-hidden="true">🖨</span> Print these dates</button>
+          <button class="el-tool" type="button" id="el-share"><span aria-hidden="true">🔗</span> Share this page</button>
         </div>
 
         <div class="el-cycle-head">
@@ -1227,7 +1227,7 @@
             </div>
             <div class="site-footer__bottom">
                 <p>&copy; 2026 League of Women Voters of Newport County. A nonpartisan, nonprofit 501(c)(4) organization.</p>
-                <p><a href="get-involved.html#membership">Join</a> &middot; <a href="get-involved.html#donate">Donate</a> &middot; <a href="about.html">About us</a></p>
+                <p><a href="get-involved.html#membership">Join</a> &middot; <a href="get-involved.html#donate">Donate</a> &middot; <a href="about.html">About us</a> &middot; <a href="accessibility.html">Accessibility</a></p>
             </div>
         </div>
     </footer>
@@ -1438,7 +1438,7 @@
             var url='https://lwvnewportcounty.org/elections-2026.html';
             var data={title:'Elections 2026 — LWV Newport County', text:'Your 2026 Rhode Island elections hub for Newport County.', url:url};
             if(navigator.share){ navigator.share(data).catch(function(){}); }
-            else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ var t=shareBtn.textContent; shareBtn.textContent='✓ Link copied'; setTimeout(function(){ shareBtn.textContent=t; },1800); }); }
+            else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ var t=shareBtn.innerHTML; shareBtn.innerHTML='<span aria-hidden="true">✓</span> Link copied'; setTimeout(function(){ shareBtn.innerHTML=t; },1800); }); }
             else { window.prompt('Copy this link:',url); }
           });
         }

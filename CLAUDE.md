@@ -69,7 +69,7 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 
 ## Architecture
 
-**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep`, `news-notes` (the newsletter archive, linked from the footer) and `members` (encrypted).
+**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep`, `news-notes` (the newsletter archive, linked from the footer), `accessibility` (how to have the site read aloud, linked from the footer's bottom row) and `members` (encrypted).
 
 **Design system.** `styles.css` holds the LWV brand tokens (`--lwv-blue`, `--lwv-red`, `--lwv-purple`, `--lwv-purple-dark`, `--lwv-gold`, AA-safe neutrals, a spacing scale) and the shared components. `docs/styleguide.html` (not published) shows each one with copy-paste markup. Headings are IBM Plex Serif; body text is Inter.
 

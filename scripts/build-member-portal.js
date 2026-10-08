@@ -446,7 +446,7 @@ async function main() {
             </div>
             <div class="site-footer__bottom">
                 <p>&copy; 2026 League of Women Voters of Newport County. A nonpartisan, nonprofit 501(c)(4) organization.</p>
-                <p><a href="get-involved.html#membership">Join</a> &middot; <a href="get-involved.html#donate">Donate</a> &middot; <a href="about.html">About us</a></p>
+                <p><a href="get-involved.html#membership">Join</a> &middot; <a href="get-involved.html#donate">Donate</a> &middot; <a href="about.html">About us</a> &middot; <a href="accessibility.html">Accessibility</a></p>
             </div>
         </div>
     </footer>
