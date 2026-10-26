@@ -21,6 +21,75 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <script src="site.js" defer></script>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* "At a glance" panel in the forum-season letter: shared concerns as tags,
+           then one small card per town. Grouped, not charted: the letter gives no
+           per-topic question counts. */
+        .concerns { margin: 0 0 var(--space-6); }
+        .concerns .stat-grid { margin-bottom: var(--space-5); }
+        .concerns h4 {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: var(--space-5) 0 var(--space-3);
+        }
+        .concerns__lead {
+            background: var(--white);
+            border-left: 4px solid var(--lwv-gold);
+            border-radius: var(--radius);
+            padding: var(--space-3) var(--space-4);
+            margin: 0 0 var(--space-3);
+            line-height: 1.6;
+        }
+        .concerns__lead strong { color: var(--lwv-purple-dark); }
+        .prose .concerns__tags {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            padding: 0;
+            margin: 0;
+        }
+        .prose .concerns__tags li {
+            background: var(--lwv-purple-tint);
+            color: var(--ink);
+            border-radius: 999px;
+            padding: var(--space-1) var(--space-3);
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        /* Columns, not a grid: town cards differ in height, so a grid leaves gaps */
+        .concerns__towns { column-gap: var(--space-3); }
+        .concerns__town {
+            break-inside: avoid;
+            margin-bottom: var(--space-3);
+            background: var(--white);
+            border: 1px solid var(--hairline);
+            border-top: 3px solid var(--lwv-blue);
+            border-radius: var(--radius);
+            padding: var(--space-3) var(--space-4);
+        }
+        .concerns__town h5 {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--lwv-blue);
+            margin: 0 0 var(--space-2);
+        }
+        .prose .concerns__town ul { margin: 0; padding-left: 1.2em; }
+        .prose .concerns__town li { margin-bottom: var(--space-1); font-size: 15px; line-height: 1.5; }
+        @media (min-width: 600px) {
+            .concerns__towns { columns: 2; }
+        }
+        /* Four stats share one row from 900px; "110+" needs the smaller size to stay inside its bracket */
+        @media (min-width: 900px) {
+            .concerns .stat-bracket { padding: var(--space-4) var(--space-2); }
+            .concerns .stat-bracket__num { font-size: 40px; }
+        }
+    </style>
     <!-- Breadcrumb for search results (Home > this page). -->
     <script type="application/ld+json">
     {
@@ -125,6 +194,62 @@
         <article class="news-card">
             <p class="eyebrow eyebrow--plain">From the President &bull; October 26, 2026</p>
             <h3 class="news-card__title">Reflections on the Forum Season</h3>
+
+            <!-- At a glance: a site summary of the letter's figures and concerns paragraphs. Every item
+                 below comes from the letter; the letter itself follows unchanged. Stats depend on the
+                 Jamestown answer (see PR #40). -->
+            <div class="panel concerns">
+                <div class="stat-grid">
+                    <div class="stat-bracket"><span class="stat-bracket__num">10</span><span class="stat-bracket__label">Forums</span></div>
+                    <div class="stat-bracket"><span class="stat-bracket__num">86</span><span class="stat-bracket__label">Candidates</span></div>
+                    <div class="stat-bracket"><span class="stat-bracket__num">59</span><span class="stat-bracket__label">Seats</span></div>
+                    <div class="stat-bracket"><span class="stat-bracket__num">110+</span><span class="stat-bracket__label">Resident questions</span></div>
+                </div>
+
+                <h4>Heard across all five communities</h4>
+                <p class="concerns__lead"><strong>Affordability:</strong> whether young families, and our children, can afford to keep living in Newport County</p>
+                <ul class="concerns__tags">
+                    <li>Taxes and fees: sewer, parking, trash</li>
+                    <li>Support for small businesses</li>
+                    <li>Long-term economic planning</li>
+                    <li>Short-term rentals</li>
+                    <li>Flock cameras</li>
+                    <li>Zoning</li>
+                    <li>School budgets</li>
+                </ul>
+
+                <h4>At the school committee forums</h4>
+                <ul class="concerns__tags">
+                    <li>Council and school committee budget friction</li>
+                    <li>Working with the superintendent</li>
+                    <li>Funding special education, ESL and CTE as enrollment declines</li>
+                </ul>
+
+                <h4>Unique to each community</h4>
+                <div class="concerns__towns">
+                    <div class="concerns__town">
+                        <h5>Newport</h5>
+                        <ul><li>ICE</li><li>Economic diversification</li><li>Balancing tourism with quality of life</li></ul>
+                    </div>
+                    <div class="concerns__town">
+                        <h5>Middletown</h5>
+                        <ul><li>Regionalization</li><li>Term limits</li><li>The future of Pottsy Field</li></ul>
+                    </div>
+                    <div class="concerns__town">
+                        <h5>Portsmouth</h5>
+                        <ul><li>Governance and transparency</li><li>Nonpartisan local elections</li><li>The home-rule lawsuit against the State</li><li>Membership in Portsmouth Concerned Citizens</li></ul>
+                    </div>
+                    <div class="concerns__town">
+                        <h5>Tiverton</h5>
+                        <ul><li>Governance and transparency</li><li>PFAS in residents&rsquo; wells</li><li>Municipal spending priorities</li></ul>
+                    </div>
+                    <div class="concerns__town">
+                        <h5>Little Compton</h5>
+                        <ul><li>Protecting farmland while creating affordable housing</li><li>Groundwater vulnerabilities</li><li>Preparing students for 21st-century jobs</li><li>Keeping the K&ndash;8 school&rsquo;s five-star rating</li></ul>
+                    </div>
+                </div>
+            </div>
+
             <p><strong>Thank you, Newport County!</strong></p>
             <p>The League of Women Voters of Newport County (LWVNC) was honored to hold 10 forums for candidates running for office in Newport County this election season. The field is a crowded one: 86 candidates are running for 59 seats on city and town councils and school committees.</p>
             <p>The questions for each forum came from residents of each city and town. Residents submitted over 110 questions, which were consolidated and adapted for the forums. Candidates were also allowed to address a topic they wished had been asked and was not.</p>
