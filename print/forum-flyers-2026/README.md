@@ -18,6 +18,10 @@ so the whole series looks the same.
 
 Each PDF is ready to print or email. The question-form link in the PDF is clickable.
 
+The Jamestown Town Council forum was not held. Candidates already had two other
+nonpartisan forums scheduled (League president, Oct 26, 2026). Its flyer is kept as a
+record only.
+
 ## What's on each flyer
 
 | Flyer | Moderator | Question form |
