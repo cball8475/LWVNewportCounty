@@ -173,6 +173,7 @@
       .el-forum-row.is-past.has-rec{ filter:none; }
       .el-forum-row.is-past.has-rec .el-fr-rec{ color:var(--el-blue) !important; }
       .el-forum-row .el-fr-name{ font-weight:600; color:var(--el-ink); font-size:.97rem; display:block; }
+      .el-fr-note{ margin:0; color:var(--el-muted); font-size:.94rem; line-height:1.55; }
       .el-forum-row .el-fr-date{ font-weight:800; color:var(--el-blue); white-space:nowrap; font-size:.9rem; }
       .el-fr-cal{ flex:0 0 auto; width:34px; height:34px; padding:0; margin:0; border-radius:9px; justify-content:center; }
       .el-fr-cal span{ display:none; }
@@ -1091,8 +1092,8 @@
              and School Committee forum was one combined event on Oct 19 (see the flyer in print/forum-flyers-2026);
              its date was corrected from Sept 22 on 2026-10-23 at the owner's direction. The Portsmouth Town Council forum (Sept 15) wasn't taped
              (League president, Oct 24), so its row links Jim McGaw's Portsmouth Times article (Sept 16, eastbayri.com
-             story 142602) instead. None found yet for Portsmouth School Committee, Jamestown, Middletown School
-             Committee or the Aug 4 District 13 forum. -->
+             story 142602) instead. None found yet for Portsmouth School Committee, Middletown School
+             Committee or the Aug 4 District 13 forum. Jamestown's forums weren't held (see that card). -->
         <div class="el-forum-grid" id="el-forum-grid">
           <div class="el-town" data-town="newport">
             <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Newport</h3>
@@ -1114,10 +1115,12 @@
             <div class="el-forum-row has-rec"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 7</span><a class="el-fr-rec" href="https://www.youtube.com/watch?v=NyWcpYfGP7w" target="_blank" rel="noopener" aria-label="Watch the Tiverton Town Council forum recording on YouTube">▶ Watch the recording</a></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Tiverton Town Council" data-date="2026-10-07" data-note="LWV Newport County candidate forum: Tiverton Town Council. For time and location, email lwvnewportcounty@gmail.com." data-file="forum-tiverton-council" aria-label="Add Tiverton Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
             <div class="el-forum-row has-rec"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 8</span><a class="el-fr-rec" href="https://www.youtube.com/watch?v=24hygM1u_Lg" target="_blank" rel="noopener" aria-label="Watch the Tiverton School Committee forum recording on YouTube">▶ Watch the recording</a></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Tiverton School Committee" data-date="2026-10-08" data-note="LWV Newport County candidate forum: Tiverton School Committee. For time and location, email lwvnewportcounty@gmail.com." data-file="forum-tiverton-school" aria-label="Add Tiverton School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
           </div>
+          <!-- Jamestown: the League scheduled a School Committee forum (Oct 15) and a Town Council forum (Oct 19)
+               but didn't hold them, because candidates already had two other nonpartisan forums scheduled
+               (League president, Oct 26, 2026). The card stays so the town filter still explains it. -->
           <div class="el-town" data-town="jamestown">
             <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Jamestown</h3>
-            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">School Committee</span><span class="el-fr-date">Oct 15</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Jamestown School Committee" data-date="2026-10-15" data-note="LWV Newport County candidate forum: Jamestown School Committee. For time and location, email lwvnewportcounty@gmail.com." data-file="forum-jamestown-school" aria-label="Add Jamestown School Committee forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
-            <div class="el-forum-row"><span class="el-fr-main"><span class="el-fr-name">Town Council</span><span class="el-fr-date">Oct 19</span></span><button class="el-cal el-fr-cal" type="button" data-cal data-title="LWV Forum — Jamestown Town Council" data-date="2026-10-19" data-note="LWV Newport County candidate forum: Jamestown Town Council. For time and location, email lwvnewportcounty@gmail.com." data-file="forum-jamestown-council" aria-label="Add Jamestown Town Council forum to calendar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add</span></button></div>
+            <p class="el-fr-note">The League didn&rsquo;t hold forums in Jamestown this year. Candidates already had two other nonpartisan forums scheduled.</p>
           </div>
           <div class="el-town" data-town="little-compton">
             <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 8v13h18V8L12 2z" stroke="#005596" stroke-width="2" stroke-linejoin="round"/></svg>Little Compton</h3>
