@@ -2,8 +2,8 @@
 <!-- Public pages for search engines. Submitted in Google Search Console.
      Adding or removing a page? Update this list, and give the page a
      <link rel="canonical"> and BreadcrumbList JSON-LD (see about.html).
-     members.html (password-protected) and the unlinked record pages are left
-     out on purpose; robots.txt asks crawlers to skip them. -->
+     The unlinked record pages are left out on purpose; robots.txt asks
+     crawlers to skip them. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://lwvnewportcounty.org/</loc></url>
   <url><loc>https://lwvnewportcounty.org/about.html</loc></url>

@@ -65,17 +65,15 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 
 **Live site.** The sandbox proxy blocks `lwvnewportcounty.org` and `docs.google.com`. Check live pages with a web-scraping tool, or ask the owner.
 
-**Member portal.** Never run `scripts/build-member-portal.js` into a tracked path. It writes the *plaintext* member roster, and only the StatiCrypt-encrypted `members.html` may be committed. `members-source.html` and `encrypted/` are gitignored.
-
 ## Architecture
 
-**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep`, `news-notes` (the newsletter archive, linked from the footer), `accessibility` (how to have the site read aloud, linked from the footer's bottom row) and `members` (encrypted).
+**Pages.** The pages are `index` (home), `about`, `vote` (voter resources), `events`, `elections-2026` (the Elections hub), `issues`, `get-involved`, `news`, `action-alerts`, `find-your-rep`, `news-notes` (the newsletter archive, linked from the footer), `accessibility` (how to have the site read aloud, linked from the footer's bottom row).
 
 **Design system.** `styles.css` holds the LWV brand tokens (`--lwv-blue`, `--lwv-red`, `--lwv-purple`, `--lwv-purple-dark`, `--lwv-gold`, AA-safe neutrals, a spacing scale) and the shared components. `docs/styleguide.html` (not published) shows each one with copy-paste markup. Headings are IBM Plex Serif; body text is Inter.
 
 - Build pages from the components instead of inline styles: `.page-header` (or `.page-header--photo`), a `.container.container--narrow.page-body.prose` content area, `.card`, `.callout` (the lwv.org box with a thick purple left and bottom border), `.panel`, `.promo`, `.eyebrow`, `.stat-bracket`, `.date-tile`, `.event-item`, `.alert`, `.update-box`, `.news-card`, `.table` in a `.table-wrap`, and the `.btn` variants. A rule only one page needs goes in that page's `<style>` block.
 - Gold is for rules, brackets and dark backgrounds. Gold text on white fails contrast.
-- The LEGACY section at the end of `styles.css` keeps old class names (`.site-header`, bare `nav`, `.cta-section`, `.impact-card`, …) working, mainly for the encrypted member portal until the bot rebuilds it. Don't use them in new work.
+- The LEGACY section at the end of `styles.css` keeps old class names (`.site-header`, bare `nav`, `.cta-section`, `.impact-card`, …) working. Don't use them in new work.
 - The Elections hub has its own `el-` styles; its `--el-*` variables point at the brand tokens.
 
 **Shared chrome.** Every page carries its own copy of the same chrome:
@@ -86,13 +84,13 @@ cd print/palm-card-2026/source && python3 build_card.py [en|es] && ./render.sh  
 - the `.site-footer`;
 - `<main id="main">` around the page content.
 
-`nav-standard.html` is the current reference copy, with instructions. A chrome change has to be made on every page **and** in the member-portal template in `scripts/build-member-portal.js`. Mark the current page's link with `aria-current="page"`. `site.js` runs the phone/tablet menu; its 1180px width must match the nav breakpoint in `styles.css`.
+`nav-standard.html` is the current reference copy, with instructions. A chrome change has to be made on every page. Mark the current page's link with `aria-current="page"`. `site.js` runs the phone/tablet menu; its 1180px width must match the nav breakpoint in `styles.css`.
 
-The newsletter signup is a pre-filled email ("Subscribe by email"). If the League sets up a signup form, swap that mailto link in every footer, in the portal template, and on `news.html` and `news-notes.html`.
+The newsletter signup is a pre-filled email ("Subscribe by email"). If the League sets up a signup form, swap that mailto link in every footer and on `news.html` and `news-notes.html`.
 
-**Search engines.** These are per page, not chrome, so the member portal doesn't need them.
-- `sitemap.xml` lists the public pages. `robots.txt` points to it and asks crawlers to skip `members.html`, the unlinked working files, the precinct sample-ballot PDFs and `print/`.
-- Link to the homepage as `./`, never `index.html`, so internal links match the canonical `/` (in the chrome and in the member-portal template).
+**Search engines.** These are per page, not chrome.
+- `sitemap.xml` lists the public pages. `robots.txt` points to it and asks crawlers to skip the unlinked working files, the precinct sample-ballot PDFs and `print/`.
+- Link to the homepage as `./`, never `index.html`, so internal links match the canonical `/` (in the chrome).
 - Each public page has a `<link rel="canonical">` right after `og:url`, and a BreadcrumbList JSON-LD block (Home > page) just before `</head>`. A new page needs both, plus a sitemap entry.
 - `index.html` carries WebSite and Organization (`NGO`) JSON-LD: the site name, the "LWVNC" alias, logo, email, mailing address and social profiles. Update it when any of those change.
 - The FAQ at `about.html#faq` is repeated word for word in that page's FAQPage JSON-LD. Edit both together, and keep dates and dues out of the answers.
@@ -104,8 +102,6 @@ The newsletter signup is a pre-filled email ("Subscribe by email"). If the Leagu
 |---|---|---|
 | `lwvus-news.yml` | every 6 h, manual | `fetch_lwvus.py` tries the lwv.org RSS feed first and scrapes the site if that fails. It writes `data/lwvus-news.json` and the `LWVUS_NEWS_START/END` block in any page (today, `news.html` and `issues.html`). It exits 1 when it finds no items, and keeps the old HTML when results are thin. |
 | `post-news.yml` | the "📰 Post News" issue form (label `news-post`) | `post-news.js` renders the issue into the `AUTO-NEWS-LWVNC/LWVRI/LWVUS` block of `news.html`. Posts from owners and collaborators publish immediately; anyone else's need the `approved` label. Editing the issue replaces its card (`news-post:N` markers). Owner-facing guide: `NEWS-POSTING-GUIDE.md`. |
-| `update-member-portal.yml` | 12:00 and 22:00 UTC, manual | `build-member-portal.js` reads published CSV tabs of the member-portal Google Sheet (tab GIDs are hardcoded) and writes `members-source.html`. StatiCrypt then encrypts it with secret `MEMBER_PASSWORD` into `members.html`. An inline check refuses to commit plaintext, keyed on the `lwvnc-portal-plaintext-sentinel` comment the builder emits. |
-| `validate-member-portal.yml` | a push touching `members.html` | Runs the same encryption check on human pushes. Pushes made with `GITHUB_TOKEN` don't trigger it, which is why the check also runs inline above. |
 
 Never hand-edit inside machine-owned marker blocks (`LWVUS_NEWS_*`, `AUTO-NEWS-*`, `news-post:*`). Both generators emit `<article class="news-card">` markup, so restyle the cards by changing the generators and the `.news-card` rules together. To re-render existing posts, re-run `post-news.js` for each issue with its current body (action `edited`, `TZ=UTC`, ascending issue number), as the Sept/Oct 2026 redesign did. Bot commits land on `main` several times a day, so branches go stale fast. Bring `main` in with a merge rather than rebasing a shared branch.
 
